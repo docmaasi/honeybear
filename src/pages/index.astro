@@ -1,0 +1,206 @@
+---
+import Base from "../layouts/Base.astro";
+import NextShow from "../components/NextShow.astro";
+import EpisodeCard from "../components/EpisodeCard.astro";
+import { site, links, worlds, bingo, weekdayName, timeLabel } from "../data/site";
+import { episodes } from "../data/episodes";
+
+const recent = episodes.slice(0, 6);
+
+const schema = [
+  {
+    "@type": "PodcastSeries",
+    "@id": `${site.domain}/#haven`,
+    name: "HoneyBear Katherine's Haven",
+    description:
+      "A weekly podcast about encouragement, resilience, and everyday hope, recorded live in Meta Horizon Worlds with a listening audience that joins the conversation.",
+    url: `${site.domain}/shows`,
+    webFeed: `https://www.youtube.com/feeds/videos.xml?channel_id=${links.youtubeChannelId}`,
+    author: { "@id": `${site.domain}/#katherine` },
+    inLanguage: "en-US",
+  },
+];
+---
+
+<Base
+  title="HoneyBear Katherine — encouragement, every week"
+  description={site.description}
+  schema={schema}
+>
+  <!-- Hero: what is on, and when. The question the old site never answered. -->
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="kicker">Live from Meta Horizon Worlds</p>
+        <h1>Encouragement, every&nbsp;week.</h1>
+        <NextShow />
+      </div>
+
+      <div class="hero-portrait">
+        <span class="lamp"></span>
+        <div class="medallion">
+          <img
+            src="/art/katherine-portrait.jpg"
+            alt="Katherine L. Carter, host of HoneyBear Katherine's Haven"
+            width="520"
+            height="520"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent episodes -->
+  <section>
+    <div class="shell">
+      <div class="rule"><h2>Recent episodes</h2></div>
+      <div class="ep-grid">
+        {recent.map((ep) => <EpisodeCard episode={ep} />)}
+      </div>
+      <p class="more">
+        <a class="btn btn-quiet" href="/episodes">See all {episodes.length} episodes</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Worlds -->
+  <section class="worlds">
+    <div class="shell">
+      <div class="rule"><h2>Places she built</h2></div>
+      <p class="lede intro">
+        Katherine designs and runs her own worlds inside Meta Horizon. They are
+        open, they are free, and people actually live in them.
+      </p>
+      <div class="world-grid">
+        {worlds.map((w) => (
+          <article class="world">
+            <h3>{w.name}</h3>
+            <p class="small where">{w.where}</p>
+            <p>{w.blurb}</p>
+          </article>
+        ))}
+        <article class="world world-bingo">
+          <h3>{bingo.name}</h3>
+          <p class="small where tnum">
+            {bingo.slots
+              .map((s) => `${weekdayName(s.weekday)} ${timeLabel(s.hourET, s.minuteET)}`)
+              .join(" · ")} Eastern
+          </p>
+          <p>{bingo.blurb}</p>
+        </article>
+      </div>
+      <p class="more">
+        <a class="btn btn-quiet" href="/worlds">More about the worlds</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Book -->
+  <section class="book">
+    <div class="shell book-grid">
+      <div class="stack stack-md">
+        <div class="rule"><h2>Weight of Dysfunction</h2></div>
+        <p class="lede">
+          Katherine's book on what families carry, what gets handed down, and
+          how a person puts it down.
+        </p>
+        <div class="next-actions">
+          <a class="btn btn-gold" href="/book">About the book</a>
+          <a class="btn btn-quiet" href={links.book} rel="noopener">
+            Buy on Amazon
+          </a>
+        </div>
+      </div>
+      <div class="book-note panel">
+        <p>
+          “Her work blends technology, storytelling, and social awareness —
+          resilience, relationships, and personal growth.”
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(40px, 5.5vw, 70px) clamp(30px, 4vw, 52px);
+    position: relative;
+    overflow: hidden;
+  }
+  /* one pool of lamplight, top-left, behind the copy */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -30%;
+    left: -10%;
+    width: 70%;
+    height: 130%;
+    background: radial-gradient(circle at 40% 50%, #3d245640 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: clamp(34px, 6vw, 76px);
+    align-items: center;
+  }
+  .kicker {
+    font-size: 15px;
+    color: var(--gold-lit);
+    letter-spacing: 0.02em;
+    margin-bottom: 14px;
+  }
+  .hero-copy h1 {
+    font-size: clamp(36px, 5.6vw, 60px);
+    margin-bottom: 30px;
+    max-width: 15ch;
+  }
+  .hero-portrait { position: relative; max-width: 380px; justify-self: end; width: 100%; }
+
+  .ep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px 32px;
+  }
+  .more { margin-top: 44px; }
+
+  .worlds { background: var(--night-sunk); }
+  .intro { margin-bottom: 38px; max-width: 58ch; }
+  .world-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 34px;
+  }
+  .world {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 22px;
+    border-top: 2px solid var(--plum);
+  }
+  .world-bingo { border-top-color: var(--gold); }
+  .world .where { color: var(--pearl-faint); }
+  .world p { font-size: 16px; color: var(--pearl-dim); }
+
+  .book-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(30px, 5vw, 60px);
+    align-items: center;
+  }
+  .book-note p {
+    font-family: var(--f-display);
+    font-size: 20px;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--pearl);
+  }
+  .next-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-portrait { justify-self: start; max-width: 260px; order: -1; }
+    .book-grid { grid-template-columns: 1fr; }
+  }
+</style>

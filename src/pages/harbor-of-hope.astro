@@ -1,0 +1,325 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+
+// Every number here is a national US service. Nothing on this page is
+// aspirational — if it is listed, it answers.
+const hotlines = [
+  {
+    name: "National Domestic Violence Hotline",
+    tel: "1-800-799-7233",
+    href: "tel:18007997233",
+    extra: "Text START to 88788 · TTY 1-800-787-3224",
+    note: "Free, confidential, 24 hours a day, every day. Interpreters for over 200 languages.",
+    site: "https://www.thehotline.org",
+  },
+  {
+    name: "Crisis Text Line",
+    tel: "Text HOME to 741741",
+    href: "sms:741741&body=HOME",
+    note: "If a call is not safe or not possible, this is a text conversation with a trained counselor.",
+    site: "https://www.crisistextline.org",
+  },
+  {
+    name: "988 Suicide and Crisis Lifeline",
+    tel: "988",
+    href: "tel:988",
+    note: "For any mental health crisis, including thoughts of suicide. Call or text.",
+    site: "https://988lifeline.org",
+  },
+  {
+    name: "StrongHearts Native Helpline",
+    tel: "1-844-762-8483",
+    href: "tel:18447628483",
+    note: "Culturally appropriate support for Native American and Alaska Native communities.",
+    site: "https://strongheartshelpline.org",
+  },
+  {
+    name: "loveisrespect",
+    tel: "1-866-331-9474",
+    href: "tel:18663319474",
+    extra: "Text LOVEIS to 22522",
+    note: "For teens and young adults navigating dating abuse.",
+    site: "https://www.loveisrespect.org",
+  },
+  {
+    name: "RAINN National Sexual Assault Hotline",
+    tel: "1-800-656-4673",
+    href: "tel:18006564673",
+    note: "Support after sexual assault, and connection to local services.",
+    site: "https://www.rainn.org",
+  },
+];
+
+const signs = [
+  "Checking your phone, messages, or spending, or needing to know where you are at all times.",
+  "Cutting you off from family and friends, or making it difficult to see them.",
+  "Controlling the money, or stopping you from working or studying.",
+  "Blaming you for their anger, or telling you that you caused it.",
+  "Threats — toward you, your children, your pets, or themselves.",
+  "Making you feel unsteady about your own memory of events.",
+];
+
+const schema = [
+  {
+    "@type": "WebPage",
+    name: "Harbor of Hope — domestic abuse support and resources",
+    description:
+      "National hotlines, warning signs, and safety planning guidance for anyone affected by domestic abuse.",
+    url: `${site.domain}/harbor-of-hope`,
+    about: { "@type": "Thing", name: "Domestic violence support" },
+  },
+];
+---
+
+<Base
+  title="Harbor of Hope"
+  description="National hotlines, warning signs, and safety planning for anyone affected by domestic abuse. Free, confidential, available 24 hours."
+  schema={schema}
+>
+  <!-- Quick exit is first in the DOM so it is the first thing a keyboard reaches. -->
+  <div class="exit-bar">
+    <div class="shell exit-inner">
+      <p class="exit-note">
+        Press <kbd>Esc</kbd> three times to leave this page quickly.
+      </p>
+      <button class="exit-btn" id="exit-btn" type="button">
+        Leave this site now
+      </button>
+    </div>
+  </div>
+
+  <section class="head">
+    <div class="shell stack stack-md">
+      <h1>Harbor of Hope</h1>
+      <p class="lede">
+        If someone is hurting you, frightening you, or controlling your life,
+        help exists and it is free. These lines are answered by trained people,
+        24 hours a day.
+      </p>
+    </div>
+  </section>
+
+  <section class="urgent">
+    <div class="shell">
+      <div class="emergency">
+        <p>
+          <strong>If you are in immediate danger, call 911.</strong> If it is
+          not safe to speak, you can call and stay silent — in many areas
+          pressing 55 signals the operator that you need help but cannot talk.
+        </p>
+      </div>
+
+      <div class="rule"><h2>Who to call</h2></div>
+      <ul class="lines">
+        {hotlines.map((h) => (
+          <li class="line">
+            <h3>{h.name}</h3>
+            <p class="num">
+              <a href={h.href}>{h.tel}</a>
+            </p>
+            {h.extra && <p class="extra small">{h.extra}</p>}
+            <p class="note">{h.note}</p>
+            <p class="small">
+              <a href={h.site} rel="noopener noreferrer">
+                {h.site.replace("https://", "")}
+              </a>
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="signs-sec">
+    <div class="shell">
+      <div class="rule"><h2>What abuse can look like</h2></div>
+      <p class="lede intro">
+        Abuse is not only physical. Any of these, on their own, is reason enough
+        to talk to someone.
+      </p>
+      <ul class="signs">
+        {signs.map((s) => <li>{s}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="safety">
+    <div class="shell">
+      <div class="rule"><h2>Staying safer online</h2></div>
+      <div class="prose">
+        <p>
+          <strong>The quick-exit button does not erase your history.</strong> It
+          moves you away from this page immediately, but a browser keeps a
+          record of where it has been.
+        </p>
+        <p>
+          If someone may check your device, a private or incognito window is
+          safer than clearing history afterwards — a suddenly empty history can
+          itself draw attention. Safest of all is a device the other person
+          cannot reach: a library computer, a friend's phone, or a work machine.
+        </p>
+        <p>
+          The National Domestic Violence Hotline has detailed guidance on safety
+          planning, including what to prepare before leaving. Their advocates
+          will walk through it with you on the phone.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-hoh">
+    <div class="shell panel">
+      <h2>About this page</h2>
+      <p>
+        Harbor of Hope is Katherine's advocacy work: raising awareness of what
+        abuse looks like and pointing people toward help that already exists.
+      </p>
+      <p>
+        It is not a crisis service and does not provide legal, medical, or
+        housing assistance directly. The organisations listed above do, and they
+        are staffed around the clock by people trained for exactly this.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .exit-bar {
+    background: #7d1f1a;
+    border-bottom: 1px solid #a02a24;
+    position: sticky;
+    top: 74px;
+    z-index: 40;
+  }
+  .exit-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding-block: 12px;
+  }
+  .exit-note { font-size: 15px; color: #f6d8d5; margin: 0; }
+  kbd {
+    font-family: var(--f-body);
+    font-size: 13px;
+    font-weight: 700;
+    background: #ffffff26;
+    border: 1px solid #ffffff40;
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+  .exit-btn {
+    font-family: var(--f-body);
+    font-size: 15px;
+    font-weight: 700;
+    background: #fff;
+    color: #7d1f1a;
+    border: none;
+    border-radius: var(--r-sm);
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  .exit-btn:hover { background: #ffe9e7; }
+
+  .head { padding-block: clamp(40px, 6vw, 70px) 0; }
+  .urgent { padding-top: clamp(34px, 5vw, 54px); }
+
+  .emergency {
+    border-left: 3px solid var(--live);
+    background: #e4574f14;
+    padding: 20px 24px;
+    margin-bottom: 46px;
+  }
+  .emergency p { max-width: 70ch; }
+
+  .lines {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 34px 36px;
+  }
+  .line {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 20px;
+    border-top: 2px solid var(--gold);
+  }
+  .line h3 { font-size: 20px; }
+  .num {
+    font-family: var(--f-display);
+    font-size: 26px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .num a { text-decoration: none; }
+  .extra { color: var(--pearl-dim); }
+  .note { font-size: 15.5px; color: var(--pearl-dim); line-height: 1.55; }
+
+  .intro { margin-bottom: 26px; max-width: 60ch; }
+  .signs {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px 34px;
+    max-width: 900px;
+  }
+  .signs li {
+    position: relative;
+    padding-left: 26px;
+    color: var(--pearl-dim);
+    line-height: 1.55;
+  }
+  .signs li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 12px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .prose { max-width: 68ch; display: flex; flex-direction: column; gap: 18px; }
+  .about-hoh .panel { display: flex; flex-direction: column; gap: 14px; }
+  .about-hoh p { color: var(--pearl-dim); }
+
+  @media (max-width: 640px) {
+    .exit-bar { top: 74px; }
+    .exit-note { font-size: 14px; }
+    .exit-inner { padding-block: 10px; }
+  }
+</style>
+
+<script>
+  // Quick exit: replace this page in history and send the browser somewhere
+  // ordinary. `replace` means the back button does not return here.
+  const SAFE = "https://www.google.com/search?q=weather";
+
+  function leave() {
+    try {
+      // Put a neutral page in this history slot first, then move on.
+      window.location.replace(SAFE);
+    } catch {
+      window.location.href = SAFE;
+    }
+  }
+
+  document.getElementById("exit-btn")?.addEventListener("click", leave);
+
+  let escapes = 0;
+  let timer: number | undefined;
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    escapes += 1;
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => (escapes = 0), 1200);
+    if (escapes >= 3) leave();
+  });
+</script>

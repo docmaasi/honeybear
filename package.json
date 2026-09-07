@@ -1,0 +1,17 @@
+{
+  "name": "honeybear-katherine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 3800",
+    "build": "astro build",
+    "preview": "astro preview --port 3800",
+    "audit": "node scripts/audit.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.14.1",
+    "@astrojs/sitemap": "^3.6.0",
+    "sharp": "^0.34.4"
+  }
+}

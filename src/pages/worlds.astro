@@ -1,0 +1,100 @@
+---
+import Base from "../layouts/Base.astro";
+import {
+  site, worlds, bingo, weekdayName, timeLabel, zoneLine,
+} from "../data/site";
+
+const schema = [
+  {
+    "@type": "CreativeWork",
+    name: "SunnyDale and Serenity Cove",
+    creator: { "@id": `${site.domain}/#katherine` },
+    about: "Virtual worlds built in Meta Horizon Worlds",
+    url: `${site.domain}/worlds`,
+  },
+];
+---
+
+<Base
+  title="The worlds"
+  description="Serenity Cove and SunnyDale — virtual places built by Katherine L. Carter inside Meta Horizon Worlds, plus Bingo Under the Stars every week."
+  schema={schema}
+>
+  <section class="head">
+    <div class="shell stack stack-md">
+      <h1>Places she built</h1>
+      <p class="lede">
+        Katherine designs and runs her own worlds inside Meta Horizon. They are
+        free to visit, and people genuinely spend time in them.
+      </p>
+    </div>
+  </section>
+
+  <section class="list">
+    <div class="shell stack stack-lg">
+      {worlds.map((w) => (
+        <article class="world">
+          <div class="w-head">
+            <h2>{w.name}</h2>
+            <p class="small where">{w.where}</p>
+          </div>
+          <p class="w-blurb">{w.blurb}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bingo-sec">
+    <div class="shell">
+      <div class="rule"><h2>{bingo.name}</h2></div>
+      <p class="lede intro">{bingo.blurb}</p>
+      <ul class="slots">
+        {bingo.slots.map((s) => (
+          <li>
+            <span class="day">{weekdayName(s.weekday)}</span>
+            <span class="time tnum">{timeLabel(s.hourET, s.minuteET)} Eastern</span>
+            <span class="zones small tnum">{zoneLine(s.hourET, s.minuteET)}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-block: clamp(46px, 7vw, 82px) 0; }
+  .list { padding-top: clamp(36px, 5vw, 60px); }
+
+  .world {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 34px;
+    align-items: start;
+    padding-bottom: 42px;
+    border-bottom: 1px solid #2b2136;
+  }
+  .world:last-child { border-bottom: none; padding-bottom: 0; }
+  .w-head h2 { font-size: clamp(26px, 3.4vw, 34px); }
+  .where { color: var(--pearl-faint); margin-top: 6px; }
+  .w-blurb { font-size: 18px; color: var(--pearl-dim); max-width: 60ch; }
+
+  .bingo-sec { background: var(--night-sunk); }
+  .intro { max-width: 58ch; margin-bottom: 30px; }
+  .slots { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; max-width: 780px; }
+  .slots li {
+    display: grid;
+    grid-template-columns: 130px 200px 1fr;
+    gap: 14px;
+    align-items: baseline;
+    padding-block: 15px;
+    border-bottom: 1px solid #241b2d;
+  }
+  .day { font-family: var(--f-display); font-size: 19px; font-weight: 600; }
+  .time { color: var(--gold-lit); }
+  .zones { color: var(--pearl-faint); }
+
+  @media (max-width: 760px) {
+    .world { grid-template-columns: 1fr; gap: 12px; }
+    .slots li { grid-template-columns: 1fr; gap: 3px; padding-block: 14px; }
+  }
+</style>

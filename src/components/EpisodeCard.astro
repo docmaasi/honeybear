@@ -1,0 +1,98 @@
+---
+import {
+  isDateOnlyTitle,
+  formatDate,
+  thumbUrl,
+  type Episode,
+} from "../data/episodes";
+
+interface Props {
+  episode: Episode;
+  /** The first card on a page gets a larger image */
+  featured?: boolean;
+}
+const { episode, featured = false } = Astro.props;
+
+const untitled = isDateOnlyTitle(episode.title);
+const heading = untitled ? formatDate(episode.published) : episode.title;
+const sub = untitled ? "Episode" : formatDate(episode.published);
+---
+
+<a
+  class:list={["ep", featured && "ep-featured"]}
+  href={`/episodes/${episode.id}`}
+>
+  <div class="ep-thumb">
+    <img
+      src={thumbUrl(episode.id)}
+      alt=""
+      loading={featured ? "eager" : "lazy"}
+      width="480"
+      height="360"
+    />
+    <span class="ep-play" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </span>
+  </div>
+  <div class="ep-text">
+    <h3>{heading}</h3>
+    <p class="small">{sub}</p>
+    {episode.summary && <p class="ep-sum">{episode.summary}</p>}
+  </div>
+</a>
+
+<style>
+  .ep {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .ep-thumb {
+    position: relative;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: var(--night-raised);
+    border: 1px solid #2f2438;
+    aspect-ratio: 16 / 9;
+  }
+  .ep-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease, opacity .2s ease;
+  }
+  .ep:hover .ep-thumb img { transform: scale(1.035); }
+  .ep:hover .ep-thumb { border-color: var(--gold); }
+
+  .ep-play {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #17101fd9;
+    border: 1px solid var(--gold);
+    color: var(--gold-lit);
+    backdrop-filter: blur(4px);
+  }
+
+  .ep h3 { font-size: 20px; }
+  .ep:hover h3 { color: var(--gold-lit); }
+  .ep-text { display: flex; flex-direction: column; gap: 5px; }
+  .ep-sum {
+    font-size: 15px;
+    color: var(--pearl-dim);
+    line-height: 1.55;
+    margin-top: 3px;
+  }
+
+  .ep-featured .ep h3 { font-size: 26px; }
+</style>

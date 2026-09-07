@@ -1,0 +1,185 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, links } from "../data/site";
+
+// Questions phrased the way people actually ask them, each answered directly
+// in the first sentence. This is what answer engines quote.
+const faqs = [
+  {
+    q: "Who is HoneyBear Katherine?",
+    a: "HoneyBear Katherine is Katherine L. Carter, a writer, former teacher, and community builder who hosts the weekly podcast HoneyBear Katherine's Haven from inside Meta Horizon Worlds. She is the author of Weight of Dysfunction and the founder of HBK777 Productions.",
+  },
+  {
+    q: "When does HoneyBear Katherine's Haven air?",
+    a: "HoneyBear Katherine's Haven airs every Friday at 7:00 PM Eastern, which is 6:00 PM Central, 5:00 PM Mountain, and 4:00 PM Pacific. Episodes are published to YouTube afterwards.",
+  },
+  {
+    q: "Where can I listen to the podcast?",
+    a: "Every episode is on the HoneyBear Katherine's Haven YouTube channel, and each one has its own page on this site. Live shows are watched in Meta Horizon Worlds or on the YouTube stream.",
+  },
+  {
+    q: "What is HoneyBear Katherine's Haven about?",
+    a: "The show is about encouragement — the practical kind. Guests from every walk of life talk about resilience, relationships, and personal growth, and the live audience joins the conversation with questions and their own stories.",
+  },
+];
+
+const schema = [
+  {
+    "@type": "AboutPage",
+    name: "About Katherine L. Carter",
+    mainEntity: { "@id": `${site.domain}/#katherine` },
+  },
+  {
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
+---
+
+<Base
+  title="About Katherine"
+  description="Katherine L. Carter is a writer, former teacher, and community builder who hosts HoneyBear Katherine's Haven from Meta Horizon Worlds."
+  schema={schema}
+>
+  <section class="head">
+    <div class="shell head-grid">
+      <div class="stack stack-md">
+        <h1>Katherine L. Carter</h1>
+        <p class="lede">
+          Writer, former teacher, community builder — and the voice behind
+          HoneyBear Katherine's Haven.
+        </p>
+      </div>
+      <div class="portrait">
+        <span class="lamp"></span>
+        <div class="medallion">
+          <img
+            src="/art/katherine-portrait.jpg"
+            alt="Katherine L. Carter"
+            width="360"
+            height="360"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bio">
+    <div class="shell prose">
+      <p>
+        Katherine graduated with high honors from the Rochester Institute of
+        Technology, where she studied human resource management, business
+        administration, sociology, and psychology. She is a member of Phi Theta
+        Kappa.
+      </p>
+      <p>
+        She is the author of <a href="/book">Weight of Dysfunction</a> and the
+        founder of HoneyBear Katherine's Haven, Bingo Under the Stars, and
+        HBK777 Productions. Through HBK777 she builds immersive spaces across
+        Meta Horizon Worlds and VRChat, including the cities of
+        <a href="/worlds">SunnyDale and Serenity Cove</a>.
+      </p>
+      <p>
+        Her work sits where technology, storytelling, and social awareness meet
+        — resilience, relationships, and personal growth, carried in a signature
+        of purples, golds, and pearls.
+      </p>
+    </div>
+  </section>
+
+  <section class="haven">
+    <div class="shell">
+      <div class="rule"><h2>About the Haven</h2></div>
+      <div class="prose">
+        <p>
+          HoneyBear Katherine's Haven is a weekly podcast about encouragement,
+          and it means the practical kind — the sort that changes what somebody
+          does on Monday.
+        </p>
+        <p>
+          Each episode brings a guest into a room that is deliberately warm.
+          People talk about what they have come through and what they learned
+          doing it. The audience is not an audience so much as a participant:
+          questions, stories, and conversation run throughout.
+        </p>
+        <p>
+          It airs <strong>Fridays at 7:00 PM Eastern</strong>, live from Meta
+          Horizon Worlds. If you cannot make it live, every episode goes up
+          afterwards.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="shell">
+      <div class="rule"><h2>Common questions</h2></div>
+      <dl class="faq-list">
+        {faqs.map((f) => (
+          <div class="faq-item">
+            <dt>{f.q}</dt>
+            <dd>{f.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="hoh-teaser">
+    <div class="shell panel hoh">
+      <div class="stack stack-sm">
+        <h2>Harbor of Hope</h2>
+        <p>
+          Katherine's advocacy work around domestic abuse — awareness, safety
+          planning, and where to find real help.
+        </p>
+      </div>
+      <a class="btn btn-gold" href="/harbor-of-hope">Harbor of Hope</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-block: clamp(46px, 7vw, 82px) 0; }
+  .head-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 46px;
+    align-items: center;
+  }
+  .portrait { position: relative; width: 100%; }
+
+  .prose { max-width: 68ch; display: flex; flex-direction: column; gap: 20px; }
+  .prose p { font-size: 18px; }
+  .bio { padding-block: clamp(40px, 6vw, 70px) 0; }
+
+  .faq-list { margin: 0; display: grid; gap: 30px; }
+  .faq-item { max-width: 70ch; }
+  .faq-item dt {
+    font-family: var(--f-display);
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .faq-item dd { margin: 0; color: var(--pearl-dim); }
+
+  .hoh {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 26px;
+    flex-wrap: wrap;
+    border-color: #4a3a58;
+  }
+  .hoh h2 { font-size: 26px; }
+  .hoh p { color: var(--pearl-dim); max-width: 52ch; }
+
+  @media (max-width: 800px) {
+    .head-grid { grid-template-columns: 1fr; }
+    .portrait { max-width: 200px; order: -1; }
+  }
+</style>

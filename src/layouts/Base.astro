@@ -1,0 +1,106 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site, links } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path-relative OG image, e.g. /art/haven-podcast.jpg */
+  image?: string;
+  /** Extra JSON-LD objects to merge into the graph */
+  schema?: unknown[];
+}
+
+const {
+  title,
+  description,
+  image = "/art/share-card.jpg",
+  schema = [],
+} = Astro.props;
+
+const url = new URL(Astro.url.pathname, site.domain).href;
+const ogImage = new URL(image, site.domain).href;
+const fullTitle =
+  Astro.url.pathname === "/" ? title : `${title} — ${site.name}`;
+
+// The site-wide entity graph. This is what answer engines read to work out
+// who Katherine is and what the shows are.
+const baseGraph = [
+  {
+    "@type": "Person",
+    "@id": `${site.domain}/#katherine`,
+    name: site.legalName,
+    alternateName: "HoneyBear Katherine",
+    url: site.domain,
+    jobTitle: "Podcast host, writer, and virtual world builder",
+    description:
+      "Creative entrepreneur, writer, former teacher and community builder. Host of HoneyBear Katherine's Haven and author of Weight of Dysfunction.",
+    alumniOf: { "@type": "CollegeOrUniversity", name: "Rochester Institute of Technology" },
+    sameAs: [links.youtube, links.facebook, links.instagram],
+  },
+  {
+    "@type": "WebSite",
+    "@id": `${site.domain}/#website`,
+    url: site.domain,
+    name: site.name,
+    description: site.description,
+    publisher: { "@id": `${site.domain}/#katherine` },
+    inLanguage: "en-US",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [...baseGraph, ...schema],
+};
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+
+    <link rel="icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/hbk777-medallion.png" />
+    <meta name="theme-color" content="#17101f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+    />
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(jsonLd)}
+    ></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

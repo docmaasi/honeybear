@@ -1,0 +1,134 @@
+---
+import Base from "../layouts/Base.astro";
+import {
+  site, links, shows, bingo, weekdayName, timeLabel, zoneLine,
+} from "../data/site";
+import { nextOccurrence } from "../data/schedule";
+
+const now = new Date();
+const withNext = shows.map((s) => ({
+  ...s,
+  next: nextOccurrence(s.weekday, s.hourET, s.minuteET, s.runtimeMin, now),
+}));
+
+const schema = withNext.map((s) => ({
+  "@type": "Event",
+  name: s.name,
+  description: s.blurb,
+  startDate: s.next.start.toISOString(),
+  endDate: s.next.end.toISOString(),
+  eventStatus: "https://schema.org/EventScheduled",
+  eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+  location: {
+    "@type": "VirtualLocation",
+    url: links.youtube,
+  },
+  performer: { "@id": `${site.domain}/#katherine` },
+  organizer: { "@id": `${site.domain}/#katherine` },
+}));
+---
+
+<Base
+  title="Shows and schedule"
+  description="When HoneyBear Katherine's Haven, The Encouraging Moment, and Bingo Under the Stars air each week — in every US time zone."
+  schema={schema}
+>
+  <section class="head">
+    <div class="shell stack stack-md">
+      <h1>What's on, and when</h1>
+      <p class="lede">
+        Everything runs on Eastern time. The line under each show converts it
+        for the rest of the country, so nobody has to do the arithmetic.
+      </p>
+    </div>
+  </section>
+
+  <section class="list">
+    <div class="shell stack stack-lg">
+      {withNext.map((s) => (
+        <article class="show">
+          <div class="show-art">
+            <img src={s.art} alt="" width="300" height="400" loading="lazy" />
+          </div>
+          <div class="stack stack-sm show-body">
+            <h2>{s.name}</h2>
+            <p class="when tnum">
+              Every {weekdayName(s.weekday)} at{" "}
+              {timeLabel(s.hourET, s.minuteET)} Eastern
+            </p>
+            <p class="zones small tnum">{zoneLine(s.hourET, s.minuteET)}</p>
+            <p class="blurb">{s.blurb}</p>
+            <p class="cta">
+              <a class="btn btn-gold" href={links.youtube} rel="noopener">
+                Watch on YouTube
+              </a>
+            </p>
+          </div>
+        </article>
+      ))}
+
+      <article class="show show-alt">
+        <div class="stack stack-sm show-body">
+          <h2>{bingo.name}</h2>
+          <ul class="slots">
+            {bingo.slots.map((sl) => (
+              <li class="tnum">
+                <strong>{weekdayName(sl.weekday)}</strong>
+                <span>{timeLabel(sl.hourET, sl.minuteET)} Eastern</span>
+                <span class="small">{zoneLine(sl.hourET, sl.minuteET)}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="blurb">{bingo.blurb}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-block: clamp(46px, 7vw, 82px) 10px; }
+  .list { padding-top: clamp(34px, 5vw, 58px); }
+
+  .show {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 34px;
+    align-items: start;
+    padding-bottom: 46px;
+    border-bottom: 1px solid #2b2136;
+  }
+  .show:last-child { border-bottom: none; }
+  .show-alt { grid-template-columns: 1fr; }
+  .show-art img {
+    width: 100%;
+    border-radius: var(--r-md);
+    border: 1px solid #2f2438;
+    display: block;
+  }
+  .when {
+    font-size: 19px;
+    color: var(--gold-lit);
+    font-weight: 500;
+  }
+  .zones { color: var(--pearl-faint); }
+  .blurb { color: var(--pearl-dim); margin-top: 6px; }
+  .cta { margin-top: 12px; }
+
+  .slots { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 12px; }
+  .slots li {
+    display: grid;
+    grid-template-columns: 120px 190px 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #241b2d;
+  }
+  .slots .small { color: var(--pearl-faint); }
+
+  @media (max-width: 720px) {
+    .show { grid-template-columns: 1fr; gap: 22px; }
+    .show-art { max-width: 180px; }
+    .slots li { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>

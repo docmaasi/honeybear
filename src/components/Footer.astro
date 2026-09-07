@@ -1,0 +1,133 @@
+---
+import { links, shows, bingo, weekdayName, timeLabel } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div class="stack stack-md foot-brand">
+        <img
+          src="/images/hbk777-medallion.png"
+          alt="HBK777"
+          width="62"
+          height="62"
+        />
+        <p class="small">
+          Encouragement, resilience, and everyday hope — live from Meta Horizon
+          Worlds with Katherine L. Carter.
+        </p>
+        <div class="socials">
+          <a href={links.youtube} rel="noopener">YouTube</a>
+          <a href={links.facebook} rel="noopener">Facebook</a>
+          <a href={links.instagram} rel="noopener">Instagram</a>
+        </div>
+      </div>
+
+      <div class="stack stack-sm">
+        <h4>On air</h4>
+        {shows.map((s) => (
+          <p class="small">
+            {s.name}<br />
+            <span class="tnum">
+              {weekdayName(s.weekday)}s, {timeLabel(s.hourET, s.minuteET)} Eastern
+            </span>
+          </p>
+        ))}
+        <p class="small">
+          {bingo.name}<br />
+          <span class="tnum">
+            {bingo.slots
+              .map((sl) => `${weekdayName(sl.weekday)} ${timeLabel(sl.hourET, sl.minuteET)}`)
+              .join(", ")} Eastern
+          </span>
+        </p>
+      </div>
+
+      <div class="stack stack-sm">
+        <h4>Explore</h4>
+        <a href="/shows">Shows and schedule</a>
+        <a href="/episodes">Every episode</a>
+        <a href="/worlds">Serenity Cove and SunnyDale</a>
+        <a href="/book">Weight of Dysfunction</a>
+        <a href="/about">About Katherine</a>
+        <a href="/contact">Contact</a>
+      </div>
+
+      <div class="stack stack-sm">
+        <h4>Support the show</h4>
+        <a href={links.cashApp} rel="noopener">Send a tip on Cash App</a>
+        <a href={links.ryze} rel="noopener nofollow sponsored">RYZE Coffee</a>
+        <a href={links.pamperedChef} rel="noopener nofollow sponsored">
+          Pampered Chef
+        </a>
+        <p class="disclosure">
+          RYZE and Pampered Chef links earn Katherine a commission at no extra
+          cost to you.
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-base">
+      <p class="small">© {year} Katherine L. Carter. All rights reserved.</p>
+      <p class="small">
+        Built by
+        <a href={links.studio} rel="noopener">Smith App Studio</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-foot {
+    background: var(--night-sunk);
+    border-top: 1px solid #2b2136;
+    padding-block: 64px 34px;
+    margin-top: 40px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 44px 36px;
+  }
+  .foot-brand img {
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+  }
+  .foot-grid h4 {
+    font-size: 16px;
+    color: var(--pearl);
+    margin-bottom: 4px;
+  }
+  .foot-grid a {
+    color: var(--pearl-dim);
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .foot-grid a:hover { color: var(--gold-lit); text-decoration: underline; }
+  .socials { display: flex; gap: 18px; flex-wrap: wrap; }
+  .disclosure {
+    font-size: 13.5px;
+    color: var(--pearl-dim);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+  .foot-base {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 52px;
+    padding-top: 24px;
+    border-top: 1px solid #2b2136;
+  }
+  .foot-base a { color: var(--gold-lit); }
+
+  @media (max-width: 860px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 34px; }
+  }
+</style>

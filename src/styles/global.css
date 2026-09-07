@@ -1,0 +1,231 @@
+/* ============================================================
+   HoneyBear Katherine — "a lit room at night"
+   Deep plum dark, warm lamplight gold, pearl text.
+   Gold is scarce on purpose: it marks the medallion, what is
+   live, and one rule per page. Everything else stays quiet.
+   ============================================================ */
+
+:root {
+  /* the room */
+  --night: #17101f;
+  --night-raised: #221929;
+  --night-sunk: #100a16;
+  --plum: #3d2456;
+  --plum-line: #33244180;
+
+  /* the lamp */
+  --gold: #c08b37;
+  --gold-lit: #ebc87e;
+  --gold-glow: #c08b3733;
+
+  /* what it lights */
+  --pearl: #f4efe6;
+  --pearl-dim: #b3a99f;
+  --pearl-faint: #7d7480;
+
+  /* state */
+  --live: #e4574f;
+
+  --f-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --f-body: "Karla", "Helvetica Neue", Arial, sans-serif;
+
+  --measure: 68ch;
+  --gutter: clamp(20px, 5vw, 56px);
+  --shell: 1120px;
+
+  --r-sm: 4px;
+  --r-md: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  background: var(--night);
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--pearl);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- type ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-variation-settings: "SOFT" 20, "WONK" 1;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(38px, 6.4vw, 66px); }
+h2 { font-size: clamp(28px, 4vw, 40px); }
+h3 { font-size: clamp(20px, 2.4vw, 25px); letter-spacing: -0.01em; }
+h4 { font-size: 18px; }
+
+p { margin: 0; max-width: var(--measure); }
+a { color: var(--gold-lit); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--pearl); }
+
+strong { font-weight: 700; }
+
+.lede {
+  font-size: clamp(18px, 2vw, 21px);
+  line-height: 1.6;
+  color: var(--pearl-dim);
+}
+
+.small { font-size: 15px; color: var(--pearl-dim); }
+
+:focus-visible {
+  outline: 2px solid var(--gold-lit);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- layout ---------- */
+
+.shell {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+section { padding-block: clamp(56px, 9vw, 104px); }
+
+.stack { display: flex; flex-direction: column; }
+.stack-sm { gap: 12px; }
+.stack-md { gap: 22px; }
+.stack-lg { gap: 40px; }
+
+/* A single hairline that carries the section name, rather than a
+   floating uppercase label. The rule IS the label. */
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 34px;
+}
+.rule h2 { flex: none; }
+.rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold) 0%, transparent 85%);
+  opacity: .55;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-body);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 13px 24px;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+.btn-gold {
+  background: var(--gold-lit);
+  color: #2a1c0a;
+  border-color: var(--gold-lit);
+}
+.btn-gold:hover { background: #f6dda3; color: #2a1c0a; }
+.btn-quiet {
+  background: transparent;
+  color: var(--pearl);
+  border-color: #4a3a58;
+}
+.btn-quiet:hover { border-color: var(--gold); color: var(--pearl); }
+
+/* ---------- the medallion ---------- */
+/* The one bold element on the site: a gold-rimmed portrait echoing
+   the carved HBK777 badge. Used once per page at most. */
+
+.medallion {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gold);
+  box-shadow:
+    0 0 0 8px var(--night-raised),
+    0 0 0 9px #4a3a58,
+    0 28px 70px -20px #000;
+}
+.medallion img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* the lamplight behind it */
+.lamp {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 50% 45%, var(--gold-glow) 0%, transparent 62%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ---------- surfaces ---------- */
+
+.panel {
+  background: var(--night-raised);
+  border: 1px solid #2f2438;
+  border-radius: var(--r-md);
+  padding: 26px;
+}
+
+/* ---------- live indicator ---------- */
+
+.live-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--live);
+  flex: none;
+  box-shadow: 0 0 0 0 #e4574fcc;
+  animation: pulse 2.4s infinite;
+}
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 9px #e4574f00; }
+  100% { box-shadow: 0 0 0 0 #e4574f00; }
+}
+
+/* ---------- utility ---------- */
+
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--gold-lit);
+  color: #2a1c0a;
+  padding: 12px 18px;
+  font-weight: 700;
+  z-index: 100;
+}
+.skip:focus { left: 12px; top: 12px; }
+
+.tnum { font-variant-numeric: tabular-nums; }

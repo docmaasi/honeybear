@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base title="Page not found" description="That page does not exist on honeybearkatherine.org.">
+  <section class="nf">
+    <div class="shell stack stack-md">
+      <h1>That page isn't here</h1>
+      <p class="lede">
+        The link may be old, or it may have been mistyped. Everything on the
+        site is one click away below.
+      </p>
+      <div class="links">
+        <a class="btn btn-gold" href="/">Home</a>
+        <a class="btn btn-quiet" href="/episodes">Episodes</a>
+        <a class="btn btn-quiet" href="/shows">Schedule</a>
+        <a class="btn btn-quiet" href="/contact">Contact</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { padding-block: clamp(70px, 12vw, 140px); }
+  .links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+</style>

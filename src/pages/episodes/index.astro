@@ -1,0 +1,71 @@
+---
+import Base from "../../layouts/Base.astro";
+import EpisodeCard from "../../components/EpisodeCard.astro";
+import { episodes, formatDate } from "../../data/episodes";
+import { site, links } from "../../data/site";
+
+// Group by year so a long list stays navigable.
+const byYear = new Map<number, typeof episodes>();
+for (const ep of episodes) {
+  const y = Number(ep.published.slice(0, 4));
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(ep);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+const schema = [
+  {
+    "@type": "ItemList",
+    name: "HoneyBear Katherine's Haven episodes",
+    numberOfItems: episodes.length,
+    itemListElement: episodes.map((ep, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${site.domain}/episodes/${ep.id}`,
+      name: ep.title,
+    })),
+  },
+];
+---
+
+<Base
+  title="Every episode"
+  description={`All ${episodes.length} episodes of HoneyBear Katherine's Haven and The Encouraging Moment, newest first.`}
+  schema={schema}
+>
+  <section class="head">
+    <div class="shell stack stack-md">
+      <h1>Every episode</h1>
+      <p class="lede">
+        {episodes.length} episodes, newest first. Each one plays here or on
+        YouTube — whichever you prefer.
+      </p>
+      <p>
+        <a class="btn btn-quiet" href={links.youtube} rel="noopener">
+          Subscribe on YouTube
+        </a>
+      </p>
+    </div>
+  </section>
+
+  {years.map((year) => (
+    <section class="year">
+      <div class="shell">
+        <div class="rule"><h2 class="tnum">{year}</h2></div>
+        <div class="ep-grid">
+          {byYear.get(year)!.map((ep) => <EpisodeCard episode={ep} />)}
+        </div>
+      </div>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .head { padding-block: clamp(46px, 7vw, 82px) 20px; }
+  .year { padding-block: clamp(30px, 4vw, 46px); }
+  .ep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px 32px;
+  }
+</style>
