@@ -81,18 +81,21 @@ export const worlds = [
   {
     name: "Serenity Cove",
     where: "Meta Horizon Worlds",
+    image: "/art/serenity.jpg",
     blurb:
       "A quiet stretch of water and mountains built for people who need somewhere to put their shoulders down. Come for the view, stay as long as you like.",
   },
   {
     name: "SunnyDale",
     where: "Meta Horizon Worlds",
+    image: "/art/sunnydale.jpg",
     blurb:
       "A neighbourhood rather than a landscape — porches, shopfronts, and places to run into people. Built for gathering, not for sightseeing.",
   },
 ];
 
 export const nav = [
+  { label: "Topics", href: "/topics" },
   { label: "Shows", href: "/shows" },
   { label: "Episodes", href: "/episodes" },
   { label: "Worlds", href: "/worlds" },

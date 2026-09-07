@@ -16,6 +16,8 @@ export type Episode = {
   published: string;
   /** Optional: a sentence about the episode. Shown on the episode page. */
   summary?: string;
+  /** Optional: topic slugs from topics.ts. An episode can carry several. */
+  topics?: string[];
 };
 
 export const episodes: Episode[] = [
@@ -26,6 +28,7 @@ export const episodes: Episode[] = [
     published: "2026-08-19",
     summary:
       "What friendship actually asks of us, and why the people who stay are the ones who show up unannounced.",
+    topics: ["friendship"],
   },
   { id: "6lqEUlk4NWA", title: "August 16, 2026", published: "2026-08-16" },
   {
@@ -34,6 +37,7 @@ export const episodes: Episode[] = [
     published: "2026-08-13",
     summary:
       "On the weeks when everything arrives at once, and what to do with the pile.",
+    topics: ["conflict-repair"],
   },
   { id: "0tSCRdPRPGw", title: "August 13, 2026", published: "2026-08-13" },
   { id: "HwjjhYimzI0", title: "August 13, 2026", published: "2026-08-13" },
@@ -78,6 +82,10 @@ export function watchUrl(id: string) {
 
 export function thumbUrl(id: string) {
   return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+}
+
+export function episodesByTopic(slug: string) {
+  return episodes.filter((e) => e.topics?.includes(slug));
 }
 
 export const latest = episodes[0];

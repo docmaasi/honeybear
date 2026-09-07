@@ -34,11 +34,14 @@ const schema = [
     <div class="shell stack stack-lg">
       {worlds.map((w) => (
         <article class="world">
-          <div class="w-head">
+          <div class="w-img">
+            <img src={w.image} alt="" loading="lazy" width="1000" height="640" />
+          </div>
+          <div class="w-body">
             <h2>{w.name}</h2>
             <p class="small where">{w.where}</p>
+            <p class="w-blurb">{w.blurb}</p>
           </div>
-          <p class="w-blurb">{w.blurb}</p>
         </article>
       ))}
     </div>
@@ -67,14 +70,23 @@ const schema = [
 
   .world {
     display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 34px;
-    align-items: start;
+    grid-template-columns: 420px 1fr;
+    gap: clamp(26px, 4vw, 46px);
+    align-items: center;
     padding-bottom: 42px;
     border-bottom: 1px solid #2b2136;
   }
   .world:last-child { border-bottom: none; padding-bottom: 0; }
-  .w-head h2 { font-size: clamp(26px, 3.4vw, 34px); }
+  .world:nth-child(even) .w-img { order: 2; }
+  .w-img {
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid #2f2438;
+    aspect-ratio: 25 / 16;
+  }
+  .w-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .w-body { display: flex; flex-direction: column; gap: 7px; }
+  .w-body h2 { font-size: clamp(26px, 3.4vw, 34px); }
   .where { color: var(--pearl-faint); margin-top: 6px; }
   .w-blurb { font-size: 18px; color: var(--pearl-dim); max-width: 60ch; }
 
@@ -94,7 +106,8 @@ const schema = [
   .zones { color: var(--pearl-faint); }
 
   @media (max-width: 760px) {
-    .world { grid-template-columns: 1fr; gap: 12px; }
+    .world { grid-template-columns: 1fr; gap: 18px; }
+    .world:nth-child(even) .w-img { order: 0; }
     .slots li { grid-template-columns: 1fr; gap: 3px; padding-block: 14px; }
   }
 </style>
