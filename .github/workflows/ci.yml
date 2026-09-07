@@ -1,0 +1,49 @@
+name: Build and audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Cancel an in-flight run when a newer commit lands on the same branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build and structural audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Structural audit
+        run: npm run audit
+
+      - name: Check the live site is still answering
+        if: github.event_name == 'push'
+        run: |
+          # A passing build says the code is sound; this says the deployment is.
+          # Non-blocking: a cold deploy can lag a push by a few seconds.
+          for url in \
+            https://honeybear-mu.vercel.app/ \
+            https://honeybear-mu.vercel.app/episodes \
+            https://honeybear-mu.vercel.app/harbor-of-hope
+          do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$url" || echo 000)
+            echo "$code  $url"
+          done
