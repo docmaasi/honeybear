@@ -44,53 +44,53 @@ const schema = [
   /* Pagefind ships its own stylesheet; these variables restyle it to match. */
   :root {
     --pagefind-ui-scale: 0.9;
-    --pagefind-ui-primary: var(--pearl);
-    --pagefind-ui-text: var(--pearl);
+    --pagefind-ui-primary: var(--ink);
+    --pagefind-ui-text: var(--ink);
     --pagefind-ui-background: var(--night);
-    --pagefind-ui-border: #3c2f47;
-    --pagefind-ui-tag: var(--night-raised);
+    --pagefind-ui-border: var(--rule-strong);
+    --pagefind-ui-tag: var(--paper-raised);
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 4px;
     --pagefind-ui-font: var(--f-body);
   }
   .pagefind-ui__search-input {
-    background: var(--night-sunk) !important;
-    color: var(--pearl) !important;
+    background: var(--paper-sunk) !important;
+    color: var(--ink) !important;
     font-family: var(--f-body) !important;
   }
-  .pagefind-ui__search-input::placeholder { color: var(--pearl-faint) !important; }
+  .pagefind-ui__search-input::placeholder { color: var(--muted) !important; }
   .pagefind-ui__result {
-    border-top: 1px solid #2b2136 !important;
+    border-top: 1px solid var(--rule) !important;
     padding-block: 22px !important;
   }
   .pagefind-ui__result-title a {
     font-family: var(--f-display) !important;
     font-size: 21px !important;
     font-weight: 700 !important;
-    color: var(--pearl) !important;
+    color: var(--ink) !important;
     text-decoration: none !important;
   }
-  .pagefind-ui__result-title a:hover { color: var(--gold-lit) !important; }
+  .pagefind-ui__result-title a:hover { color: var(--gold) !important; }
   .pagefind-ui__result-excerpt {
-    color: var(--pearl-dim) !important;
+    color: var(--ink-2) !important;
     line-height: 1.6 !important;
   }
   .pagefind-ui__result-excerpt mark {
     background: transparent !important;
-    color: var(--gold-lit) !important;
+    color: var(--gold) !important;
     font-weight: 700;
   }
   .pagefind-ui__result-tags,
-  .pagefind-ui__result-tag { color: var(--pearl-faint) !important; }
+  .pagefind-ui__result-tag { color: var(--muted) !important; }
   .pagefind-ui__button {
-    background: var(--night-raised) !important;
-    color: var(--pearl) !important;
-    border: 1px solid #3c2f47 !important;
+    background: var(--paper-raised) !important;
+    color: var(--ink) !important;
+    border: 1px solid var(--rule-strong) !important;
   }
   .pagefind-ui__message {
     font-family: var(--f-display) !important;
     font-size: 20px !important;
-    color: var(--pearl) !important;
+    color: var(--ink) !important;
   }
 </style>
 
@@ -100,9 +100,9 @@ const schema = [
   .privacy-note {
     margin-top: 34px;
     padding-top: 18px;
-    border-top: 1px solid #2b2136;
+    border-top: 1px solid var(--rule);
     font-size: 14.5px;
-    color: var(--pearl-faint);
+    color: var(--muted);
     max-width: 62ch;
   }
 </style>

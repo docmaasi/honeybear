@@ -122,7 +122,7 @@ const schema = [
   .feat-img {
     border-radius: var(--r-md);
     overflow: hidden;
-    border: 1px solid #2f2438;
+    border: 1px solid var(--rule);
     aspect-ratio: 16 / 10;
   }
   .feat-lead .feat-img { aspect-ratio: 4 / 3.4; }
@@ -132,23 +132,23 @@ const schema = [
   }
   .feat:hover .feat-img img { transform: scale(1.03); }
   .feat:hover .feat-img { border-color: var(--gold); }
-  .feat:hover h2 { color: var(--gold-lit); }
+  .feat:hover h2 { color: var(--gold); }
   .feat-text { display: flex; flex-direction: column; gap: 7px; }
   .feat h2 { font-size: 23px; line-height: 1.16; }
   .feat-lead h2 { font-size: clamp(27px, 3.4vw, 36px); }
-  .feat p { font-size: 15.5px; color: var(--pearl-dim); line-height: 1.5; }
+  .feat p { font-size: 15.5px; color: var(--ink-2); line-height: 1.5; }
   .feat-lead p { font-size: 17px; }
 
   .cat {
     font-size: 13px;
-    color: var(--gold-lit);
+    color: var(--gold);
     font-family: var(--f-body);
     font-weight: 600;
   }
-  .date { font-size: 13.5px; color: var(--pearl-faint); }
+  .date { font-size: 13.5px; color: var(--muted); }
 
   .cat-sec { padding-block: clamp(30px, 4.5vw, 52px); }
-  .cat-sec:nth-of-type(even) { background: var(--night-sunk); }
+  .cat-sec:nth-of-type(even) { background: var(--paper-sunk); }
   .cat-blurb { margin-bottom: 32px; max-width: 54ch; font-size: 17px; }
 
   .post-grid {
@@ -166,7 +166,7 @@ const schema = [
   .card-img {
     border-radius: var(--r-md);
     overflow: hidden;
-    border: 1px solid #2f2438;
+    border: 1px solid var(--rule);
     aspect-ratio: 16 / 10;
   }
   .card-img img {
@@ -175,9 +175,9 @@ const schema = [
   }
   .card:hover .card-img img { transform: scale(1.04); }
   .card:hover .card-img { border-color: var(--gold); }
-  .card:hover h3 { color: var(--gold-lit); }
+  .card:hover h3 { color: var(--gold); }
   .card h3 { font-size: 19px; line-height: 1.2; }
-  .card p { font-size: 15px; color: var(--pearl-dim); line-height: 1.5; }
+  .card p { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
 
   @media (max-width: 860px) {
     .feat-grid { grid-template-columns: 1fr; }

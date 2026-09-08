@@ -73,14 +73,14 @@ const schema = [
   .head { padding-block: clamp(46px, 7vw, 82px) 0; }
   .emergency {
     border-left: 3px solid var(--live);
-    background: #e4574f14;
+    background: var(--live-soft);
     padding: 15px 20px;
     margin-top: 6px;
   }
 
   .group { padding-block: clamp(34px, 5vw, 56px); }
-  .group:nth-of-type(even) { background: var(--night-sunk); }
-  .group-urgent .rule h2 { color: #f2a49e; }
+  .group:nth-of-type(even) { background: var(--paper-sunk); }
+  .group-urgent .rule h2 { color: var(--live); }
   .blurb { margin-bottom: 30px; max-width: 56ch; font-size: 17px; }
 
   .cards {
@@ -91,7 +91,7 @@ const schema = [
   }
   .res {
     display: flex; flex-direction: column; gap: 6px;
-    padding-top: 18px; border-top: 2px solid var(--plum);
+    padding-top: 18px; border-top: 2px solid var(--accent);
   }
   .group-urgent .res { border-top-color: var(--gold); }
   .res h3 { font-size: 19px; line-height: 1.25; }
@@ -99,11 +99,11 @@ const schema = [
   .res h3 a:hover { text-decoration: underline; }
   .tel {
     font-family: var(--f-body);
-    font-size: 21px; font-weight: 700; color: var(--gold-lit);
+    font-size: 21px; font-weight: 700; color: var(--gold);
   }
-  .note { font-size: 15px; color: var(--pearl-dim); line-height: 1.55; }
+  .note { font-size: 15px; color: var(--ink-2); line-height: 1.55; }
 
   .closing .panel { display: flex; flex-direction: column; gap: 12px; }
   .closing h2 { font-size: 24px; }
-  .closing p { color: var(--pearl-dim); }
+  .closing p { color: var(--ink-2); }
 </style>

@@ -186,8 +186,8 @@ const schema = [
 
 <style>
   .exit-bar {
-    background: #7d1f1a;
-    border-bottom: 1px solid #a02a24;
+    background: var(--live);
+    border-bottom: 1px solid var(--live);
     position: sticky;
     top: 74px;
     z-index: 40;
@@ -200,13 +200,14 @@ const schema = [
     flex-wrap: wrap;
     padding-block: 12px;
   }
-  .exit-note { font-size: 15px; color: #f6d8d5; margin: 0; }
+  .exit-note { font-size: 15px; color: #ffffff; margin: 0; }
   kbd {
     font-family: var(--f-body);
     font-size: 13px;
     font-weight: 700;
-    background: #ffffff26;
-    border: 1px solid #ffffff40;
+    color: #ffffff;
+    background: transparent;
+    border: 1px solid #ffffff8c;
     border-radius: 3px;
     padding: 1px 6px;
   }
@@ -215,20 +216,20 @@ const schema = [
     font-size: 15px;
     font-weight: 700;
     background: #fff;
-    color: #7d1f1a;
+    color: var(--live);
     border: none;
     border-radius: var(--r-sm);
     padding: 10px 20px;
     cursor: pointer;
   }
-  .exit-btn:hover { background: #ffe9e7; }
+  .exit-btn:hover { background: var(--live-soft); }
 
   .head { padding-block: clamp(40px, 6vw, 70px) 0; }
   .urgent { padding-top: clamp(34px, 5vw, 54px); }
 
   .emergency {
     border-left: 3px solid var(--live);
-    background: #e4574f14;
+    background: var(--live-soft);
     padding: 20px 24px;
     margin-bottom: 46px;
   }
@@ -257,8 +258,8 @@ const schema = [
     font-variant-numeric: tabular-nums;
   }
   .num a { text-decoration: none; }
-  .extra { color: var(--pearl-dim); }
-  .note { font-size: 15.5px; color: var(--pearl-dim); line-height: 1.55; }
+  .extra { color: var(--ink-2); }
+  .note { font-size: 15.5px; color: var(--ink-2); line-height: 1.55; }
 
   .intro { margin-bottom: 26px; max-width: 60ch; }
   .signs {
@@ -273,7 +274,7 @@ const schema = [
   .signs li {
     position: relative;
     padding-left: 26px;
-    color: var(--pearl-dim);
+    color: var(--ink-2);
     line-height: 1.55;
   }
   .signs li::before {
@@ -288,7 +289,7 @@ const schema = [
 
   .prose { max-width: 68ch; display: flex; flex-direction: column; gap: 18px; }
   .about-hoh .panel { display: flex; flex-direction: column; gap: 14px; }
-  .about-hoh p { color: var(--pearl-dim); }
+  .about-hoh p { color: var(--ink-2); }
 
   @media (max-width: 640px) {
     .exit-bar { top: 74px; }

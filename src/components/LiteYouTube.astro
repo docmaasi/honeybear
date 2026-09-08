@@ -26,15 +26,15 @@ const { id, title, poster } = Astro.props;
   @import "lite-youtube-embed/src/lite-yt-embed.css";
 
   lite-youtube {
-    background-color: var(--night-sunk);
+    background-color: var(--paper-sunk);
     border-radius: var(--r-md);
     overflow: hidden;
-    border: 1px solid #2f2438;
+    border: 1px solid var(--rule);
     max-width: none;
   }
   lite-youtube::before { display: none; }
   lite-youtube > .lty-playbtn {
-    background: #17101fd9;
+    background: #221a2bb3;
     border: 1px solid var(--gold);
     border-radius: 50%;
     width: 74px;
@@ -44,14 +44,14 @@ const { id, title, poster } = Astro.props;
     transition: background-color .18s ease, transform .18s ease;
   }
   lite-youtube:hover > .lty-playbtn {
-    background: var(--gold-lit);
+    background: var(--gold);
     transform: scale(1.06);
   }
   lite-youtube > .lty-playbtn::before {
-    border-color: transparent transparent transparent var(--gold-lit);
+    border-color: transparent transparent transparent var(--gold);
   }
   lite-youtube:hover > .lty-playbtn::before {
-    border-left-color: #2a1c0a;
+    border-left-color: #ffffff;
   }
   lite-youtube.lyt-activated > .lty-playbtn { opacity: 0; pointer-events: none; }
 </style>

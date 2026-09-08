@@ -6,35 +6,63 @@
 @import "@fontsource-variable/outfit/wght.css";
 
 /* ============================================================
-   HoneyBear Katherine — "a lit room at night"
-   Deep plum dark, warm lamplight gold, pearl text.
-   Gold is scarce on purpose: it marks the medallion, what is
-   live, and one rule per page. Everything else stays quiet.
+   HoneyBear Katherine
+
+   Katherine names her colours as "purples, golds, pearls". The
+   weighting matters: PEARL is the ground, GOLD is the metal, and
+   PURPLE is the accent — spent on what should be noticed rather
+   than poured over everything.
+
+   Deep plum still appears, but as punctuation: the hero frame,
+   the footer, and anything urgent.
+
+   Every colour is a token. No component hardcodes a hex, so the
+   whole site re-weights from this one block. Contrast is
+   measured, not assumed — the figures are on /accessibility.
    ============================================================ */
 
 :root {
-  /* the room */
-  --night: #17101f;
-  --night-raised: #221929;
-  --night-sunk: #100a16;
-  --plum: #3d2456;
-  --plum-line: #33244180;
+  /* ---- ground: pearl ---- */
+  --paper: #fbf8f3;
+  --paper-raised: #ffffff;
+  --paper-sunk: #f4efe7;
+  --paper-tint: #f7f1e9;
 
-  /* the lamp */
-  --gold: #c08b37;
-  --gold-lit: #ebc87e;
-  --gold-glow: #c08b3733;
+  /* ---- ink ---- */
+  --ink: #221a2b;          /* 15.9:1 on pearl */
+  --ink-2: #4a4055;        /*  9.2:1 */
+  --muted: #6b6175;        /*  5.5:1 */
 
-  /* what it lights */
-  --pearl: #f4efe6;
-  --pearl-dim: #b3a99f;
-  --pearl-faint: #837a86;
+  /* ---- lines ---- */
+  --rule: #e6dfd4;
+  --rule-strong: #cfc5b8;
 
-  /* state */
-  --live: #e4574f;
+  /* ---- accent: purple, used sparingly ---- */
+  --accent: #6b2fa0;       /*  7.8:1 on pearl — safe for text */
+  --accent-deep: #4a1d6e;
+  --accent-soft: #f1eaf8;
+  --accent-line: #d9c8ec;
 
-  /* Bodoni Moda: high-contrast editorial serif — glamour, not utility.
-     Outfit: geometric sans, warm and modern, readable at small sizes. */
+  /* ---- metal: gold ---- */
+  --gold: #8a6414;         /*  5.1:1 — the only gold safe for text */
+  --gold-line: #a87b2a;    /*  decorative only: rules, borders, rings */
+  --gold-soft: #f7f0dd;
+
+  /* ---- deep bands ---- */
+  --night: #1b1424;
+  --night-2: #251c31;
+  --night-line: #3a2e49;
+  --on-night: #f7f2ea;
+  --on-night-2: #c6bccf;
+  --on-night-faint: #9d93aa;
+
+  /* ---- state ---- */
+  --live: #b3261e;         /*  6.2:1 on pearl */
+  --live-soft: #fbeceb;
+  --live-line: #e4b4b0;
+  --good: #1b6144;
+
+  /* ---- type ---- */
   --f-display: "Bodoni Moda", "Didot", Georgia, serif;
   --f-body: "Outfit", "Helvetica Neue", Arial, sans-serif;
 
@@ -43,13 +71,16 @@
   --shell: 1120px;
 
   --r-sm: 4px;
-  --r-md: 10px;
+  --r-md: 12px;
+
+  --shadow-card: 0 1px 2px #221a2b0a, 0 8px 24px -14px #221a2b26;
+  --shadow-lift: 0 2px 4px #221a2b0d, 0 22px 44px -22px #221a2b33;
 }
 
 * { box-sizing: border-box; }
 
 html {
-  background: var(--night);
+  background: var(--paper);
   scroll-behavior: smooth;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -64,8 +95,8 @@ html {
 body {
   margin: 0;
   font-weight: 400;
-  background: var(--night);
-  color: var(--pearl);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--f-body);
   font-size: 17px;
   line-height: 1.65;
@@ -82,30 +113,28 @@ h1, h2, h3, h4 {
   letter-spacing: -0.005em;
   margin: 0;
   text-wrap: balance;
+  color: var(--ink);
 }
-h1 { font-weight: 800; }
-
-h1 { font-size: clamp(38px, 6.4vw, 66px); }
+h1 { font-weight: 800; font-size: clamp(38px, 6.4vw, 66px); }
 h2 { font-size: clamp(28px, 4vw, 40px); }
-h3 { font-size: clamp(20px, 2.4vw, 25px); letter-spacing: -0.01em; }
+h3 { font-size: clamp(20px, 2.4vw, 25px); }
 h4 { font-size: 18px; }
 
 p { margin: 0; max-width: var(--measure); }
-a { color: var(--gold-lit); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--pearl); }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-deep); }
 
 strong { font-weight: 700; }
 
 .lede {
   font-size: clamp(18px, 2vw, 21px);
   line-height: 1.6;
-  color: var(--pearl-dim);
+  color: var(--ink-2);
 }
-
-.small { font-size: 15px; color: var(--pearl-dim); }
+.small { font-size: 15px; color: var(--muted); }
 
 :focus-visible {
-  outline: 2px solid var(--gold-lit);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -125,8 +154,7 @@ section { padding-block: clamp(56px, 9vw, 104px); }
 .stack-md { gap: 22px; }
 .stack-lg { gap: 40px; }
 
-/* A single hairline that carries the section name, rather than a
-   floating uppercase label. The rule IS the label. */
+/* A hairline that carries the section name. The rule IS the label. */
 .rule {
   display: flex;
   align-items: center;
@@ -138,9 +166,26 @@ section { padding-block: clamp(56px, 9vw, 104px); }
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, var(--gold) 0%, transparent 85%);
-  opacity: .55;
+  background: linear-gradient(to right, var(--gold-line) 0%, transparent 88%);
 }
+
+/* Deep plum as punctuation rather than as the default ground. */
+.band-dark {
+  background: var(--night);
+  color: var(--on-night);
+}
+.band-dark h1,
+.band-dark h2,
+.band-dark h3,
+.band-dark h4 { color: var(--on-night); }
+.band-dark p,
+.band-dark .lede { color: var(--on-night-2); }
+.band-dark .small { color: var(--on-night-faint); }
+.band-dark a { color: var(--gold-line); }
+.band-dark a:hover { color: var(--on-night); }
+.band-dark .rule::after { opacity: .75; }
+
+.band-tint { background: var(--paper-sunk); }
 
 /* ---------- buttons ---------- */
 
@@ -150,7 +195,7 @@ section { padding-block: clamp(56px, 9vw, 104px); }
   gap: 10px;
   font-family: var(--f-body);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 13px 24px;
   border-radius: var(--r-sm);
   border: 1px solid transparent;
@@ -158,41 +203,53 @@ section { padding-block: clamp(56px, 9vw, 104px); }
   cursor: pointer;
   transition: background-color .18s ease, border-color .18s ease, color .18s ease;
 }
+/* Primary is the accent: purple, where the eye should go. */
 .btn-gold {
-  background: var(--gold-lit);
-  color: #2a1c0a;
-  border-color: var(--gold-lit);
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
 }
-.btn-gold:hover { background: #f6dda3; color: #2a1c0a; }
+.btn-gold:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  color: #ffffff;
+}
 .btn-quiet {
   background: transparent;
-  color: var(--pearl);
-  border-color: #4a3a58;
+  color: var(--ink);
+  border-color: var(--rule-strong);
 }
-.btn-quiet:hover { border-color: var(--gold); color: var(--pearl); }
+.btn-quiet:hover { border-color: var(--accent); color: var(--accent); }
+
+.band-dark .btn-gold {
+  background: var(--gold-line);
+  color: #241a06;
+  border-color: var(--gold-line);
+}
+.band-dark .btn-gold:hover { background: #d3a54a; border-color: #d3a54a; color: #241a06; }
+.band-dark .btn-quiet { color: var(--on-night); border-color: var(--night-line); }
+.band-dark .btn-quiet:hover { border-color: var(--gold-line); color: var(--gold-line); }
 
 /* ---------- the medallion ---------- */
-/* The one bold element on the site: a gold-rimmed portrait echoing
-   the carved HBK777 badge. Used once per page at most. */
 
 .medallion {
   position: relative;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--gold);
+  border: 2px solid var(--gold-line);
   box-shadow:
-    0 0 0 8px var(--night-raised),
-    0 0 0 9px #4a3a58,
-    0 28px 70px -20px #000;
+    0 0 0 9px var(--paper),
+    0 0 0 10px var(--accent-line),
+    0 26px 60px -24px #221a2b59;
 }
 .medallion img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.band-dark .medallion { box-shadow: 0 0 0 9px var(--night), 0 0 0 10px var(--night-line); }
 
-/* the lamplight behind it */
 .lamp {
   position: absolute;
   inset: -40%;
-  background: radial-gradient(circle at 50% 45%, var(--gold-glow) 0%, transparent 62%);
+  background: radial-gradient(circle at 50% 45%, #6b2fa01f 0%, transparent 62%);
   pointer-events: none;
   z-index: -1;
 }
@@ -200,25 +257,32 @@ section { padding-block: clamp(56px, 9vw, 104px); }
 /* ---------- surfaces ---------- */
 
 .panel {
-  background: var(--night-raised);
-  border: 1px solid #2f2438;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
   border-radius: var(--r-md);
   padding: 26px;
+  box-shadow: var(--shadow-card);
+}
+.band-dark .panel {
+  background: var(--night-2);
+  border-color: var(--night-line);
+  box-shadow: none;
 }
 
 /* ---------- live indicator ---------- */
 
 .live-dot {
-  width: 9px; height: 9px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--live);
   flex: none;
-  box-shadow: 0 0 0 0 #e4574fcc;
+  box-shadow: 0 0 0 0 #b3261ecc;
   animation: pulse 2.4s infinite;
 }
 @keyframes pulse {
-  70% { box-shadow: 0 0 0 9px #e4574f00; }
-  100% { box-shadow: 0 0 0 0 #e4574f00; }
+  70% { box-shadow: 0 0 0 9px #b3261e00; }
+  100% { box-shadow: 0 0 0 0 #b3261e00; }
 }
 
 /* ---------- utility ---------- */
@@ -232,8 +296,8 @@ img { max-width: 100%; height: auto; }
   position: absolute;
   left: -9999px;
   top: 0;
-  background: var(--gold-lit);
-  color: #2a1c0a;
+  background: var(--accent);
+  color: #ffffff;
   padding: 12px 18px;
   font-weight: 700;
   z-index: 100;

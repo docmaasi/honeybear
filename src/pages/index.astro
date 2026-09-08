@@ -29,7 +29,7 @@ const schema = [
   schema={schema}
 >
   <!-- Hero: what is on, and when. The question the old site never answered. -->
-  <section class="hero">
+  <section class="hero band-dark">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="shell hero-grid">
       <div class="hero-copy">
@@ -78,7 +78,7 @@ const schema = [
   </section>
 
   <!-- Recent episodes -->
-  <section>
+  <section class="band-tint">
     <div class="shell">
       <div class="rule"><h2>Recent episodes</h2></div>
       <div class="ep-grid">
@@ -123,7 +123,7 @@ const schema = [
   </section>
 
   <!-- Book -->
-  <section class="book">
+  <section class="book band-dark">
     <div class="shell book-grid">
       <div class="stack stack-md">
         <div class="rule"><h2>Weight Of Dysfunction</h2></div>
@@ -139,11 +139,14 @@ const schema = [
           </a>
         </div>
       </div>
-      <div class="book-note panel">
-        <p>
-          “If reading about her situation helps even one person see their
-          relationship for what it is, I have fulfilled my purpose.”
-        </p>
+      <div class="book-cover">
+        <img
+          src="/art/weight-of-dysfunction-cover.jpg"
+          alt="Cover of Weight Of Dysfunction by Katherine L. Carter"
+          width="667"
+          height="1000"
+          loading="lazy"
+        />
       </div>
     </div>
   </section>
@@ -151,7 +154,7 @@ const schema = [
 
 <style>
   .hero {
-    padding-block: clamp(40px, 5.5vw, 70px) clamp(30px, 4vw, 52px);
+    padding-block: clamp(52px, 7vw, 88px) clamp(46px, 6vw, 74px);
     position: relative;
     overflow: hidden;
   }
@@ -160,12 +163,19 @@ const schema = [
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(to right, #17101fef 0%, #17101fdd 46%, #17101fb0 100%),
-      linear-gradient(to bottom, #17101f00 55%, #17101f 100%),
+      linear-gradient(105deg, #1b1424f2 0%, #1b1424d9 42%, #1b1424a6 100%),
       url("/art/haven-room.jpg");
-    background-size: cover, cover, cover;
-    background-position: center, center, center 30%;
+    background-size: cover, cover;
+    background-position: center, center 32%;
     pointer-events: none;
+  }
+  /* a warm edge where the band meets the pearl below */
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--gold-line), #6b2fa0 55%, transparent);
   }
   .hero-grid {
     position: relative;
@@ -176,7 +186,7 @@ const schema = [
   }
   .kicker {
     font-size: 15px;
-    color: var(--gold-lit);
+    color: var(--gold-line);
     letter-spacing: 0.02em;
     margin-bottom: 14px;
   }
@@ -187,7 +197,7 @@ const schema = [
   }
   .hero-portrait { position: relative; max-width: 380px; justify-self: end; width: 100%; }
 
-  .topics-sec { background: var(--night-sunk); }
+  .topics-sec { background: var(--paper); }
   .topic-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -203,8 +213,9 @@ const schema = [
   .tcard-img {
     border-radius: var(--r-md);
     overflow: hidden;
-    border: 1px solid #2f2438;
+    border: 1px solid var(--rule);
     aspect-ratio: 4 / 3;
+    box-shadow: var(--shadow-card);
   }
   .tcard-img img {
     width: 100%; height: 100%; object-fit: cover; display: block;
@@ -212,9 +223,9 @@ const schema = [
   }
   .tcard:hover .tcard-img img { transform: scale(1.04); }
   .tcard:hover .tcard-img { border-color: var(--gold); }
-  .tcard:hover h3 { color: var(--gold-lit); }
+  .tcard:hover h3 { color: var(--accent); }
   .tcard h3 { font-size: 20px; }
-  .tcard p { font-size: 15.5px; color: var(--pearl-dim); line-height: 1.5; }
+  .tcard p { font-size: 15.5px; color: var(--ink-2); line-height: 1.5; }
 
   .ep-grid {
     display: grid;
@@ -223,7 +234,7 @@ const schema = [
   }
   .more { margin-top: 44px; }
 
-  .worlds { background: var(--night-sunk); }
+  .worlds { background: var(--paper); }
   .intro { margin-bottom: 38px; max-width: 58ch; }
   .world-grid {
     display: grid;
@@ -235,24 +246,24 @@ const schema = [
     flex-direction: column;
     gap: 8px;
     padding-top: 22px;
-    border-top: 2px solid var(--plum);
+    border-top: 2px solid var(--accent-line);
   }
   .world-bingo { border-top-color: var(--gold); }
-  .world .where { color: var(--pearl-faint); }
-  .world p { font-size: 16px; color: var(--pearl-dim); }
+  .world .where { color: var(--muted); }
+  .world p { font-size: 16px; color: var(--ink-2); }
 
   .book-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.15fr 0.85fr;
     gap: clamp(30px, 5vw, 60px);
     align-items: center;
   }
-  .book-note p {
-    font-family: var(--f-display);
-    font-size: 20px;
-    line-height: 1.5;
-    font-style: italic;
-    color: var(--pearl);
+  .book-cover { justify-self: center; max-width: 260px; width: 100%; }
+  .book-cover img {
+    width: 100%;
+    border-radius: 3px;
+    transform: rotate(-1.6deg);
+    box-shadow: 0 2px 0 0 #ffffff14, 0 30px 60px -22px #000;
   }
   .next-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 

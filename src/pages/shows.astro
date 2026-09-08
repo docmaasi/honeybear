@@ -96,23 +96,23 @@ const schema = withNext.map((s) => ({
     gap: 34px;
     align-items: start;
     padding-bottom: 46px;
-    border-bottom: 1px solid #2b2136;
+    border-bottom: 1px solid var(--rule);
   }
   .show:last-child { border-bottom: none; }
   .show-alt { grid-template-columns: 1fr; }
   .show-art img {
     width: 100%;
     border-radius: var(--r-md);
-    border: 1px solid #2f2438;
+    border: 1px solid var(--rule);
     display: block;
   }
   .when {
     font-size: 19px;
-    color: var(--gold-lit);
+    color: var(--gold);
     font-weight: 500;
   }
-  .zones { color: var(--pearl-faint); }
-  .blurb { color: var(--pearl-dim); margin-top: 6px; }
+  .zones { color: var(--muted); }
+  .blurb { color: var(--ink-2); margin-top: 6px; }
   .cta { margin-top: 12px; }
 
   .slots { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 12px; }
@@ -122,9 +122,9 @@ const schema = withNext.map((s) => ({
     gap: 12px;
     align-items: baseline;
     padding-bottom: 12px;
-    border-bottom: 1px solid #241b2d;
+    border-bottom: 1px solid var(--rule);
   }
-  .slots .small { color: var(--pearl-faint); }
+  .slots .small { color: var(--muted); }
 
   @media (max-width: 720px) {
     .show { grid-template-columns: 1fr; gap: 22px; }

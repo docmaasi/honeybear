@@ -5,7 +5,7 @@ import { legalPages } from "../data/legal";
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-foot">
+<footer class="site-foot band-dark">
   <div class="shell">
     <div class="foot-grid">
       <div class="stack stack-md foot-brand">
@@ -106,8 +106,8 @@ const year = new Date().getFullYear();
 
 <style>
   .site-foot {
-    background: var(--night-sunk);
-    border-top: 1px solid #2b2136;
+    background: var(--night);
+    border-top: 1px solid var(--rule);
     padding-block: 64px 34px;
     margin-top: 40px;
   }
@@ -122,19 +122,19 @@ const year = new Date().getFullYear();
   }
   .foot-grid h4 {
     font-size: 16px;
-    color: var(--pearl);
+    color: var(--on-night);
     margin-bottom: 4px;
   }
   .foot-grid a {
-    color: var(--pearl-dim);
+    color: var(--on-night-2);
     text-decoration: none;
     font-size: 15px;
   }
-  .foot-grid a:hover { color: var(--gold-lit); text-decoration: underline; }
+  .foot-grid a:hover { color: var(--gold-line); text-decoration: underline; }
   .socials { display: flex; gap: 18px; flex-wrap: wrap; }
   .disclosure {
     font-size: 13.5px;
-    color: var(--pearl-dim);
+    color: var(--on-night-faint);
     line-height: 1.5;
     margin-top: 4px;
   }
@@ -142,24 +142,24 @@ const year = new Date().getFullYear();
     margin-top: 46px;
     padding: 16px 20px;
     border-left: 3px solid var(--live);
-    background: #e4574f14;
+    background: #b3261e26;
   }
-  .foot-safety p { font-size: 14.5px; color: var(--pearl-dim); line-height: 1.55; max-width: 78ch; }
-  .foot-safety strong { color: var(--pearl); }
-  .foot-safety a { color: var(--gold-lit); text-decoration: none; font-weight: 700; }
-  .foot-safety a:hover { text-decoration: underline; }
+  .foot-safety p { font-size: 14.5px; color: var(--on-night); line-height: 1.55; max-width: 78ch; }
+  .foot-safety strong { color: var(--on-night); }
+  .foot-safety a { color: #ffffff; text-decoration: underline; text-underline-offset: 3px; font-weight: 700; }
+  .foot-safety a:hover { color: #ffd9d5; }
 
   .foot-legal { margin-top: 26px; }
   .foot-legal ul {
     list-style: none; margin: 0; padding: 0;
     display: flex; flex-wrap: wrap; gap: 8px 22px;
   }
-  .foot-legal a { color: var(--pearl-dim); text-decoration: none; font-size: 14.5px; }
-  .foot-legal a:hover { color: var(--gold-lit); text-decoration: underline; }
+  .foot-legal a { color: var(--on-night-2); text-decoration: none; font-size: 14.5px; }
+  .foot-legal a:hover { color: var(--gold-line); text-decoration: underline; }
 
-  .nb { display: block; margin-top: 4px; color: var(--pearl-faint); }
-  .nb a { color: var(--pearl-faint); }
-  .nb a:hover { color: var(--gold-lit); }
+  .nb { display: block; margin-top: 4px; color: var(--on-night-faint); }
+  .nb a { color: var(--on-night-faint); }
+  .nb a:hover { color: var(--gold-line); }
 
   .foot-base {
     display: flex;
@@ -168,9 +168,9 @@ const year = new Date().getFullYear();
     flex-wrap: wrap;
     margin-top: 24px;
     padding-top: 22px;
-    border-top: 1px solid #2b2136;
+    border-top: 1px solid var(--rule);
   }
-  .foot-base a { color: var(--gold-lit); }
+  .foot-base a { color: var(--gold-line); }
 
   @media (max-width: 860px) {
     .foot-grid { grid-template-columns: 1fr 1fr; }

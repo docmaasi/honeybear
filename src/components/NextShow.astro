@@ -159,14 +159,14 @@ const live = isLive(next.occ, now);
     font-weight: 700;
     padding: 6px 13px;
     border-radius: 999px;
-    background: #e4574f1f;
-    color: #f2a49e;
-    border: 1px solid #e4574f4d;
+    background: var(--live-soft);
+    color: #f4b8b3;
+    border: 1px solid var(--live-line);
   }
   .badge-quiet {
     background: transparent;
-    color: var(--gold-lit);
-    border-color: #c08b3759;
+    color: var(--gold-line);
+    border-color: #6b563a;
   }
   .next-name {
     font-size: clamp(25px, 3.2vw, 34px);
@@ -174,11 +174,11 @@ const live = isLive(next.occ, now);
   }
   .next-when {
     font-size: clamp(18px, 2.2vw, 22px);
-    color: var(--pearl);
+    color: var(--on-night);
     font-weight: 500;
   }
-  .next-yours { color: var(--pearl-dim); }
-  .next-blurb { color: var(--pearl-dim); max-width: 46ch; }
+  .next-yours { color: var(--on-night-2); }
+  .next-blurb { color: var(--on-night-2); max-width: 46ch; }
   .next-actions {
     display: flex;
     gap: 12px;

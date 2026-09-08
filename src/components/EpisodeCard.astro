@@ -55,8 +55,8 @@ const sub = untitled ? "Episode" : formatDate(episode.published);
     position: relative;
     border-radius: var(--r-md);
     overflow: hidden;
-    background: var(--night-raised);
-    border: 1px solid #2f2438;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
     aspect-ratio: 16 / 9;
   }
   .ep-thumb img {
@@ -78,18 +78,18 @@ const sub = untitled ? "Episode" : formatDate(episode.published);
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: #17101fd9;
+    background: #221a2bb3;
     border: 1px solid var(--gold);
-    color: var(--gold-lit);
+    color: var(--gold);
     backdrop-filter: blur(4px);
   }
 
   .ep h3 { font-size: 20px; }
-  .ep:hover h3 { color: var(--gold-lit); }
+  .ep:hover h3 { color: var(--gold); }
   .ep-text { display: flex; flex-direction: column; gap: 5px; }
   .ep-sum {
     font-size: 15px;
-    color: var(--pearl-dim);
+    color: var(--ink-2);
     line-height: 1.55;
     margin-top: 3px;
   }

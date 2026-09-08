@@ -202,7 +202,7 @@ const schema = [
     position: absolute;
     inset: -20% -10% auto -20%;
     height: 130%;
-    background: radial-gradient(circle at 28% 40%, #3d245640 0%, transparent 62%);
+    background: radial-gradient(circle at 28% 40%, var(--accent-soft) 0%, transparent 62%);
     pointer-events: none;
   }
   .hero-grid {
@@ -226,19 +226,19 @@ const schema = [
     transform: rotate(-1.4deg);
   }
 
-  .kicker { color: var(--gold-lit); font-size: 15px; margin-bottom: 12px; }
+  .kicker { color: var(--gold); font-size: 15px; margin-bottom: 12px; }
   .hero h1 { font-size: clamp(36px, 5.6vw, 62px); }
   .byline {
     font-family: var(--f-display);
     font-style: italic;
     font-size: clamp(19px, 2.2vw, 23px);
-    color: var(--pearl-dim);
+    color: var(--ink-2);
     margin-top: 10px;
   }
   .stand {
     font-size: clamp(17px, 1.9vw, 20px);
     line-height: 1.6;
-    color: var(--pearl);
+    color: var(--ink);
     margin-top: 22px;
     max-width: 46ch;
   }
@@ -249,10 +249,10 @@ const schema = [
     flex-wrap: wrap;
     margin-top: 20px;
     font-size: 15.5px;
-    color: var(--pearl-dim);
+    color: var(--ink-2);
   }
-  .stars { color: var(--gold-lit); letter-spacing: 2px; font-size: 17px; }
-  .rating .dim { color: var(--pearl-faint); }
+  .stars { color: var(--gold); letter-spacing: 2px; font-size: 17px; }
+  .rating .dim { color: var(--muted); }
   .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
 
   .quote-sec { padding-block: clamp(30px, 5vw, 56px); }
@@ -261,7 +261,7 @@ const schema = [
     font-family: var(--f-display);
     font-size: clamp(23px, 3.2vw, 34px);
     line-height: 1.32;
-    color: var(--pearl);
+    color: var(--ink);
     font-style: italic;
     border-left: 2px solid var(--gold);
     padding-left: clamp(18px, 3vw, 30px);
@@ -272,12 +272,12 @@ const schema = [
     padding-left: clamp(20px, 3vw, 32px);
     font-style: normal;
     font-size: 15px;
-    color: var(--pearl-faint);
+    color: var(--muted);
   }
   .inline-quote { margin: 26px 0; }
   .inline-quote p { font-size: clamp(18px, 2.1vw, 22px); }
 
-  .about-book { background: var(--night-sunk); }
+  .about-book { background: var(--paper-sunk); }
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 300px;
@@ -285,12 +285,12 @@ const schema = [
     align-items: start;
   }
   .prose { display: flex; flex-direction: column; gap: 16px; max-width: 62ch; }
-  .prose p { font-size: 17.5px; line-height: 1.7; color: #ded7cd; }
-  .prose em { color: var(--pearl); font-style: italic; }
+  .prose p { font-size: 17.5px; line-height: 1.7; color: var(--ink-2); }
+  .prose em { color: var(--ink); font-style: italic; }
 
   .facts {
-    background: var(--night-raised);
-    border: 1px solid #2f2438;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
     border-radius: var(--r-md);
     padding: 24px 26px;
   }
@@ -302,15 +302,15 @@ const schema = [
     font-weight: 700;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: var(--pearl-faint);
+    color: var(--muted);
     margin-bottom: 2px;
   }
-  .facts dd { margin: 0; font-size: 16px; color: var(--pearl); }
+  .facts dd { margin: 0; font-size: 16px; color: var(--ink); }
   .full { margin-top: 22px; width: 100%; justify-content: center; }
 
   .note {
     border-left: 3px solid var(--live);
-    background: #e4574f14;
+    background: var(--live-soft);
     padding: 26px 30px;
     display: flex;
     flex-direction: column;
@@ -318,9 +318,9 @@ const schema = [
     align-items: flex-start;
   }
   .note h2 { font-size: 24px; }
-  .note p { color: var(--pearl-dim); max-width: 62ch; }
-  .note .line { color: var(--pearl); }
-  .note a[href^="tel"] { color: var(--gold-lit); }
+  .note p { color: var(--ink-2); max-width: 62ch; }
+  .note .line { color: var(--ink); }
+  .note a[href^="tel"] { color: var(--gold); }
   .note .btn { margin-top: 6px; }
 
   .author-prose { max-width: 66ch; }
@@ -338,12 +338,12 @@ const schema = [
     text-decoration: none;
     color: inherit;
     padding-top: 20px;
-    border-top: 2px solid var(--plum);
+    border-top: 2px solid var(--accent);
     transition: border-color .18s ease;
   }
   .card:hover { border-top-color: var(--gold); }
-  .card:hover h3 { color: var(--gold-lit); }
-  .card p { color: var(--pearl-dim); font-size: 16px; }
+  .card:hover h3 { color: var(--gold); }
+  .card p { color: var(--ink-2); font-size: 16px; }
 
   @media (max-width: 880px) {
     .hero-grid { grid-template-columns: 1fr; }

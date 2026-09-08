@@ -1,0 +1,70 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="You are offline"
+  description="This page is shown when there is no connection. The crisis numbers below work without one."
+>
+  <section class="off">
+    <div class="shell stack stack-md">
+      <h1>You are offline</h1>
+      <p class="lede">
+        The page you asked for is not saved on this device. It will load again
+        as soon as you have a connection.
+      </p>
+
+      <div class="numbers">
+        <h2>These work without internet</h2>
+        <p>
+          <strong>Emergency</strong>
+          <a href="tel:911">911</a>
+        </p>
+        <p>
+          <strong>National Domestic Violence Hotline</strong>
+          <a href="tel:18007997233">1-800-799-7233</a>
+        </p>
+        <p>
+          <strong>988 Suicide and Crisis Lifeline</strong>
+          <a href="tel:988">988</a>
+        </p>
+        <p class="small">
+          A phone call needs signal, not data. These connect even with no
+          internet at all.
+        </p>
+      </div>
+
+      <p class="links">
+        <a class="btn btn-quiet" href="/">Home</a>
+        <a class="btn btn-quiet" href="/harbor-of-hope">Harbor of Hope</a>
+        <a class="btn btn-quiet" href="/resources">Resources</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .off { padding-block: clamp(60px, 10vw, 120px); }
+  .numbers {
+    border-left: 3px solid var(--live);
+    background: var(--live-soft);
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 56ch;
+  }
+  .numbers h2 { font-size: 22px; margin-bottom: 4px; }
+  .numbers p { display: flex; flex-direction: column; gap: 2px; }
+  .numbers strong { font-size: 15px; color: var(--ink-2); font-weight: 600; }
+  .numbers a {
+    font-family: var(--f-display);
+    font-size: 26px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+    color: var(--live);
+  }
+  .numbers .small { color: var(--muted); margin-top: 6px; }
+  .links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+</style>
