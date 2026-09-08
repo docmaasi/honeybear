@@ -80,7 +80,15 @@ export function watchUrl(id: string) {
   return `https://www.youtube.com/watch?v=${id}`;
 }
 
+/** Locally served thumbnail. Fetched once at build time by
+ *  scripts/fetch_thumbs.mjs so that no page contacts YouTube before a
+ *  visitor presses play. Run `npm run thumbs` after adding an episode. */
 export function thumbUrl(id: string) {
+  return `/art/episodes/${id}.jpg`;
+}
+
+/** The canonical YouTube thumbnail, for structured data only. */
+export function remoteThumbUrl(id: string) {
   return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 }
 

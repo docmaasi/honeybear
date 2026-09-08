@@ -1,3 +1,10 @@
+/* Fonts are self-hosted (Fontsource, SIL Open Font License).
+   Nothing is fetched from Google, so a visitor's IP never reaches a
+   third party just to read the page. */
+@import "@fontsource-variable/bodoni-moda/opsz.css";
+@import "@fontsource-variable/bodoni-moda/opsz-italic.css";
+@import "@fontsource-variable/outfit/wght.css";
+
 /* ============================================================
    HoneyBear Katherine — "a lit room at night"
    Deep plum dark, warm lamplight gold, pearl text.

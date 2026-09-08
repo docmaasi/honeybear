@@ -27,6 +27,12 @@ const others = resourceGroups.filter((g) => !g.urgent);
     </nav>
 
     <div class="head-right">
+      <a class="search-link" href="/search" aria-label="Search the site">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+      </a>
       <a class="btn btn-gold watch-cta" href={links.youtube} rel="noopener">Watch</a>
       <button
         class="menu-btn"
@@ -59,6 +65,7 @@ const others = resourceGroups.filter((g) => !g.urgent);
             </a>
           </li>
         ))}
+        <li><a href="/search">Search</a></li>
         <li><a href="/resources">Help &amp; resources</a></li>
         <li><a href="/harbor-of-hope">Harbor of Hope</a></li>
       </ul>
@@ -136,6 +143,16 @@ const others = resourceGroups.filter((g) => !g.urgent);
 
   .head-right { display: flex; align-items: center; gap: 12px; }
   .watch-cta { padding: 9px 18px; font-size: 15px; }
+
+  .search-link {
+    display: grid;
+    place-items: center;
+    width: 40px; height: 40px;
+    color: var(--pearl-dim);
+    border-radius: var(--r-sm);
+    flex: none;
+  }
+  .search-link:hover { color: var(--gold-lit); }
 
   .menu-btn {
     display: grid; place-items: center;

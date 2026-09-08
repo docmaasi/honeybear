@@ -1,0 +1,61 @@
+---
+// A click-to-play facade for YouTube (lite-youtube-embed, Apache-2.0).
+//
+// Why it matters here: the previous iframe contacted YouTube the moment an
+// episode page loaded, whether or not anyone pressed play. Now nothing reaches
+// Google until a visitor chooses to watch. The thumbnail is served from this
+// site, so even that no longer leaks a request.
+//
+// It also loads far less: one small script instead of the full player.
+interface Props {
+  id: string;
+  title: string;
+  /** Locally served poster so no request leaves the site before play. */
+  poster: string;
+}
+const { id, title, poster } = Astro.props;
+---
+
+<lite-youtube videoid={id} params="rel=0&modestbranding=1" style={`background-image: url('${poster}')`}>
+  <a class="lty-playbtn" href={`https://www.youtube.com/watch?v=${id}`} rel="noopener">
+    <span class="lyt-visually-hidden">Play: {title}</span>
+  </a>
+</lite-youtube>
+
+<style is:global>
+  @import "lite-youtube-embed/src/lite-yt-embed.css";
+
+  lite-youtube {
+    background-color: var(--night-sunk);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid #2f2438;
+    max-width: none;
+  }
+  lite-youtube::before { display: none; }
+  lite-youtube > .lty-playbtn {
+    background: #17101fd9;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    width: 74px;
+    height: 52px;
+    filter: none;
+    opacity: 1;
+    transition: background-color .18s ease, transform .18s ease;
+  }
+  lite-youtube:hover > .lty-playbtn {
+    background: var(--gold-lit);
+    transform: scale(1.06);
+  }
+  lite-youtube > .lty-playbtn::before {
+    border-color: transparent transparent transparent var(--gold-lit);
+  }
+  lite-youtube:hover > .lty-playbtn::before {
+    border-left-color: #2a1c0a;
+  }
+  lite-youtube.lyt-activated > .lty-playbtn { opacity: 0; pointer-events: none; }
+</style>
+
+<script>
+  import "lite-youtube-embed";
+</script>

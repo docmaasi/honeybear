@@ -104,14 +104,19 @@ for (const file of html) {
   }
 
   // --- F-11: no dead controls or placeholder copy ---
+  // Checked against visible text only: script and style bodies legitimately
+  // contain words like "placeholder" as configuration keys.
   check();
   if (/href="#"/.test(s)) fail(name, 'dead link: href="#"');
+  const visible = s
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "");
   const banned = [
     "coming soon", "lorem ipsum", "placeholder",
     "create or restart your membership", "TODO", "FIXME",
   ];
   for (const b of banned) {
-    if (s.toLowerCase().includes(b.toLowerCase()))
+    if (visible.toLowerCase().includes(b.toLowerCase()))
       fail(name, `placeholder copy found: "${b}"`);
   }
 

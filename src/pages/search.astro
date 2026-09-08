@@ -1,0 +1,127 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+
+// Pagefind (MIT) indexes the built HTML and runs the search in the browser.
+// No server, no API, no query ever leaves the visitor's device — which matters
+// on a site where somebody may be searching for how to leave a relationship.
+const schema = [
+  {
+    "@type": "WebPage",
+    name: "Search",
+    url: `${site.domain}/search`,
+    isPartOf: { "@id": `${site.domain}/#website` },
+  },
+];
+---
+
+<Base
+  title="Search"
+  description="Search every article, episode and resource on the site. Searching happens on your own device — nothing is sent anywhere."
+  schema={schema}
+>
+  <section class="head">
+    <div class="shell stack stack-md">
+      <h1>Search</h1>
+      <p class="lede">
+        Everything on the site: articles, episodes, topics and resources.
+      </p>
+    </div>
+  </section>
+
+  <section class="results">
+    <div class="shell">
+      <div id="search" data-pagefind-ignore></div>
+      <p class="privacy-note" data-pagefind-ignore>
+        Your search runs entirely in your own browser. Nothing you type here is
+        sent to this site or anywhere else, and no record of it is kept.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  /* Pagefind ships its own stylesheet; these variables restyle it to match. */
+  :root {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: var(--pearl);
+    --pagefind-ui-text: var(--pearl);
+    --pagefind-ui-background: var(--night);
+    --pagefind-ui-border: #3c2f47;
+    --pagefind-ui-tag: var(--night-raised);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 4px;
+    --pagefind-ui-font: var(--f-body);
+  }
+  .pagefind-ui__search-input {
+    background: var(--night-sunk) !important;
+    color: var(--pearl) !important;
+    font-family: var(--f-body) !important;
+  }
+  .pagefind-ui__search-input::placeholder { color: var(--pearl-faint) !important; }
+  .pagefind-ui__result {
+    border-top: 1px solid #2b2136 !important;
+    padding-block: 22px !important;
+  }
+  .pagefind-ui__result-title a {
+    font-family: var(--f-display) !important;
+    font-size: 21px !important;
+    font-weight: 700 !important;
+    color: var(--pearl) !important;
+    text-decoration: none !important;
+  }
+  .pagefind-ui__result-title a:hover { color: var(--gold-lit) !important; }
+  .pagefind-ui__result-excerpt {
+    color: var(--pearl-dim) !important;
+    line-height: 1.6 !important;
+  }
+  .pagefind-ui__result-excerpt mark {
+    background: transparent !important;
+    color: var(--gold-lit) !important;
+    font-weight: 700;
+  }
+  .pagefind-ui__result-tags,
+  .pagefind-ui__result-tag { color: var(--pearl-faint) !important; }
+  .pagefind-ui__button {
+    background: var(--night-raised) !important;
+    color: var(--pearl) !important;
+    border: 1px solid #3c2f47 !important;
+  }
+  .pagefind-ui__message {
+    font-family: var(--f-display) !important;
+    font-size: 20px !important;
+    color: var(--pearl) !important;
+  }
+</style>
+
+<style>
+  .head { padding-block: clamp(46px, 7vw, 82px) 0; }
+  .results { padding-block: clamp(28px, 4vw, 44px) clamp(50px, 8vw, 90px); }
+  .privacy-note {
+    margin-top: 34px;
+    padding-top: 18px;
+    border-top: 1px solid #2b2136;
+    font-size: 14.5px;
+    color: var(--pearl-faint);
+    max-width: 62ch;
+  }
+</style>
+
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script is:inline>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (typeof PagefindUI === "undefined") return;
+    new PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      showImages: false,
+      pageSize: 8,
+      resetStyles: false,
+      translations: {
+        placeholder: "Search articles, episodes and resources",
+        zero_results: "Nothing found for [SEARCH_TERM]",
+      },
+    });
+  });
+</script>

@@ -78,6 +78,42 @@ export const resourceGroups: ResourceGroup[] = [
     ],
   },
   {
+    key: "international",
+    title: "Outside the United States",
+    blurb:
+      "The lines above are US numbers. These directories cover the rest of the world.",
+    items: [
+      {
+        name: "Find a Helpline",
+        href: "https://findahelpline.com",
+        note: "Free crisis lines in over 130 countries, filtered by what you are dealing with. Run by the non-profit ThroughLine.",
+      },
+      {
+        name: "HotPeachPages International",
+        href: "https://www.hotpeachpages.net",
+        note: "A long-running international directory of domestic violence agencies, listed by country and in many languages.",
+      },
+      {
+        name: "UK — Refuge National Domestic Abuse Helpline",
+        tel: "0808 2000 247",
+        href: "https://www.nationaldahelpline.org.uk",
+        note: "Free and 24 hours, across England.",
+      },
+      {
+        name: "Canada — Talk Suicide Canada",
+        tel: "988",
+        href: "https://988.ca",
+        note: "Call or text, 24 hours, in English and French.",
+      },
+      {
+        name: "Australia — 1800RESPECT",
+        tel: "1800 737 732",
+        href: "https://www.1800respect.org.au",
+        note: "National domestic, family and sexual violence counselling, 24 hours.",
+      },
+    ],
+  },
+  {
     key: "legal",
     title: "Legal and practical",
     blurb: "Knowing where you stand, and what to do next.",
