@@ -1,0 +1,186 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { categories, type CategoryKey } from "../../data/categories";
+import { site } from "../../data/site";
+
+const posts = (await getCollection("blog")).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date),
+);
+
+const grouped = (Object.keys(categories) as CategoryKey[]).map((key) => ({
+  key,
+  meta: categories[key],
+  posts: posts.filter((p) => p.data.category === key),
+}));
+
+const featured = posts.slice(0, 3);
+
+function pretty(iso: string) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return `${months[m - 1]} ${d}, ${y}`;
+}
+
+const schema = [
+  {
+    "@type": "Blog",
+    "@id": `${site.domain}/blog`,
+    name: "The Haven Journal",
+    description:
+      "Writing on relationships, dating, trust, and love in both the real and the digital world.",
+    url: `${site.domain}/blog`,
+    author: { "@id": `${site.domain}/#katherine` },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.data.title,
+      url: `${site.domain}/blog/${p.id}`,
+      datePublished: p.data.date,
+    })),
+  },
+];
+---
+
+<Base
+  title="The Haven Journal"
+  description="Writing on relationships, dating, trust, and love in both the real and the digital world — from the host of HoneyBear Katherine's Haven."
+  image="/art/blog/meta-boo.jpg"
+  schema={schema}
+>
+  <section class="head">
+    <div class="shell stack stack-md">
+      <h1>The Haven Journal</h1>
+      <p class="lede">
+        {posts.length} pieces on dating, trust, repair, and what love looks like
+        now that so much of it happens on a screen. Written to be useful rather
+        than comforting.
+      </p>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="shell">
+      <div class="feat-grid">
+        {featured.map((p, i) => (
+          <a class:list={["feat", i === 0 && "feat-lead"]} href={`/blog/${p.id}`}>
+            <div class="feat-img">
+              <img src={p.data.image} alt="" loading={i === 0 ? "eager" : "lazy"} width="1000" height="625" />
+            </div>
+            <div class="feat-text">
+              <span class="cat">{categories[p.data.category].name}</span>
+              <h2>{p.data.title}</h2>
+              <p>{p.data.description}</p>
+              <span class="date tnum">{pretty(p.data.date)}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {grouped.map((g) => (
+    <section class="cat-sec">
+      <div class="shell">
+        <div class="rule"><h2>{g.meta.name}</h2></div>
+        <p class="lede cat-blurb">{g.meta.blurb}</p>
+        <div class="post-grid">
+          {g.posts.map((p) => (
+            <a class="card" href={`/blog/${p.id}`}>
+              <div class="card-img">
+                <img src={p.data.image} alt="" loading="lazy" width="1000" height="625" />
+              </div>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+              <span class="date tnum">{pretty(p.data.date)}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .head { padding-block: clamp(46px, 7vw, 82px) 0; }
+  .featured { padding-block: clamp(32px, 5vw, 52px); }
+
+  .feat-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 30px;
+    align-items: start;
+  }
+  .feat-lead { grid-row: span 2; }
+  .feat {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .feat-img {
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid #2f2438;
+    aspect-ratio: 16 / 10;
+  }
+  .feat-lead .feat-img { aspect-ratio: 4 / 3.4; }
+  .feat-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .5s ease;
+  }
+  .feat:hover .feat-img img { transform: scale(1.03); }
+  .feat:hover .feat-img { border-color: var(--gold); }
+  .feat:hover h2 { color: var(--gold-lit); }
+  .feat-text { display: flex; flex-direction: column; gap: 7px; }
+  .feat h2 { font-size: 23px; line-height: 1.16; }
+  .feat-lead h2 { font-size: clamp(27px, 3.4vw, 36px); }
+  .feat p { font-size: 15.5px; color: var(--pearl-dim); line-height: 1.5; }
+  .feat-lead p { font-size: 17px; }
+
+  .cat {
+    font-size: 13px;
+    color: var(--gold-lit);
+    font-family: var(--f-body);
+    font-weight: 600;
+  }
+  .date { font-size: 13.5px; color: var(--pearl-faint); }
+
+  .cat-sec { padding-block: clamp(30px, 4.5vw, 52px); }
+  .cat-sec:nth-of-type(even) { background: var(--night-sunk); }
+  .cat-blurb { margin-bottom: 32px; max-width: 54ch; font-size: 17px; }
+
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 34px 28px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .card-img {
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid #2f2438;
+    aspect-ratio: 16 / 10;
+  }
+  .card-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .5s ease;
+  }
+  .card:hover .card-img img { transform: scale(1.04); }
+  .card:hover .card-img { border-color: var(--gold); }
+  .card:hover h3 { color: var(--gold-lit); }
+  .card h3 { font-size: 19px; line-height: 1.2; }
+  .card p { font-size: 15px; color: var(--pearl-dim); line-height: 1.5; }
+
+  @media (max-width: 860px) {
+    .feat-grid { grid-template-columns: 1fr; }
+    .feat-lead { grid-row: auto; }
+  }
+</style>

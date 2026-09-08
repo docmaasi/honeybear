@@ -11,6 +11,9 @@ interface Props {
   image?: string;
   /** Extra JSON-LD objects to merge into the graph */
   schema?: unknown[];
+  /** Blog titles are already descriptive; the site-name suffix pushes them
+      past the ~60 characters search results actually display. */
+  appendSite?: boolean;
 }
 
 const {
@@ -18,12 +21,15 @@ const {
   description,
   image = "/art/share-card.jpg",
   schema = [],
+  appendSite = true,
 } = Astro.props;
 
 const url = new URL(Astro.url.pathname, site.domain).href;
 const ogImage = new URL(image, site.domain).href;
 const fullTitle =
-  Astro.url.pathname === "/" ? title : `${title} — ${site.name}`;
+  Astro.url.pathname === "/" || !appendSite
+    ? title
+    : `${title} — ${site.name}`;
 
 // The site-wide entity graph. This is what answer engines read to work out
 // who Katherine is and what the shows are.
@@ -86,7 +92,7 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,700;0,6..96,800;1,6..96,400;1,6..96,600&family=Outfit:wght@300;400;500;600;700&display=swap"
     />
 
     <script

@@ -1,0 +1,109 @@
+---
+import Base from "../layouts/Base.astro";
+import { resourceGroups } from "../data/resources";
+import { site } from "../data/site";
+
+const schema = [
+  {
+    "@type": "WebPage",
+    name: "Help and resources",
+    description:
+      "Crisis lines, legal information, free digital-safety tools, and counselling directories for relationships in the real and digital world.",
+    url: `${site.domain}/resources`,
+  },
+];
+---
+
+<Base
+  title="Help and resources"
+  description="Crisis lines, legal help, free and open-source digital safety tools, and counselling directories. Every entry is a real organisation, and nothing here pays to be listed."
+  schema={schema}
+>
+  <section class="head">
+    <div class="shell stack stack-md">
+      <h1>Help and resources</h1>
+      <p class="lede">
+        Places that actually help, grouped by what you might need. Every entry is
+        a real organisation or an open project that exists today. Nothing here is
+        sponsored and nothing pays to be listed.
+      </p>
+      <p class="emergency">
+        <strong>If you are in immediate danger, call 911.</strong>
+      </p>
+    </div>
+  </section>
+
+  {resourceGroups.map((g) => (
+    <section class:list={["group", g.urgent && "group-urgent"]} id={g.key}>
+      <div class="shell">
+        <div class="rule"><h2>{g.title}</h2></div>
+        <p class="lede blurb">{g.blurb}</p>
+        <ul class="cards">
+          {g.items.map((r) => (
+            <li class="res">
+              <h3>
+                <a href={r.href} rel="noopener noreferrer">{r.name}</a>
+              </h3>
+              {r.tel && <p class="tel tnum">{r.tel}</p>}
+              <p class="note">{r.note}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <section class="closing">
+    <div class="shell panel">
+      <h2>A note on this list</h2>
+      <p>
+        It is deliberately short. There are hundreds of organisations doing this
+        work, and a list of hundreds is no use to someone who needs one phone
+        number at eleven at night.
+      </p>
+      <p>
+        If something here is out of date, or there is something that belongs on
+        it, <a href="/contact">tell us</a> and it will be changed.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-block: clamp(46px, 7vw, 82px) 0; }
+  .emergency {
+    border-left: 3px solid var(--live);
+    background: #e4574f14;
+    padding: 15px 20px;
+    margin-top: 6px;
+  }
+
+  .group { padding-block: clamp(34px, 5vw, 56px); }
+  .group:nth-of-type(even) { background: var(--night-sunk); }
+  .group-urgent .rule h2 { color: #f2a49e; }
+  .blurb { margin-bottom: 30px; max-width: 56ch; font-size: 17px; }
+
+  .cards {
+    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px 34px;
+  }
+  .res {
+    display: flex; flex-direction: column; gap: 6px;
+    padding-top: 18px; border-top: 2px solid var(--plum);
+  }
+  .group-urgent .res { border-top-color: var(--gold); }
+  .res h3 { font-size: 19px; line-height: 1.25; }
+  .res h3 a { text-decoration: none; }
+  .res h3 a:hover { text-decoration: underline; }
+  .tel {
+    font-family: var(--f-body);
+    font-size: 21px; font-weight: 700; color: var(--gold-lit);
+  }
+  .note { font-size: 15px; color: var(--pearl-dim); line-height: 1.55; }
+
+  .closing .panel { display: flex; flex-direction: column; gap: 12px; }
+  .closing h2 { font-size: 24px; }
+  .closing p { color: var(--pearl-dim); }
+</style>

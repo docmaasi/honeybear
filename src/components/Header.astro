@@ -1,6 +1,10 @@
 ---
-import { nav, links } from "../data/site";
+import { nav, links, platforms } from "../data/site";
+import { resourceGroups } from "../data/resources";
+
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const urgent = resourceGroups.find((g) => g.urgent)!;
+const others = resourceGroups.filter((g) => !g.urgent);
 ---
 
 <header class="site-head">
@@ -10,163 +14,268 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       <span class="brand-name">HoneyBear Katherine</span>
     </a>
 
-    <button class="menu-btn" aria-expanded="false" aria-controls="nav" id="menu-btn">
-      <span class="bars" aria-hidden="true"></span>
-      <span class="sr">Menu</span>
-    </button>
-
-    <nav id="nav" class="nav" aria-label="Main">
+    <nav class="quick" aria-label="Main">
       <ul>
         {nav.map((item) => (
           <li>
-            <a
-              href={item.href}
-              aria-current={path === item.href ? "page" : undefined}
-            >
+            <a href={item.href} aria-current={path === item.href ? "page" : undefined}>
               {item.label}
             </a>
           </li>
         ))}
       </ul>
-      <a class="btn btn-gold watch-cta" href={links.youtube} rel="noopener">
-        Watch
-      </a>
     </nav>
+
+    <div class="head-right">
+      <a class="btn btn-gold watch-cta" href={links.youtube} rel="noopener">Watch</a>
+      <button
+        class="menu-btn"
+        id="menu-btn"
+        aria-expanded="false"
+        aria-controls="drawer"
+        aria-label="Open menu and help resources"
+      >
+        <span class="bars" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
 </header>
 
+<div class="scrim" id="scrim" hidden></div>
+
+<aside class="drawer" id="drawer" hidden aria-label="Menu and resources">
+  <div class="drawer-inner">
+    <div class="drawer-top">
+      <span class="drawer-title">Menu &amp; help</span>
+      <button class="close" id="drawer-close" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="d-nav" aria-label="Site">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={path === item.href ? "page" : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li><a href="/resources">Help &amp; resources</a></li>
+        <li><a href="/harbor-of-hope">Harbor of Hope</a></li>
+      </ul>
+    </nav>
+
+    <section class="d-block urgent">
+      <h2>{urgent.title}</h2>
+      <p class="d-blurb">{urgent.blurb}</p>
+      <ul class="lines">
+        {urgent.items.slice(0, 4).map((r) => (
+          <li>
+            <a href={r.href} rel="noopener noreferrer">{r.name}</a>
+            {r.tel && <span class="tel tnum">{r.tel}</span>}
+          </li>
+        ))}
+      </ul>
+      <a class="more-link" href="/resources#help-now">All crisis lines</a>
+    </section>
+
+    {others.map((g) => (
+      <section class="d-block">
+        <h2>{g.title}</h2>
+        <ul class="links">
+          {g.items.slice(0, 4).map((r) => (
+            <li><a href={r.href} rel="noopener noreferrer">{r.name}</a></li>
+          ))}
+        </ul>
+        <a class="more-link" href={`/resources#${g.key}`}>More</a>
+      </section>
+    ))}
+
+    <section class="d-block">
+      <h2>Where the show is live</h2>
+      <ul class="links">
+        {platforms.map((p) => (
+          <li>
+            <a href={p.href} rel="noopener noreferrer">{p.name}</a>
+            <span class="note">{p.note}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <p class="d-foot">
+      Every link here is a real organisation or an open project. Nothing on this
+      list pays to be on it.
+    </p>
+  </div>
+</aside>
+
 <style>
   .site-head {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: #17101fe6;
+    position: sticky; top: 0; z-index: 50;
+    background: #17101fe8;
     backdrop-filter: blur(12px);
     border-bottom: 1px solid #2b2136;
   }
   .head-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    min-height: 74px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; min-height: 74px;
   }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--pearl);
-    flex: none;
-  }
-  .brand img {
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-  }
-  .brand-name {
-    font-family: var(--f-display);
-    font-size: 19px;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--pearl); flex: none; }
+  .brand img { border-radius: 50%; border: 1px solid var(--gold); }
+  .brand-name { font-family: var(--f-display); font-size: 19px; font-weight: 700; }
 
-  .nav { display: flex; align-items: center; gap: 30px; }
-  .nav ul {
-    display: flex;
-    gap: 26px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .nav ul a {
-    color: var(--pearl-dim);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    padding-block: 6px;
+  .quick ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
+  .quick a {
+    color: var(--pearl-dim); text-decoration: none; font-size: 15.5px;
+    font-weight: 500; padding-block: 6px;
     border-bottom: 1px solid transparent;
     transition: color .15s ease, border-color .15s ease;
   }
-  .nav ul a:hover { color: var(--pearl); }
-  .nav ul a[aria-current="page"] {
-    color: var(--pearl);
-    border-bottom-color: var(--gold);
-  }
+  .quick a:hover { color: var(--pearl); }
+  .quick a[aria-current="page"] { color: var(--pearl); border-bottom-color: var(--gold); }
+
+  .head-right { display: flex; align-items: center; gap: 12px; }
   .watch-cta { padding: 9px 18px; font-size: 15px; }
 
-  .menu-btn { display: none; }
-  .sr {
-    position: absolute; width: 1px; height: 1px;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  .menu-btn {
+    display: grid; place-items: center;
+    width: 44px; height: 44px;
+    background: transparent; border: 1px solid #4a3a58;
+    border-radius: var(--r-sm); cursor: pointer; flex: none;
+  }
+  .menu-btn:hover { border-color: var(--gold); }
+  .bars, .bars::before, .bars::after {
+    content: ""; display: block; width: 19px; height: 2px;
+    background: var(--pearl); transition: transform .2s ease, background-color .2s ease;
+  }
+  .bars { position: relative; }
+  .bars::before { position: absolute; top: -6px; }
+  .bars::after { position: absolute; top: 6px; }
+  .menu-btn[aria-expanded="true"] .bars { background: transparent; }
+  .menu-btn[aria-expanded="true"] .bars::before { transform: translateY(6px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .bars::after { transform: translateY(-6px) rotate(-45deg); }
+
+  /* ---- drawer ---- */
+  .scrim {
+    position: fixed; inset: 0; z-index: 60;
+    background: #0b0710b8; backdrop-filter: blur(2px);
+  }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 70;
+    width: min(420px, 100vw);
+    background: var(--night-raised);
+    border-left: 1px solid #35293f;
+    overflow-y: auto;
+    box-shadow: -30px 0 80px -30px #000;
+  }
+  .drawer-inner { padding: 20px 26px 44px; display: flex; flex-direction: column; gap: 26px; }
+  .drawer-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 14px; border-bottom: 1px solid #35293f;
+    position: sticky; top: 0; background: var(--night-raised); padding-top: 4px;
+  }
+  .drawer-title {
+    font-family: var(--f-display); font-size: 19px; font-weight: 700;
+  }
+  .close {
+    background: transparent; border: none; color: var(--pearl-dim);
+    font-size: 30px; line-height: 1; cursor: pointer; padding: 0 4px;
+  }
+  .close:hover { color: var(--pearl); }
+
+  .d-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .d-nav li { border-bottom: 1px solid #2b2136; }
+  .d-nav a {
+    display: block; padding: 12px 0; font-size: 17px;
+    color: var(--pearl); text-decoration: none;
+  }
+  .d-nav a:hover { color: var(--gold-lit); }
+  .d-nav a[aria-current="page"] { color: var(--gold-lit); }
+
+  .d-block h2 {
+    font-size: 13px; font-family: var(--f-body); font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--pearl-faint); margin-bottom: 10px;
+  }
+  .d-blurb { font-size: 14px; color: var(--pearl-dim); margin-bottom: 10px; }
+
+  .urgent {
+    background: #7d1f1a1f; border: 1px solid #7d1f1a80;
+    border-radius: var(--r-md); padding: 18px 20px;
+  }
+  .urgent h2 { color: #f2a49e; }
+
+  .lines, .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+  .lines li { display: flex; flex-direction: column; gap: 2px; }
+  .lines a, .links a { color: var(--pearl); text-decoration: none; font-size: 15.5px; font-weight: 500; }
+  .lines a:hover, .links a:hover { color: var(--gold-lit); text-decoration: underline; }
+  .tel {
+    font-family: var(--f-body); font-weight: 700;
+    font-size: 16px; color: var(--gold-lit);
+  }
+  .links li { display: flex; flex-direction: column; gap: 1px; }
+  .note { font-size: 13px; color: var(--pearl-faint); }
+
+  .more-link {
+    display: inline-block; margin-top: 12px;
+    font-size: 14px; color: var(--gold-lit);
+  }
+  .d-foot {
+    font-size: 13px; color: var(--pearl-faint); line-height: 1.5;
+    padding-top: 18px; border-top: 1px solid #2b2136;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 980px) { .quick { display: none; } }
+  @media (max-width: 520px) {
     .brand-name { display: none; }
-    .nav ul { gap: 18px; }
-    .nav ul a { font-size: 15px; }
-  }
-
-  @media (max-width: 760px) {
-    .menu-btn {
-      display: grid;
-      place-items: center;
-      width: 44px; height: 44px;
-      background: transparent;
-      border: 1px solid #4a3a58;
-      border-radius: var(--r-sm);
-      cursor: pointer;
-    }
-    .bars, .bars::before, .bars::after {
-      content: "";
-      display: block;
-      width: 19px; height: 2px;
-      background: var(--pearl);
-      transition: transform .2s ease, opacity .2s ease;
-    }
-    .bars { position: relative; }
-    .bars::before { position: absolute; top: -6px; }
-    .bars::after { position: absolute; top: 6px; }
-    .menu-btn[aria-expanded="true"] .bars { background: transparent; }
-    .menu-btn[aria-expanded="true"] .bars::before { transform: translateY(6px) rotate(45deg); }
-    .menu-btn[aria-expanded="true"] .bars::after { transform: translateY(-6px) rotate(-45deg); }
-
-    .brand-name { display: block; font-size: 17px; }
-    .nav {
-      position: absolute;
-      inset: 100% 0 auto 0;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      background: var(--night-raised);
-      border-bottom: 1px solid #2b2136;
-      padding: 8px var(--gutter) 22px;
-      display: none;
-    }
-    .nav[data-open="true"] { display: flex; }
-    .nav ul { flex-direction: column; gap: 0; }
-    .nav li { border-bottom: 1px solid #2b2136; }
-    .nav ul a {
-      display: block;
-      padding: 15px 0;
-      font-size: 17px;
-      border-bottom: none;
-    }
-    .nav ul a[aria-current="page"] { color: var(--gold-lit); }
-    .watch-cta {
-      margin-top: 18px;
-      justify-content: center;
-      padding: 13px 24px;
-      font-size: 16px;
-    }
+    .watch-cta { padding: 9px 14px; }
   }
 </style>
 
 <script>
   const btn = document.getElementById("menu-btn");
-  const nav = document.getElementById("nav");
-  btn?.addEventListener("click", () => {
-    const open = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!open));
-    nav?.setAttribute("data-open", String(!open));
+  const drawer = document.getElementById("drawer");
+  const scrim = document.getElementById("scrim");
+  const closeBtn = document.getElementById("drawer-close");
+  let lastFocus: HTMLElement | null = null;
+
+  function open() {
+    lastFocus = document.activeElement as HTMLElement;
+    drawer!.hidden = false;
+    scrim!.hidden = false;
+    btn!.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    (drawer!.querySelector("a") as HTMLElement)?.focus();
+  }
+
+  function close() {
+    drawer!.hidden = true;
+    scrim!.hidden = true;
+    btn!.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    lastFocus?.focus();
+  }
+
+  btn?.addEventListener("click", () =>
+    btn.getAttribute("aria-expanded") === "true" ? close() : open(),
+  );
+  closeBtn?.addEventListener("click", close);
+  scrim?.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !drawer!.hidden) close();
+  });
+  // Keep focus inside the drawer while it is open.
+  drawer?.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab") return;
+    const focusable = drawer.querySelectorAll<HTMLElement>("a[href], button");
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   });
 </script>

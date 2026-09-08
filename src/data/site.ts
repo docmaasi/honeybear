@@ -7,8 +7,22 @@ export const site = {
   domain: "https://honeybearkatherine.org",
   tagline: "Encouragement, every week.",
   description:
-    "HoneyBear Katherine's Haven is a weekly podcast about encouragement, resilience, and everyday hope, hosted by Katherine L. Carter in Meta Horizon Worlds.",
+    "HoneyBear Katherine's Haven is a weekly relationship podcast on love, trust, dating and repair, hosted by Katherine L. Carter live in Meta Horizon Worlds and Clubroom.",
 };
+
+/** The two VR platforms the show broadcasts from. */
+export const platforms = [
+  {
+    name: "Meta Horizon Worlds",
+    href: "https://horizon.meta.com",
+    note: "Full virtual worlds, in headset or on screen.",
+  },
+  {
+    name: "Clubroom",
+    href: "https://www.clubroom.app",
+    note: "Voice-led rooms. No headset needed.",
+  },
+];
 
 export const links = {
   youtube: "https://www.youtube.com/@honeybearkatherineshaven",
@@ -95,6 +109,7 @@ export const worlds = [
 ];
 
 export const nav = [
+  { label: "Journal", href: "/blog" },
   { label: "Topics", href: "/topics" },
   { label: "Shows", href: "/shows" },
   { label: "Episodes", href: "/episodes" },
