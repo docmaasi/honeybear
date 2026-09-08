@@ -14,7 +14,7 @@ export const site = {
 export const platforms = [
   {
     name: "Meta Horizon Worlds",
-    href: "https://horizon.meta.com",
+    href: "https://www.meta.com/horizon-worlds/",
     note: "Full virtual worlds, in headset or on screen.",
   },
   {
@@ -31,9 +31,7 @@ export const links = {
   instagram: "https://www.instagram.com/katherine_l_carter/",
   cashApp: "https://cash.app/$honeybearkatherine",
   ryze: "https://get.aspr.app/SH1HHw",
-  pamperedChef: "https://www.pamperedchef.com/pws/honeybearkatherine77",
   book: "https://www.amazon.com/dp/1667889222",
-  email: "hello@honeybearkatherine.org",
   studio: "https://smithappstudio.com",
 };
 
@@ -46,7 +44,9 @@ export type Show = {
   /** 24-hour, US Eastern */
   hourET: number;
   minuteET: number;
-  /** Typical runtime in minutes, used for the "on air now" window */
+  /** Assumed runtime in minutes. Only used to decide how long the "on air
+   *  now" badge stays up — not published anywhere as a fact. Adjust to the
+   *  real length when Katherine confirms it. */
   runtimeMin: number;
   art: string;
 };
@@ -83,7 +83,7 @@ export type BingoSlot = { weekday: number; hourET: number; minuteET: number };
 
 export const bingo = {
   name: "Bingo Under the Stars",
-  blurb: "Cards, callouts, and a room full of regulars. Everyone is welcome.",
+  blurb: "Bingo, live and hosted. Everyone is welcome.",
   slots: [
     { weekday: 1, hourET: 21, minuteET: 0 },
     { weekday: 4, hourET: 21, minuteET: 0 },
@@ -103,8 +103,10 @@ export const worlds = [
     name: "SunnyDale",
     where: "Meta Horizon Worlds",
     image: "/art/sunnydale.jpg",
+    // Katherine's own description of SunnyDale is still to come — the old site
+    // repeated Serenity Cove's text here. Say only what is known until then.
     blurb:
-      "A neighbourhood rather than a landscape — porches, shopfronts, and places to run into people. Built for gathering, not for sightseeing.",
+      "A city Katherine built and runs inside Meta Horizon Worlds.",
   },
 ];
 

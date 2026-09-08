@@ -54,7 +54,7 @@ Ask early. Ask again every six months. Say it out loud, because the version in y
 
 VR made long distance survivable. It did not make it resolved. The couples who do well treat it as a bridge and keep walking across it.
 
-Katherine and the room work through this often on **HoneyBear Katherine's Haven**, live in Meta Horizon Worlds and Clubroom.
+**HoneyBear Katherine's Haven** is live weekly in Meta Horizon Worlds and Clubroom.
 
 ## What to watch for in yourself
 

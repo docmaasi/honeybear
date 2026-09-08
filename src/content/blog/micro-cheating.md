@@ -59,4 +59,4 @@ Lead with the feeling rather than the file of evidence. *"I have felt like I'm g
 
 You are not trying to win. You are trying to find out whether the relationship still has both of you in it.
 
-Katherine and the room work through this most weeks on **HoneyBear Katherine's Haven**, live in Meta Horizon Worlds and Clubroom.
+**HoneyBear Katherine's Haven** is live weekly in Meta Horizon Worlds and Clubroom.

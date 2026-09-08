@@ -54,7 +54,7 @@ That is real and it counts. Loneliness inside a relationship does not need a bet
 
 The couples who come out of this well are usually the ones who talked about it in month two rather than month twenty.
 
-Katherine takes this question regularly on **HoneyBear Katherine's Haven**, live in Meta Horizon Worlds and Clubroom.
+**HoneyBear Katherine's Haven** is live weekly in Meta Horizon Worlds and Clubroom.
 
 ## If nothing is wrong
 

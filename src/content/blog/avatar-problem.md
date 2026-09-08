@@ -58,4 +58,4 @@ An avatar that makes someone braver is a gift. An avatar that lets someone run a
 
 Otherwise: ask the ordinary questions early, and watch the response rather than the answer.
 
-**HoneyBear Katherine's Haven** runs live in Meta Horizon Worlds and Clubroom, and this subject comes up almost every week.
+**HoneyBear Katherine's Haven** is live in Meta Horizon Worlds and Clubroom, and the audience talks throughout.

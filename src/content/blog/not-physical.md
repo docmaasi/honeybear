@@ -59,4 +59,4 @@ You also do not have to decide anything this week. See [what to do the week afte
 
 Repair is possible, and it is slower than either person wants. It begins with the person who did it being able to describe the harm accurately, without a lawyer's instinct. [How to apologise so it actually lands](/blog/apology) covers the mechanics.
 
-**HoneyBear Katherine's Haven** runs live weekly in Meta Horizon Worlds and Clubroom, and this is the sentence that comes up more than any other.
+**HoneyBear Katherine's Haven** is live weekly in Meta Horizon Worlds and Clubroom.

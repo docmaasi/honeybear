@@ -9,7 +9,7 @@ quickAnswer: "It functions as a second relationship. It is real enough to hide, 
 book: true
 ---
 
-This arrives on the show constantly, usually phrased carefully. *There is someone I talk to. It is not physical. Nothing has happened. My spouse does not know.*
+It is usually phrased carefully. *There is someone I talk to. It is not physical. Nothing has happened. My spouse does not know.*
 
 Every clause there is doing work. Let us take them honestly, because the people asking are not villains — they are usually lonely, and telling themselves something that has stopped being true.
 
@@ -51,4 +51,4 @@ There are only three, and drifting is not one of them, though most people try it
 
 Start with [what to do the week after you find out](/blog/after-you-find-out). You do not have to decide anything this week.
 
-**HoneyBear Katherine's Haven** runs live in Meta Horizon Worlds and Clubroom, and this conversation happens with more compassion than people expect.
+**HoneyBear Katherine's Haven** is live in Meta Horizon Worlds and Clubroom.

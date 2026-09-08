@@ -41,7 +41,7 @@ If the answer is "quite a lot, and yes, a bit" — that is worth sitting with. N
 
 ## When it gets complicated
 
-Two situations come up constantly on the show.
+Two situations complicate it.
 
 The first is a meta boo alongside a real-world partner who does not know. That is its own subject, and we cover it in [married in the real world, involved in the digital one](/blog/married-digital).
 
@@ -51,4 +51,4 @@ The second is a meta boo who begins to control — who needs to know where you a
 
 A meta boo is a real relationship with real feeling and a genuine gap in it. Both halves of that sentence are true, and the people who do best are the ones who hold both.
 
-We talk about this most weeks on **HoneyBear Katherine's Haven**, live in Meta Horizon Worlds and Clubroom. Bring your questions — the room answers back.
+**HoneyBear Katherine's Haven** is live in Meta Horizon Worlds and Clubroom, and the audience joins the conversation. Bring your questions.

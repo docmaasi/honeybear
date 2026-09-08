@@ -51,7 +51,7 @@ Meet the ordinary. Talk while one of you is in a bad mood. Be boring together. I
 
 The love is real. Find out whether the relationship is.
 
-Katherine works through this every week on **HoneyBear Katherine's Haven** in Meta Horizon Worlds and Clubroom, with an audience who have lived it.
+**HoneyBear Katherine's Haven** is live in Meta Horizon Worlds and Clubroom, with an audience that joins in.
 
 ## One caution
 

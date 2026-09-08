@@ -59,4 +59,4 @@ If the response is minimising, defending, or blaming you for the state of the re
 
 If any part of the situation involves fear rather than grief, read [early signs of a controlling relationship](/blog/control-signs), because that is a different problem with a different answer.
 
-**HoneyBear Katherine's Haven** runs live in Meta Horizon Worlds and Clubroom, and this is a room where a lot of people have been exactly here.
+**HoneyBear Katherine's Haven** is live in Meta Horizon Worlds and Clubroom, with an audience that joins the conversation.

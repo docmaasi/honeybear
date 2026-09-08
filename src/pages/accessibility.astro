@@ -1,7 +1,6 @@
 ---
 import Legal from "../layouts/Legal.astro";
 import { LEGAL_UPDATED } from "../data/legal";
-import { links } from "../data/site";
 ---
 
 <Legal
@@ -30,7 +29,7 @@ import { links } from "../data/site";
     <li>A "skip to content" link is the first thing a keyboard reaches.</li>
     <li>The help drawer traps focus while open, closes on <strong>Escape</strong>, and returns focus where it was.</li>
     <li>Images that carry meaning have alternative text. Decorative images are marked empty so screen readers skip them.</li>
-    <li>Text contrast is checked against the AA threshold, and body text sits well above it.</li>
+    <li>Contrast is measured, not assumed: body text is 13:1 against its background and the lightest secondary text is 4.5:1, both at or above the AA threshold.</li>
     <li>Animation is limited, and all of it stops for anyone whose system requests reduced motion.</li>
     <li>The layout reflows to a single column and stays readable at 320 pixels wide and at 200% zoom.</li>
     <li>Pages are plain HTML that render without JavaScript. Nothing essential to reading is behind a script.</li>
@@ -84,7 +83,7 @@ import { links } from "../data/site";
   <div class="callout">
     <p>
       If any part of this site is difficult or impossible for you to use, please
-      email <a href={`mailto:${links.email}`}>{links.email}</a>. Tell us the page
+      use <a href="/contact">the contact page</a>. Tell us the page
       and what happened, and what you were using if you know it.
     </p>
     <p>

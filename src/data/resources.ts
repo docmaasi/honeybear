@@ -159,7 +159,7 @@ export const resourceGroups: ResourceGroup[] = [
     items: [
       {
         name: "Meta Horizon Worlds",
-        href: "https://horizon.meta.com",
+        href: "https://www.meta.com/horizon-worlds/",
         note: "One of the two platforms the Haven broadcasts from.",
       },
       {
@@ -169,8 +169,8 @@ export const resourceGroups: ResourceGroup[] = [
       },
       {
         name: "Meta safety and blocking tools",
-        href: "https://www.meta.com/help/quest/articles/accounts/privacy-information-and-settings/",
-        note: "Blocking, muting, personal boundary and reporting controls, in one place.",
+        href: "https://www.meta.com/help/quest/",
+        note: "Blocking, muting, personal boundary and reporting controls.",
       },
       {
         name: "Mozilla Hubs community forks",

@@ -9,7 +9,7 @@ quickAnswer: "The avatar is not the test. Three questions decide it: was it secr
 book: false
 ---
 
-This is the most common question the show gets, and it is usually asked hoping for one of two answers. Here is the one that is actually useful.
+It is a question people arrive at hoping for one of two answers. Here is the one that is actually useful.
 
 **The avatar is not the test.** Whether pixels were involved decides nothing. Three other things decide it.
 
@@ -60,4 +60,4 @@ Almost no couple does this. It takes twenty minutes and prevents a category of p
 
 Then the question is not whether it was technically cheating. It is whether you both want to repair it, and whether the person who did it can be honest now. Start with [what to do the week after you find out](/blog/after-you-find-out).
 
-**HoneyBear Katherine's Haven** runs live weekly in Meta Horizon Worlds and Clubroom, and this question comes up more than any other.
+**HoneyBear Katherine's Haven** is live weekly in Meta Horizon Worlds and Clubroom.

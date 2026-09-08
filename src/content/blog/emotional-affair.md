@@ -55,4 +55,4 @@ Expect defensiveness first. It usually is not proof of guilt; it is the sound of
 
 People who learned early that closeness was conditional, or watched adults keep the peace by never saying the true thing, are unusually prone to this. Katherine writes about that inheritance in **Weight of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222).
 
-The show takes this one live most weeks in Meta Horizon Worlds and Clubroom.
+**HoneyBear Katherine's Haven** is live weekly in Meta Horizon Worlds and Clubroom.

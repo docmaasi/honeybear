@@ -24,7 +24,7 @@ export const topics: Topic[] = [
     name: "Intimacy and attraction",
     blurb: "What draws people together, and what keeps them there once it does.",
     body:
-      "Attraction is the easy part and it is rarely the part that decides anything. The Haven spends more time on what comes after: being known, staying interested, and the difference between wanting someone and being able to live alongside them.",
+      "Attraction is the easy part and it is rarely the part that decides anything. The more useful ground is what comes after: being known, staying interested, and the difference between wanting someone and being able to live alongside them.",
     questions: [
       "What actually sustains attraction over years, not months?",
       "How do you stay close to someone without losing yourself?",
@@ -51,7 +51,7 @@ export const topics: Topic[] = [
     blurb:
       "The patterns handed down before anyone thought to ask whether they should be.",
     body:
-      "This is the ground Katherine's book covers, and it comes up on the show constantly. What a family teaches without saying, what gets repeated by accident, and what it takes to be the person who stops a pattern rather than passing it on.",
+      "This is the ground Katherine's book covers. What a family teaches without saying, what gets repeated by accident, and what it takes to be the person who stops a pattern rather than passing it on.",
     questions: [
       "How do you stop repeating what you grew up with?",
       "What do you owe family that hurt you?",
@@ -77,7 +77,7 @@ export const topics: Topic[] = [
     name: "Healing and self-worth",
     blurb: "The relationship underneath all the others.",
     body:
-      "Most of what people bring to the show turns out to be about what they believe they deserve. Resilience, confidence, and the slow work of rebuilding a sense of your own worth after something has taken it apart.",
+      "A great deal of this comes back to what a person believes they deserve. Resilience, confidence, and the slow work of rebuilding a sense of your own worth after something has taken it apart.",
     questions: [
       "How do you rebuild confidence after a relationship damages it?",
       "Why do people accept less than they know they deserve?",

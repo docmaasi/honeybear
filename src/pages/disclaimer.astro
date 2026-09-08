@@ -1,7 +1,6 @@
 ---
 import Legal from "../layouts/Legal.astro";
 import { LEGAL_UPDATED } from "../data/legal";
-import { links } from "../data/site";
 ---
 
 <Legal
@@ -106,10 +105,6 @@ import { links } from "../data/site";
         <td>Affiliate link. Katherine earns a commission if you buy, at no additional cost to you.</td>
       </tr>
       <tr>
-        <td><strong>Pampered Chef</strong></td>
-        <td>Katherine is an independent consultant and earns from orders placed through her page.</td>
-      </tr>
-      <tr>
         <td><strong>Weight of Dysfunction</strong></td>
         <td>Katherine is the author and earns royalties on sales. This is not an affiliate link and carries no tracking tag.</td>
       </tr>
@@ -149,7 +144,6 @@ import { links } from "../data/site";
 
   <p>
     If anything here is unclear, or you think something on the site is wrong,{" "}
-    <a href="/contact">get in touch</a> or email{" "}
-    <a href={`mailto:${links.email}`}>{links.email}</a>.
+    <a href="/contact">get in touch</a>.
   </p>
 </Legal>

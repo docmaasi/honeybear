@@ -31,7 +31,7 @@ Community events, games, listening rooms, watch parties. In **Clubroom**, voice-
 
 Which is how people have always met — through activity, not through searching. Virtual worlds did not invent that. They gave it somewhere to happen at three in the morning when everywhere else is shut.
 
-It is one reason a live show works as a meeting place. **HoneyBear Katherine's Haven** runs weekly in Meta Horizon Worlds and Clubroom, and a fair number of friendships and a few relationships started there simply because the same people kept turning up to the same thing.
+It is one reason a live show works as a meeting place. **HoneyBear Katherine's Haven** runs weekly in Meta Horizon Worlds and Clubroom, and a recurring room does what recurring rooms have always done: the same people turn up, and over time they know each other.
 
 ## The new problems
 
