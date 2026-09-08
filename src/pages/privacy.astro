@@ -1,0 +1,176 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { LEGAL_UPDATED } from "../data/legal";
+import { links } from "../data/site";
+---
+
+<Legal
+  title="Privacy policy"
+  description="This site sets no cookies, runs no analytics, and tracks nobody. Here is exactly what happens when you visit, and the three third parties involved."
+  updated={LEGAL_UPDATED}
+  current="privacy"
+>
+  <div class="callout">
+    <p>
+      <strong>The short version.</strong> This website sets no cookies, runs no
+      analytics, and has no advertising or tracking of any kind. We do not build
+      a profile of you, and we have nothing to sell to anybody because we do not
+      collect anything. What follows is the detail, including the three outside
+      services a page can contact.
+    </p>
+  </div>
+
+  <p>
+    This policy covers <strong>honeybearkatherine.org</strong>. It is operated
+    by Katherine L. Carter, referred to here as "we".
+  </p>
+
+  <h2>What we collect directly</h2>
+
+  <p>
+    <strong>Nothing, unless you send it to us.</strong> There are no accounts,
+    no logins, no newsletter sign-up, and no forms that run in the background.
+  </p>
+
+  <p>
+    If you email us or use the contact form, we receive what you chose to send:
+    your name, your email address, and your message. We use it to reply to you
+    and for nothing else. We do not add you to a mailing list, and we do not
+    pass it on.
+  </p>
+
+  <h2>Cookies and storage</h2>
+
+  <p>
+    <strong>This site sets no cookies.</strong> It does not use local storage,
+    session storage, fingerprinting, pixels, beacons, or any similar technology.
+    There is no cookie banner because there is nothing to consent to.
+  </p>
+
+  <p>
+    Note that a video player, once you press play, may set cookies of its own.
+    That is covered below.
+  </p>
+
+  <h2>Analytics</h2>
+
+  <p>
+    There are none. We do not use Google Analytics or any comparable service, so
+    we cannot tell you how many people read a given article, and we are content
+    with that trade.
+  </p>
+
+  <h2>The three outside services</h2>
+
+  <p>
+    A website cannot avoid every third party. These are the only ones this site
+    contacts, and what each one receives.
+  </p>
+
+  <h3>Vercel — hosting</h3>
+  <p>
+    The site is hosted by Vercel Inc. Like any web host, their servers process
+    your IP address and basic request information in order to deliver the page,
+    and keep short-term operational logs for security and reliability. We do not
+    have access to a per-visitor record of who read what.
+  </p>
+
+  <h3>Google Fonts — typefaces</h3>
+  <p>
+    Page text is set in typefaces loaded from Google's font service. Loading
+    them transmits your IP address and browser details to Google. We do not
+    receive that information. If this matters to you, most browsers and content
+    blockers can block font requests, and the site remains readable without
+    them.
+  </p>
+
+  <h3>YouTube — episodes</h3>
+  <p>
+    Episodes are hosted on YouTube. We embed them using YouTube's
+    privacy-enhanced mode (<strong>youtube-nocookie.com</strong>), which does not
+    set advertising cookies before you interact. Episode thumbnails are loaded
+    from YouTube's image servers, which means YouTube receives your IP address
+    when a page with thumbnails loads.
+  </p>
+  <p>
+    <strong>Once you press play, YouTube's own terms apply</strong> and Google
+    may set cookies and collect data as described in{" "}
+    <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google's privacy policy</a>.
+    That is between you and Google; we receive nothing from it.
+  </p>
+
+  <h3>If you use the contact form</h3>
+  <p>
+    Where a contact form is available, it is delivered by Web3Forms, which
+    forwards your message to our email and does not require an account. Your
+    message passes through their systems in transit. If you would rather avoid
+    that, email us directly at{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a>.
+  </p>
+
+  <h2>Links that leave this site</h2>
+
+  <p>
+    When you follow a link to YouTube, Amazon, RYZE, Pampered Chef, Cash App, a
+    crisis organisation, or anywhere else, you are on their site under their
+    policy. Affiliate links may set their own cookies to attribute a purchase —
+    see the <a href="/disclaimer">disclaimer</a> for which links those are.
+  </p>
+
+  <h2>Your rights</h2>
+
+  <p>
+    Privacy laws including the California Consumer Privacy Act and the UK and EU
+    GDPR give people rights to access, correct, delete, and port their personal
+    information, and to object to its processing.
+  </p>
+
+  <p>
+    Those rights are straightforward here: <strong>the only personal
+    information we hold is correspondence you chose to send us.</strong> Ask us
+    to delete it and we will, and confirm when it is done. We have no other
+    records to produce.
+  </p>
+
+  <p>
+    <strong>We have never sold or shared personal information</strong> for
+    advertising or any other purpose, and we do not intend to. There is no "do
+    not sell my information" mechanism on this site because there is nothing
+    that would need one.
+  </p>
+
+  <h2>Children</h2>
+
+  <p>
+    This site deals with adult relationships and is not directed at children
+    under 13. We do not knowingly collect information from them. If you believe
+    a child has sent us something, contact us and we will delete it.
+  </p>
+
+  <h2>Security and retention</h2>
+
+  <p>
+    Correspondence is kept only as long as it is useful for the conversation it
+    belongs to, and then deleted. No system is perfectly secure, and email in
+    particular should not be treated as confidential. If your situation is
+    sensitive, please contact one of the organisations on the{" "}
+    <a href="/resources">resources page</a> rather than emailing us — they are
+    equipped for it and we are not.
+  </p>
+
+  <h2>Changes</h2>
+
+  <p>
+    If this policy changes, the date at the top of the page changes with it. If
+    a change is significant, we will say so on the site rather than quietly
+    editing.
+  </p>
+
+  <h2>Contact</h2>
+
+  <p>
+    Questions about privacy, or a request about your information, can go to{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a> or through the{" "}
+    <a href="/contact">contact page</a>.
+  </p>
+</Legal>

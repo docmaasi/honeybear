@@ -1,0 +1,101 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { LEGAL_UPDATED } from "../data/legal";
+import { links } from "../data/site";
+---
+
+<Legal
+  title="Accessibility"
+  description="What we have built to make this site usable for everyone, what we know is imperfect, and how to tell us when something does not work."
+  updated={LEGAL_UPDATED}
+  current="accessibility"
+>
+  <p>
+    This site deals with subjects people often reach for at a difficult moment.
+    It should work for everybody who needs it, including anyone using a screen
+    reader, a keyboard, magnification, or a slow connection.
+  </p>
+
+  <p>
+    We aim to meet <strong>WCAG 2.2 Level AA</strong>. We are not claiming a
+    formal audit — we are telling you what we have done and what we know is
+    still imperfect.
+  </p>
+
+  <h2>What is in place</h2>
+
+  <ul>
+    <li>Every page has one main heading and a logical heading order.</li>
+    <li>Every page can be operated by keyboard alone, with a visible focus outline.</li>
+    <li>A "skip to content" link is the first thing a keyboard reaches.</li>
+    <li>The help drawer traps focus while open, closes on <strong>Escape</strong>, and returns focus where it was.</li>
+    <li>Images that carry meaning have alternative text. Decorative images are marked empty so screen readers skip them.</li>
+    <li>Text contrast is checked against the AA threshold, and body text sits well above it.</li>
+    <li>Animation is limited, and all of it stops for anyone whose system requests reduced motion.</li>
+    <li>The layout reflows to a single column and stays readable at 320 pixels wide and at 200% zoom.</li>
+    <li>Pages are plain HTML that render without JavaScript. Nothing essential to reading is behind a script.</li>
+    <li>Times are given in words with time-zone conversions, not only as a graphic.</li>
+    <li>The site is light on data — no tracking, no heavy scripts, small images — so it loads on a poor connection.</li>
+  </ul>
+
+  <p>
+    An automated structural check runs on every change and blocks publication if
+    a page loses its main heading, an image loses its alternative text, or a
+    link breaks. That is not a substitute for testing with real assistive
+    technology, but it stops the common regressions.
+  </p>
+
+  <h2>What we know is imperfect</h2>
+
+  <ul>
+    <li>
+      <strong>Embedded YouTube players</strong> are built by YouTube. Their
+      keyboard behaviour and captions are outside our control. Captions depend
+      on what has been added to each video, and older episodes may only have
+      automatic ones.
+    </li>
+    <li>
+      <strong>Episode transcripts do not exist yet.</strong> This is the largest
+      gap on the site. Audio and video are unusable for anyone deaf or hard of
+      hearing without them, and transcripts are planned.
+    </li>
+    <li>
+      <strong>Some artwork carries text inside the image</strong>, which a
+      screen reader cannot read. Where that art announces a show time, the same
+      information is written in text nearby.
+    </li>
+    <li>
+      We have not yet tested with every screen reader and browser combination.
+    </li>
+  </ul>
+
+  <h2>The quick-exit control</h2>
+
+  <p>
+    The <a href="/harbor-of-hope">Harbor of Hope</a> page has a button that
+    moves you away from the page quickly, and it also responds to pressing{" "}
+    <strong>Escape</strong> three times. Both work by keyboard. Please read the
+    safety notes on that page: it does not clear your browsing history, and it
+    cannot defeat monitoring software on your device.
+  </p>
+
+  <h2>Tell us when something does not work</h2>
+
+  <div class="callout">
+    <p>
+      If any part of this site is difficult or impossible for you to use, please
+      email <a href={`mailto:${links.email}`}>{links.email}</a>. Tell us the page
+      and what happened, and what you were using if you know it.
+    </p>
+    <p>
+      This is not a formality. Accessibility problems are treated as defects
+      rather than requests, and if something on this site is stopping somebody
+      from reaching help, it gets fixed first.
+    </p>
+  </div>
+
+  <p>
+    If you need something on this site in another format — a transcript, plain
+    text, or large print — ask and we will get it to you.
+  </p>
+</Legal>

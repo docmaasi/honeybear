@@ -1,5 +1,6 @@
 ---
 import { links, shows, bingo, weekdayName, timeLabel } from "../data/site";
+import { legalPages } from "../data/legal";
 
 const year = new Date().getFullYear();
 ---
@@ -72,10 +73,33 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
+    <div class="foot-safety">
+      <p>
+        <strong>In immediate danger? Call 911.</strong> National Domestic
+        Violence Hotline <a href="tel:18007997233">1-800-799-7233</a>, free and
+        answered 24 hours. This site is not a crisis service and is not
+        monitored for emergencies.
+      </p>
+    </div>
+
+    <nav class="foot-legal" aria-label="Legal">
+      <ul>
+        {legalPages.map((p) => (
+          <li><a href={p.href}>{p.label}</a></li>
+        ))}
+        <li><a href="/resources">Resources</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
     <div class="foot-base">
-      <p class="small">© {year} Katherine L. Carter. All rights reserved.</p>
       <p class="small">
-        Built by
+        © {year} Katherine L. Carter. All rights reserved.{" "}
+        <span class="nb">Not therapy, medical or legal advice — see the{" "}
+        <a href="/disclaimer">disclaimer</a>.</span>
+      </p>
+      <p class="small">
+        Built by{" "}
         <a href={links.studio} rel="noopener">Smith App Studio</a>
       </p>
     </div>
@@ -116,13 +140,36 @@ const year = new Date().getFullYear();
     line-height: 1.5;
     margin-top: 4px;
   }
+  .foot-safety {
+    margin-top: 46px;
+    padding: 16px 20px;
+    border-left: 3px solid var(--live);
+    background: #e4574f14;
+  }
+  .foot-safety p { font-size: 14.5px; color: var(--pearl-dim); line-height: 1.55; max-width: 78ch; }
+  .foot-safety strong { color: var(--pearl); }
+  .foot-safety a { color: var(--gold-lit); text-decoration: none; font-weight: 700; }
+  .foot-safety a:hover { text-decoration: underline; }
+
+  .foot-legal { margin-top: 26px; }
+  .foot-legal ul {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 8px 22px;
+  }
+  .foot-legal a { color: var(--pearl-dim); text-decoration: none; font-size: 14.5px; }
+  .foot-legal a:hover { color: var(--gold-lit); text-decoration: underline; }
+
+  .nb { display: block; margin-top: 4px; color: var(--pearl-faint); }
+  .nb a { color: var(--pearl-faint); }
+  .nb a:hover { color: var(--gold-lit); }
+
   .foot-base {
     display: flex;
     justify-content: space-between;
     gap: 18px;
     flex-wrap: wrap;
-    margin-top: 52px;
-    padding-top: 24px;
+    margin-top: 24px;
+    padding-top: 22px;
     border-top: 1px solid #2b2136;
   }
   .foot-base a { color: var(--gold-lit); }

@@ -1,0 +1,155 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { LEGAL_UPDATED } from "../data/legal";
+import { links } from "../data/site";
+---
+
+<Legal
+  title="Terms of use"
+  description="The terms for using honeybearkatherine.org: what you may do with the content, what we promise, and what we do not."
+  updated={LEGAL_UPDATED}
+  current="terms"
+>
+  <p>
+    These terms apply to <strong>honeybearkatherine.org</strong>, operated by
+    Katherine L. Carter ("we", "us"). By using the site you agree to them. If
+    you do not, please do not use it.
+  </p>
+
+  <h2>Using the site</h2>
+
+  <p>
+    You may read, share and link to anything here. We encourage it. In return,
+    please do not:
+  </p>
+
+  <ul>
+    <li>Republish articles in full elsewhere without permission. A quotation with a link back is welcome.</li>
+    <li>Present our writing as your own, or use it to train a commercial model without asking.</li>
+    <li>Attempt to disrupt the site, probe it for vulnerabilities, or access anything not intended to be public.</li>
+    <li>Use the site to harass anybody, or to break the law.</li>
+    <li>Scrape it in a way that degrades it for other people.</li>
+  </ul>
+
+  <p>
+    If you would like to reproduce something — for a class, a support group, a
+    newsletter — <a href="/contact">ask us</a>. The answer is usually yes.
+  </p>
+
+  <h2>Who owns what</h2>
+
+  <p>
+    Articles, episode descriptions, page copy, the HBK777 mark and the site
+    design belong to Katherine L. Carter or are used with permission. Episodes
+    are published on YouTube and remain subject to YouTube's terms.
+  </p>
+
+  <p>
+    Quoting a passage with attribution and a link is fair and welcome.
+    Reproducing an entire article is not.
+  </p>
+
+  <h2>Anything you send us</h2>
+
+  <p>
+    If you send a question, a story or a suggestion — by email, through the
+    contact form, or in a live show — you keep ownership of it. You give us
+    permission to read it, reply to it, and where it is relevant, to discuss the
+    substance of it on air or in writing.
+  </p>
+
+  <p>
+    <strong>We will not identify you</strong> without your clear permission.
+    Stories shared publicly are described in general terms with identifying
+    details removed. If you would prefer we do not mention your situation at
+    all, say so and we will not.
+  </p>
+
+  <h2>Live shows and community spaces</h2>
+
+  <p>
+    The show is broadcast in Meta Horizon Worlds and Clubroom, which are run by
+    their own companies under their own rules. We do not control those platforms
+    and cannot resolve problems that happen on them — use their reporting and
+    blocking tools, which are linked from the{" "}
+    <a href="/resources">resources page</a>.
+  </p>
+
+  <p>
+    In our rooms, the expectation is simple: people are here about difficult
+    personal subjects, so treat them decently. Harassment, abuse and recording
+    people without consent will get you removed.
+  </p>
+
+  <h2>No warranty</h2>
+
+  <p>
+    The site is provided <strong>as is</strong>. We do not guarantee that it
+    will always be available, that it will be free of errors, or that anything
+    on it fits your particular circumstances. We may change, move or remove
+    content at any time.
+  </p>
+
+  <h2>Limitation of liability</h2>
+
+  <p>
+    To the fullest extent permitted by law, Katherine L. Carter is not liable
+    for any indirect, incidental, consequential or special loss arising out of
+    your use of this site or reliance on anything published here — including
+    decisions you make about a relationship.
+  </p>
+
+  <p>
+    Nothing in these terms limits liability for anything that cannot lawfully be
+    limited, including fraud or personal injury caused by negligence. Some
+    jurisdictions do not allow certain exclusions, so parts of this section may
+    not apply to you.
+  </p>
+
+  <p>
+    Please read the <a href="/disclaimer">disclaimer</a> as well. It sets out
+    clearly that this site is not therapy, not medical or legal advice, and not
+    a crisis service.
+  </p>
+
+  <h2>Other people's sites</h2>
+
+  <p>
+    We link to organisations, platforms and shops. Those links are for
+    convenience and are not an endorsement of everything on the far side of
+    them. We do not control that content and are not responsible for it. Some
+    links earn a commission, and which ones is set out in the{" "}
+    <a href="/disclaimer">disclaimer</a>.
+  </p>
+
+  <h2>Copyright complaints</h2>
+
+  <p>
+    If you believe something here infringes your copyright, email{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a> with: what the work is,
+    where it appears on this site, your contact details, a statement that you
+    believe the use is unauthorised, and a statement that your notice is
+    accurate and that you are the rights holder or authorised to act for them.
+  </p>
+
+  <p>
+    We take these seriously and will remove genuinely infringing material
+    promptly.
+  </p>
+
+  <h2>Changes to these terms</h2>
+
+  <p>
+    We may update these terms. The date at the top changes when we do.
+    Continuing to use the site after a change means you accept the revised
+    version.
+  </p>
+
+  <h2>Contact</h2>
+
+  <p>
+    Questions about these terms:{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a>, or the{" "}
+    <a href="/contact">contact page</a>.
+  </p>
+</Legal>

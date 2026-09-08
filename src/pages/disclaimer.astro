@@ -1,0 +1,155 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { LEGAL_UPDATED } from "../data/legal";
+import { links } from "../data/site";
+---
+
+<Legal
+  title="Disclaimer"
+  description="What this site is and is not: not therapy, not medical or legal advice, and not a crisis service. Plus how affiliate links and book sales work here."
+  updated={LEGAL_UPDATED}
+  current="disclaimer"
+>
+  <div class="callout urgent">
+    <p>
+      <strong>This site is not a crisis service.</strong> Nobody monitors it for
+      emergencies and messages are not read in real time. If you are in
+      immediate danger, call <strong>911</strong>. If you need to speak to
+      somebody now, the National Domestic Violence Hotline is{" "}
+      <strong>1-800-799-7233</strong>, free and staffed 24 hours. More on the{" "}
+      <a href="/resources">resources page</a>.
+    </p>
+  </div>
+
+  <h2>This is not professional advice</h2>
+
+  <p>
+    HoneyBear Katherine's Haven is a podcast and this is its website. Katherine
+    L. Carter is a writer, former teacher and community builder. She is{" "}
+    <strong>not a licensed therapist, counsellor, psychologist, physician,
+    lawyer, or financial adviser</strong>, and nothing published here is
+    delivered in any of those capacities.
+  </p>
+
+  <p>
+    Everything on this site — episodes, articles, and anything said live on air
+    — is general commentary and personal opinion offered for information and
+    encouragement. It is not a diagnosis, a treatment plan, legal guidance, or a
+    substitute for care from a qualified professional who knows your situation.
+  </p>
+
+  <p>
+    <strong>No professional relationship is created</strong> by reading this
+    site, listening to an episode, attending a live show, or contacting
+    Katherine. Please do not delay or disregard advice from a qualified
+    professional because of something you read or heard here.
+  </p>
+
+  <h2>Your decisions are your own</h2>
+
+  <p>
+    Relationships are specific and we do not know yours. Only you can weigh what
+    applies. Any action you take based on this site is taken at your own
+    discretion and risk, and Katherine L. Carter accepts no liability for
+    outcomes arising from it, to the fullest extent the law allows.
+  </p>
+
+  <h2>Safety information</h2>
+
+  <p>
+    The <a href="/harbor-of-hope">Harbor of Hope</a> and{" "}
+    <a href="/resources">resources</a> pages list national organisations that
+    provide crisis support, legal information and safety planning. Those
+    organisations are independent. We do not run them, are not affiliated with
+    them, and cannot influence what happens when you contact them.
+  </p>
+
+  <p>
+    We list them because they are established and free. We check them
+    periodically, but details change — if something here is out of date, please{" "}
+    <a href="/contact">let us know</a>.
+  </p>
+
+  <div class="callout">
+    <p>
+      <strong>A note on the quick-exit button.</strong> The Harbor of Hope page
+      has a control that moves you away quickly. It does not erase your browsing
+      history, and it cannot protect you from monitoring software installed on
+      your device. Please read the safety section on that page before relying on
+      it.
+    </p>
+  </div>
+
+  <h2>Guests and their views</h2>
+
+  <p>
+    Guests speak for themselves. Their appearance is not an endorsement of their
+    views, work or business, and their views are not necessarily Katherine's.
+    Similarly, links to other websites are provided for convenience — we do not
+    control that content and are not responsible for it.
+  </p>
+
+  <h2>Affiliate links and commercial relationships</h2>
+
+  <p>
+    In line with the US Federal Trade Commission's guidance on endorsements
+    (16 CFR Part 255), here is exactly how money works on this site.
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Link</th><th>Relationship</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>RYZE</strong></td>
+        <td>Affiliate link. Katherine earns a commission if you buy, at no additional cost to you.</td>
+      </tr>
+      <tr>
+        <td><strong>Pampered Chef</strong></td>
+        <td>Katherine is an independent consultant and earns from orders placed through her page.</td>
+      </tr>
+      <tr>
+        <td><strong>Weight of Dysfunction</strong></td>
+        <td>Katherine is the author and earns royalties on sales. This is not an affiliate link and carries no tracking tag.</td>
+      </tr>
+      <tr>
+        <td><strong>Cash App tip link</strong></td>
+        <td>Voluntary support for the show. Nothing is unlocked or promised in return.</td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Everything on the <a href="/resources">resources page</a></strong>
+        </td>
+        <td>
+          No commercial relationship of any kind. Nothing on that list pays to
+          be there, and none of those links earn anything.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    We do not run advertising, do not accept payment for editorial coverage, and
+    do not sell placement in articles. If that ever changes it will be disclosed
+    here and on the page in question.
+  </p>
+
+  <h2>Accuracy</h2>
+
+  <p>
+    Articles are written carefully and reviewed before publication, but this is
+    a podcast website, not a clinical reference. We do not guarantee that
+    everything is complete or current, and we may update or correct pieces
+    without notice. Where an article states something as fact, it is our
+    understanding at the time of writing.
+  </p>
+
+  <h2>Questions</h2>
+
+  <p>
+    If anything here is unclear, or you think something on the site is wrong,{" "}
+    <a href="/contact">get in touch</a> or email{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a>.
+  </p>
+</Legal>

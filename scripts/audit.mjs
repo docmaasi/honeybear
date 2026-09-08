@@ -119,6 +119,18 @@ for (const file of html) {
   check();
   if (/Â©|Ã©|â€™|�/.test(s)) fail(name, "character encoding fault in output");
 
+  // --- Astro drops the space at a line break before an inline tag, producing
+  //     "Built bySmith App Studio". Caught in the rendered output, not source. ---
+  check();
+  const glued = [
+    ...s.matchAll(/[a-z0-9,)]<(?:strong|a|em|code)[ >]/g),
+    ...s.matchAll(/<\/(?:strong|a|em|code)>[a-zA-Z]/g),
+  ];
+  if (glued.length) {
+    const sample = glued.slice(0, 3).map((m) => m[0]).join(", ");
+    fail(name, `${glued.length} missing space(s) beside an inline tag: ${sample}`);
+  }
+
   // --- canonical ---
   check();
   if (!/rel="canonical"/.test(s)) fail(name, "missing canonical link");
