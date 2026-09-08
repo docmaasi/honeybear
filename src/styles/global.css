@@ -22,20 +22,22 @@
    ============================================================ */
 
 :root {
-  /* ---- ground: pearl ---- */
-  --paper: #fbf8f3;
-  --paper-raised: #ffffff;
-  --paper-sunk: #f4efe7;
-  --paper-tint: #f7f1e9;
+  /* ---- ground: pearl, warm rather than white ---- */
+  --paper: #f7f2e9;         /* champagne, not gallery white */
+  --paper-raised: #fffcf7;
+  --paper-sunk: #efe6d6;    /* deeper sand band */
+  --paper-plum: #f0e8f4;    /* soft lilac — her purple in the ground itself */
+  --paper-gold: #f6eedc;    /* warm gold wash */
+  --paper-tint: #f4ecdf;
 
   /* ---- ink ---- */
-  --ink: #221a2b;          /* 15.9:1 on pearl */
-  --ink-2: #4a4055;        /*  9.2:1 */
-  --muted: #6b6175;        /*  5.5:1 */
+  --ink: #241b2e;          /* 14.8:1 on pearl — plum-black, never grey */
+  --ink-2: #4e4359;        /*  8.3:1 */
+  --muted: #6b6175;        /*  5.2:1 */
 
   /* ---- lines ---- */
-  --rule: #e6dfd4;
-  --rule-strong: #cfc5b8;
+  --rule: #e2d8c6;
+  --rule-strong: #cbbda6;
 
   /* ---- accent: purple, used sparingly ---- */
   --accent: #6b2fa0;       /*  7.8:1 on pearl — safe for text */
@@ -44,7 +46,7 @@
   --accent-line: #d9c8ec;
 
   /* ---- metal: gold ---- */
-  --gold: #8a6414;         /*  5.1:1 — the only gold safe for text */
+  --gold: #7e5a10;         /*  clears AA on every ground above */
   --gold-line: #a87b2a;    /*  decorative only: rules, borders, rings */
   --gold-soft: #f7f0dd;
 
@@ -73,8 +75,8 @@
   --r-sm: 4px;
   --r-md: 12px;
 
-  --shadow-card: 0 1px 2px #221a2b0a, 0 8px 24px -14px #221a2b26;
-  --shadow-lift: 0 2px 4px #221a2b0d, 0 22px 44px -22px #221a2b33;
+  --shadow-card: 0 1px 2px #241b2e0f, 0 10px 26px -16px #241b2e33;
+  --shadow-lift: 0 2px 4px #241b2e12, 0 24px 48px -22px #241b2e40;
 }
 
 * { box-sizing: border-box; }
@@ -186,6 +188,24 @@ section { padding-block: clamp(56px, 9vw, 104px); }
 .band-dark .rule::after { opacity: .75; }
 
 .band-tint { background: var(--paper-sunk); }
+.band-plum { background: var(--paper-plum); }
+.band-gold { background: var(--paper-gold); }
+
+/* A soft wash so a light section still has depth rather than reading flat. */
+.wash {
+  position: relative;
+  isolation: isolate;
+}
+.wash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 70% at 12% 0%, #6b2fa014 0%, transparent 60%),
+    radial-gradient(50% 60% at 92% 100%, #a87b2a1a 0%, transparent 62%);
+  pointer-events: none;
+}
 
 /* ---------- buttons ---------- */
 
