@@ -55,7 +55,7 @@ A good boundary makes closeness *more* possible, because it removes the thing th
 
 Some people were raised in homes where having a limit was treated as betrayal — where the price of belonging was total availability. If that is your background, your first attempts will feel like cruelty and you will want to apologise mid-sentence.
 
-That feeling is not a signal that you are doing it wrong. It is what unlearning feels like. Katherine's **Weight of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), covers exactly this ground.
+That feeling is not a signal that you are doing it wrong. It is what unlearning feels like. Katherine's **Weight Of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), is a first-hand record of how far that instinct can be pushed.
 
 ## An important exception
 

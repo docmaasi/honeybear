@@ -31,7 +31,7 @@ People with difficult histories often report the strongest chemistry with the pe
 
 That is not bad luck and it is not a character flaw. It is a nervous system recognising a familiar shape and reporting it as home. Familiar and good are different words, and for some people they have never once overlapped.
 
-If that describes you, it is worth taking seriously rather than fighting. Katherine's **Weight of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), sits on exactly this ground — what you learned to expect before you were old enough to have a say.
+If that describes you, it is worth taking seriously rather than fighting. Katherine's **Weight Of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), is a journal kept inside an abusive marriage — an unusually close account of how a person talks themselves into staying.
 
 ## What actually predicts things
 

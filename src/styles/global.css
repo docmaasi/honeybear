@@ -216,7 +216,9 @@ section { padding-block: clamp(56px, 9vw, 104px); }
 
 /* ---------- utility ---------- */
 
-img { max-width: 100%; }
+/* width/height attributes are set for layout stability; without
+   height:auto an image sized by CSS width stretches to the attribute. */
+img { max-width: 100%; height: auto; }
 [hidden] { display: none !important; }
 
 .skip {

@@ -53,6 +53,6 @@ Expect defensiveness first. It usually is not proof of guilt; it is the sound of
 
 ## Where the pattern often comes from
 
-People who learned early that closeness was conditional, or watched adults keep the peace by never saying the true thing, are unusually prone to this. Katherine writes about that inheritance in **Weight of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222).
+People who learned early that closeness was conditional, or that peace was kept by never saying the true thing, are unusually prone to this. Katherine's **Weight Of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), is a long first-hand account of what that costs.
 
 **HoneyBear Katherine's Haven** is live weekly in Meta Horizon Worlds and Clubroom.

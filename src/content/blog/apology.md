@@ -54,7 +54,7 @@ If you are on the other end, two things help.
 
 Every long relationship is a very long chain of small ruptures. What distinguishes the ones that last is not fewer ruptures — it is a shorter distance between rupture and repair.
 
-That is learnable. Many people never learned it because nobody in their childhood modelled it; if the adults around you either exploded or went silent for three days, you had no template. Katherine writes about that inheritance in **Weight of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222).
+That is learnable. Many people never learned it because nobody in their childhood modelled it; if the adults around you either exploded or went silent for three days, you had no template. Katherine's **Weight Of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), is a journal from inside a marriage where repair never came.
 
 You can learn it now. It is mostly practice, and it works even when only one of you starts.
 

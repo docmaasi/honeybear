@@ -35,7 +35,7 @@ And a second relationship is now being funded with attention, honesty and desire
 
 A lot of this traces back further than the marriage. People who grew up watching a parent conduct a quiet second life, or watching two adults keep a peace by never saying the true thing, tend to reproduce the arrangement without ever choosing it.
 
-Katherine's book **Weight of Dysfunction** works through exactly this ground — what a family teaches without saying it, and what it takes to be the person who stops a pattern rather than passing it along. It is [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), and it is the reason this subject sits so close to the centre of the show.
+Katherine's **Weight Of Dysfunction** is a journal account of a woman in an abusive marriage, kept over eleven years and published so a reader might recognise their own situation in it. It is [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), and it is why this ground sits so close to the centre of the show.
 
 ## The three roads
 

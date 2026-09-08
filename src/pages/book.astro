@@ -1,67 +1,190 @@
 ---
 import Base from "../layouts/Base.astro";
-import { site, links } from "../data/site";
+import { site } from "../data/site";
+import { book } from "../data/book";
 
 const schema = [
   {
     "@type": "Book",
-    name: "Weight of Dysfunction",
+    "@id": `${site.domain}/book`,
+    name: book.title,
     author: { "@id": `${site.domain}/#katherine` },
     url: `${site.domain}/book`,
-    sameAs: links.book,
-    inLanguage: "en-US",
+    sameAs: book.url,
+    image: new URL(book.cover, site.domain).href,
+    description: book.description,
+    isbn: book.isbn13,
+    numberOfPages: book.pages,
     bookFormat: "https://schema.org/Paperback",
-    isbn: "1667889222",
+    inLanguage: "en-US",
+    datePublished: book.published,
+    publisher: { "@type": "Organization", name: book.publisher },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: book.ratingValue,
+      ratingCount: book.ratingCount,
+      bestRating: 5,
+    },
   },
 ];
 ---
 
 <Base
-  title="Weight of Dysfunction"
-  description="Weight of Dysfunction by Katherine L. Carter — on what families carry, what gets handed down, and how a person puts it down."
+  title="Weight Of Dysfunction"
+  description="Katherine L. Carter's book is a journal account of a woman in an abusive marriage between 1981 and 1992 — a true record, published so somebody else might recognise their own situation in it."
+  image={book.cover}
   schema={schema}
 >
-  <section class="head">
-    <div class="shell book-grid">
-      <div class="stack stack-md">
-        <h1>Weight of Dysfunction</h1>
-        <p class="byline">by Katherine L. Carter</p>
-        <p class="lede">
-          On what families carry, what quietly gets handed from one generation
-          to the next, and what it takes for a person to set it down.
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="cover-wrap">
+        <img
+          class="cover"
+          src={book.cover}
+          alt={`Cover of ${book.title} by ${book.author}`}
+          width="667"
+          height="1000"
+        />
+      </div>
+
+      <div class="hero-copy">
+        <p class="kicker">A true account</p>
+        <h1>{book.title}</h1>
+        <p class="byline">by {book.author}</p>
+
+        <p class="stand">
+          A woman's journal from inside an abusive marriage, kept from{" "}
+          <strong>1981 to 1992</strong>. Not a memoir written at a safe
+          distance — the entries as they were made, while it was still
+          happening.
         </p>
+
+        <div
+          class="rating"
+          aria-label={`Rated ${book.ratingValue} out of 5 from ${book.ratingCount} ratings on Amazon`}
+        >
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span class="tnum">{book.ratingValue.toFixed(1)} on Amazon</span>
+          <span class="dim tnum">({book.ratingCount} ratings)</span>
+        </div>
+
         <div class="actions">
-          <a class="btn btn-gold" href={links.book} rel="noopener">
-            Buy on Amazon
+          <a class="btn btn-gold" href={book.url} rel="noopener">
+            Buy the paperback
           </a>
-          <a class="btn btn-quiet" href="/about">About Katherine</a>
+          <a class="btn btn-quiet" href="/harbor-of-hope">If this is your life</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-sec">
+    <div class="shell">
+      <blockquote>
+        <p>{book.pullQuote}</p>
+        <cite>Katherine L. Carter, on why she published it</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="about-book">
+    <div class="shell about-grid">
+      <div>
+        <div class="rule"><h2>What it is</h2></div>
+        <div class="prose">
+          <p>
+            Eleven years, chronicled as they happened. A true accounting of
+            events from one woman's perspective, with some names omitted or
+            changed.
+          </p>
+          <p>
+            She had been with her abuser since her early teens. He was the only
+            man in her life — <em>her sun, moon and stars</em>. She tries hard.
+            She wants to make it work. That is the part the book refuses to
+            simplify, and the reason it is difficult to read.
+          </p>
+          <p>
+            Readers who have never been near it arrive with one question.
+            Katherine puts it in the description herself rather than waiting for
+            somebody else to ask:
+          </p>
+        </div>
+
+        <blockquote class="inline-quote">
+          <p>{book.secondQuote}</p>
+        </blockquote>
+
+        <div class="prose">
+          <p>
+            People stay, and make excuses for the people hurting them, for
+            reasons of their own. The book is written for the reader who might
+            recognise something of their own life in it — and, in recognising
+            it, be able to name it.
+          </p>
         </div>
       </div>
 
-      <aside class="cover panel">
-        <p class="pull">
-          The same themes run through the podcast: resilience, relationships,
-          and the work of growing past what shaped you.
-        </p>
-        <p class="small">
-          The book and the show sit on the same ground, so readers and listeners
-          tend to be looking for the same thing.
-        </p>
+      <aside class="facts">
+        <h2>The details</h2>
+        <dl>
+          <div><dt>Publisher</dt><dd>{book.publisher}</dd></div>
+          <div><dt>Published</dt><dd class="tnum">{book.publishedLabel}</dd></div>
+          <div><dt>Format</dt><dd>{book.format}, {book.pages} pages</dd></div>
+          <div><dt>Language</dt><dd>{book.language}</dd></div>
+          <div><dt>ISBN-13</dt><dd class="tnum">{book.isbn13}</dd></div>
+        </dl>
+        <a class="btn btn-quiet full" href={book.url} rel="noopener">
+          View on Amazon
+        </a>
       </aside>
     </div>
   </section>
 
-  <section class="more">
+  <section class="safety">
+    <div class="shell note">
+      <h2>Before you start</h2>
+      <p>
+        This book describes domestic abuse in detail. If you are living
+        something similar, read it when you have room to — and know that help
+        exists, is free, and is there at any hour.
+      </p>
+      <p class="line">
+        <strong>
+          National Domestic Violence Hotline —{" "}
+          <a href="tel:18007997233">1-800-799-7233</a>
+        </strong>, or text START to 88788.
+      </p>
+      <a class="btn btn-gold" href="/harbor-of-hope">Harbor of Hope</a>
+    </div>
+  </section>
+
+  <section class="author">
+    <div class="shell">
+      <div class="rule"><h2>How it came to be written</h2></div>
+      <div class="prose author-prose">
+        {book.bioParagraphs.map((p) => <p>{p}</p>)}
+      </div>
+      <p class="more">
+        <a class="btn btn-quiet" href="/about">More about Katherine</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="onward">
     <div class="shell">
       <div class="rule"><h2>If the book resonates</h2></div>
       <div class="cards">
-        <a class="card" href="/episodes">
-          <h3>Listen to the Haven</h3>
-          <p>Weekly conversations on the same subjects, with guests who have lived them.</p>
+        <a class="card" href="/topics#safety-respect">
+          <h3>Safety and respect</h3>
+          <p>Where a hard relationship ends and an unsafe one begins — and how to tell.</p>
         </a>
-        <a class="card" href="/harbor-of-hope">
-          <h3>Harbor of Hope</h3>
-          <p>If any of this is closer to home than you would like, here is where the real help is.</p>
+        <a class="card" href="/blog/control-signs">
+          <h3>Early signs of control</h3>
+          <p>It rarely announces itself. It arrives looking like love.</p>
+        </a>
+        <a class="card" href="/episodes">
+          <h3>The Haven</h3>
+          <p>Katherine's weekly show, live with an audience that talks back.</p>
         </a>
       </div>
     </div>
@@ -69,32 +192,143 @@ const schema = [
 </Base>
 
 <style>
-  .head { padding-block: clamp(46px, 7vw, 86px) clamp(20px, 3vw, 40px); }
-  .book-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: clamp(30px, 5vw, 64px);
-    align-items: start;
+  .hero {
+    padding-block: clamp(40px, 6vw, 76px) clamp(28px, 4vw, 48px);
+    position: relative;
+    overflow: hidden;
   }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto -20%;
+    height: 130%;
+    background: radial-gradient(circle at 28% 40%, #3d245640 0%, transparent 62%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: clamp(30px, 5vw, 70px);
+    align-items: center;
+  }
+  .cover-wrap { position: relative; }
+  .cover {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 667 / 1000;
+    display: block;
+    border-radius: 3px;
+    box-shadow:
+      0 2px 0 0 #ffffff14,
+      0 34px 70px -24px #000,
+      0 10px 26px -12px #000c;
+    transform: rotate(-1.4deg);
+  }
+
+  .kicker { color: var(--gold-lit); font-size: 15px; margin-bottom: 12px; }
+  .hero h1 { font-size: clamp(36px, 5.6vw, 62px); }
   .byline {
     font-family: var(--f-display);
     font-style: italic;
-    font-size: 20px;
-    color: var(--gold-lit);
+    font-size: clamp(19px, 2.2vw, 23px);
+    color: var(--pearl-dim);
+    margin-top: 10px;
   }
-  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .stand {
+    font-size: clamp(17px, 1.9vw, 20px);
+    line-height: 1.6;
+    color: var(--pearl);
+    margin-top: 22px;
+    max-width: 46ch;
+  }
+  .rating {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    font-size: 15.5px;
+    color: var(--pearl-dim);
+  }
+  .stars { color: var(--gold-lit); letter-spacing: 2px; font-size: 17px; }
+  .rating .dim { color: var(--pearl-faint); }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
 
-  .cover { display: flex; flex-direction: column; gap: 16px; }
-  .pull {
+  .quote-sec { padding-block: clamp(30px, 5vw, 56px); }
+  blockquote { margin: 0; max-width: 60ch; }
+  blockquote p {
     font-family: var(--f-display);
-    font-size: 21px;
-    line-height: 1.45;
+    font-size: clamp(23px, 3.2vw, 34px);
+    line-height: 1.32;
+    color: var(--pearl);
     font-style: italic;
+    border-left: 2px solid var(--gold);
+    padding-left: clamp(18px, 3vw, 30px);
   }
+  cite {
+    display: block;
+    margin-top: 16px;
+    padding-left: clamp(20px, 3vw, 32px);
+    font-style: normal;
+    font-size: 15px;
+    color: var(--pearl-faint);
+  }
+  .inline-quote { margin: 26px 0; }
+  .inline-quote p { font-size: clamp(18px, 2.1vw, 22px); }
+
+  .about-book { background: var(--night-sunk); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: clamp(30px, 5vw, 62px);
+    align-items: start;
+  }
+  .prose { display: flex; flex-direction: column; gap: 16px; max-width: 62ch; }
+  .prose p { font-size: 17.5px; line-height: 1.7; color: #ded7cd; }
+  .prose em { color: var(--pearl); font-style: italic; }
+
+  .facts {
+    background: var(--night-raised);
+    border: 1px solid #2f2438;
+    border-radius: var(--r-md);
+    padding: 24px 26px;
+  }
+  .facts h2 { font-size: 20px; margin-bottom: 16px; }
+  .facts dl { margin: 0; display: grid; gap: 13px; }
+  .facts dt {
+    font-family: var(--f-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--pearl-faint);
+    margin-bottom: 2px;
+  }
+  .facts dd { margin: 0; font-size: 16px; color: var(--pearl); }
+  .full { margin-top: 22px; width: 100%; justify-content: center; }
+
+  .note {
+    border-left: 3px solid var(--live);
+    background: #e4574f14;
+    padding: 26px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .note h2 { font-size: 24px; }
+  .note p { color: var(--pearl-dim); max-width: 62ch; }
+  .note .line { color: var(--pearl); }
+  .note a[href^="tel"] { color: var(--gold-lit); }
+  .note .btn { margin-top: 6px; }
+
+  .author-prose { max-width: 66ch; }
+  .more { margin-top: 26px; }
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 26px;
   }
   .card {
@@ -111,7 +345,9 @@ const schema = [
   .card:hover h3 { color: var(--gold-lit); }
   .card p { color: var(--pearl-dim); font-size: 16px; }
 
-  @media (max-width: 820px) {
-    .book-grid { grid-template-columns: 1fr; }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .cover-wrap { max-width: 230px; }
+    .about-grid { grid-template-columns: 1fr; }
   }
 </style>

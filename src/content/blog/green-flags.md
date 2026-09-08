@@ -55,6 +55,6 @@ Genuinely, immediately, without a competitive undertow. Many relationships survi
 
 People who grew up around chaos often mistake *not alarming* for *good*. If your baseline was volatility, calm can register as boring and someone steady can feel like nothing at all.
 
-That is a learned response, not a preference, and it is worth knowing about yourself. Katherine writes about that inheritance in **Weight of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222) — how a family teaches you what to expect, long before you have any say in it.
+That is a learned response, not a preference, and it is worth knowing about yourself. Katherine's **Weight Of Dysfunction**, [available on Amazon](https://www.amazon.com/Weight-Dysfunction-Katherine-L-Carter/dp/1667889222), is a journal from inside an abusive marriage — a long, close record of how normal the wrong thing can come to feel.
 
 If several of these are present, pay attention. That combination is not common, and the absence of red flags is not the same thing as the presence of these.

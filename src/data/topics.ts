@@ -51,7 +51,7 @@ export const topics: Topic[] = [
     blurb:
       "The patterns handed down before anyone thought to ask whether they should be.",
     body:
-      "This is the ground Katherine's book covers. What a family teaches without saying, what gets repeated by accident, and what it takes to be the person who stops a pattern rather than passing it on.",
+      "What a family teaches without saying it, what gets repeated by accident, and what it takes to be the person who stops a pattern rather than passing it on.",
     questions: [
       "How do you stop repeating what you grew up with?",
       "What do you owe family that hurt you?",
