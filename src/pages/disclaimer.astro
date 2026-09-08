@@ -1,6 +1,7 @@
 ---
 import Legal from "../layouts/Legal.astro";
 import { LEGAL_UPDATED } from "../data/legal";
+import { links } from "../data/site";
 ---
 
 <Legal
@@ -144,6 +145,7 @@ import { LEGAL_UPDATED } from "../data/legal";
 
   <p>
     If anything here is unclear, or you think something on the site is wrong,{" "}
-    <a href="/contact">get in touch</a>.
+    <a href="/contact">get in touch</a> or email{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a>.
   </p>
 </Legal>

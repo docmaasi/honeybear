@@ -1,6 +1,7 @@
 ---
 import Legal from "../layouts/Legal.astro";
 import { LEGAL_UPDATED } from "../data/legal";
+import { links } from "../data/site";
 ---
 
 <Legal
@@ -124,7 +125,8 @@ import { LEGAL_UPDATED } from "../data/legal";
   <h2>Copyright complaints</h2>
 
   <p>
-    If you believe something here infringes your copyright, email <a href="/contact">the contact page</a> with: what the work is,
+    If you believe something here infringes your copyright, email{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a> with: what the work is,
     where it appears on this site, your contact details, a statement that you
     believe the use is unauthorised, and a statement that your notice is
     accurate and that you are the rights holder or authorised to act for them.
@@ -158,7 +160,8 @@ import { LEGAL_UPDATED } from "../data/legal";
   <h2>Contact</h2>
 
   <p>
-    Questions about these terms: <a href="/contact">the contact page</a>, or the{" "}
-    <a href="/contact">contact page</a>.
+    Questions about these terms can go to{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a>, or through{" "}
+    <a href="/contact">the contact page</a>.
   </p>
 </Legal>

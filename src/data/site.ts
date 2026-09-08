@@ -30,6 +30,7 @@ export const links = {
   facebook: "https://www.facebook.com/HoneyBearKatherine777",
   instagram: "https://www.instagram.com/katherine_l_carter/",
   cashApp: "https://cash.app/$honeybearkatherine",
+  email: "hbkgrandpavilion@gmail.com",
   ryze: "https://get.aspr.app/SH1HHw",
   book: "https://www.amazon.com/dp/1667889222",
   studio: "https://smithappstudio.com",

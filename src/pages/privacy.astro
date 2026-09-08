@@ -1,6 +1,7 @@
 ---
 import Legal from "../layouts/Legal.astro";
 import { LEGAL_UPDATED } from "../data/legal";
+import { links } from "../data/site";
 ---
 
 <Legal
@@ -108,8 +109,7 @@ import { LEGAL_UPDATED } from "../data/legal";
     Where a contact form is available, it is delivered by Web3Forms, which
     forwards your message to our email and does not require an account. Your
     message passes through their systems in transit. If you would rather avoid
-    that, message Katherine directly on one of the social accounts listed
-    on the <a href="/contact">contact page</a>.
+    that, email <a href={`mailto:${links.email}`}>{links.email}</a> directly.
   </p>
 
   <h2>Links that leave this site</h2>
@@ -173,6 +173,8 @@ import { LEGAL_UPDATED } from "../data/legal";
   <h2>Contact</h2>
 
   <p>
-    Questions about privacy, or a request about your information, can go through <a href="/contact">the contact page</a>.
+    Questions about privacy, or a request about your information, can go to{" "}
+    <a href={`mailto:${links.email}`}>{links.email}</a>, or through{" "}
+    <a href="/contact">the contact page</a>.
   </p>
 </Legal>

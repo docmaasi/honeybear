@@ -1,6 +1,7 @@
 ---
 import Legal from "../layouts/Legal.astro";
 import { LEGAL_UPDATED } from "../data/legal";
+import { links } from "../data/site";
 ---
 
 <Legal
@@ -86,7 +87,7 @@ import { LEGAL_UPDATED } from "../data/legal";
   <div class="callout">
     <p>
       If any part of this site is difficult or impossible for you to use, please
-      use <a href="/contact">the contact page</a>. Tell us the page
+      email <a href={`mailto:${links.email}`}>{links.email}</a>. Tell us the page
       and what happened, and what you were using if you know it.
     </p>
     <p>
