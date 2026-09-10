@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import { links } from "../data/site";
+---
+
+<Base
+  title="Message sent"
+  description="Your message has reached Katherine."
+>
+  <section class="ty">
+    <div class="shell stack stack-md">
+      <p class="kicker">Sent</p>
+      <h1>Your message is on its way</h1>
+      <p class="lede">
+        It has gone straight to Katherine's inbox. She reads them herself, so a
+        reply may take a few days rather than a few minutes.
+      </p>
+
+      <div class="meanwhile panel">
+        <h2>While you wait</h2>
+        <p>
+          The next show is the quickest way to meet her — the audience talks
+          throughout, and questions are welcome.
+        </p>
+        <div class="acts">
+          <a class="btn btn-gold" href="/shows">See the schedule</a>
+          <a class="btn btn-quiet" href="/blog">Read the Journal</a>
+          <a class="btn btn-quiet" href={links.youtube} rel="noopener">Watch on YouTube</a>
+        </div>
+      </div>
+
+      <p class="small urgent-note">
+        If you wrote about something urgent, please do not wait on a reply.
+        The <a href="/resources">help and resources page</a> lists lines that
+        are answered 24 hours a day.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ty { padding-block: clamp(60px, 9vw, 110px); }
+  .kicker {
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .meanwhile { max-width: 60ch; display: flex; flex-direction: column; gap: 12px; }
+  .meanwhile h2 { font-size: 22px; }
+  .meanwhile p { color: var(--ink-2); }
+  .acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+  .urgent-note {
+    border-left: 3px solid var(--live);
+    background: var(--live-soft);
+    padding: 14px 18px;
+    max-width: 62ch;
+    color: var(--ink-2);
+  }
+</style>
