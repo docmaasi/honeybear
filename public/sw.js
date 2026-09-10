@@ -1,4 +1,4 @@
-/* Offline support for honeybearkatherine.org
+/* Offline support for honeybearkatherine.com
  *
  * Deliberately conservative, because of what this site carries:
  *   - Only same-origin GET requests are ever cached.

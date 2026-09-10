@@ -4,7 +4,7 @@
 export const site = {
   name: "HoneyBear Katherine",
   legalName: "Katherine L. Carter",
-  domain: "https://honeybearkatherine.org",
+  domain: "https://honeybearkatherine.com",
   tagline: "Encouragement, every week.",
   description:
     "HoneyBear Katherine's Haven is a weekly relationship podcast on love, trust, dating and repair, hosted by Katherine L. Carter live in Meta Horizon Worlds and Clubroom.",

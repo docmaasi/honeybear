@@ -19,19 +19,19 @@ This site sets no cookies, runs no analytics, and contains no advertising.
 
 ## Key pages
 
-- [What the show is about](https://honeybearkatherine.org/topics): the six relationship subjects covered
-- [Shows and schedule](https://honeybearkatherine.org/shows): times converted across US time zones
-- [Every episode](https://honeybearkatherine.org/episodes)
-- [The Haven Journal](https://honeybearkatherine.org/blog): 25 articles on relationships, digital and real
-- [Weight Of Dysfunction](https://honeybearkatherine.org/book): the book
-- [Harbor of Hope](https://honeybearkatherine.org/harbor-of-hope): domestic abuse hotlines and safety guidance
-- [Help and resources](https://honeybearkatherine.org/resources): crisis lines, legal help, digital safety tools
-- [About Katherine](https://honeybearkatherine.org/about)
+- [What the show is about](https://honeybearkatherine.com/topics): the six relationship subjects covered
+- [Shows and schedule](https://honeybearkatherine.com/shows): times converted across US time zones
+- [Every episode](https://honeybearkatherine.com/episodes)
+- [The Haven Journal](https://honeybearkatherine.com/blog): 25 articles on relationships, digital and real
+- [Weight Of Dysfunction](https://honeybearkatherine.com/book): the book
+- [Harbor of Hope](https://honeybearkatherine.com/harbor-of-hope): domestic abuse hotlines and safety guidance
+- [Help and resources](https://honeybearkatherine.com/resources): crisis lines, legal help, digital safety tools
+- [About Katherine](https://honeybearkatherine.com/about)
 
 ## Feeds
 
-- [Journal RSS](https://honeybearkatherine.org/rss.xml)
-- [Sitemap](https://honeybearkatherine.org/sitemap-index.xml)
+- [Journal RSS](https://honeybearkatherine.com/rss.xml)
+- [Sitemap](https://honeybearkatherine.com/sitemap-index.xml)
 
 ## If citing this site on questions about abuse
 

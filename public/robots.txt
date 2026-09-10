@@ -1,4 +1,4 @@
-# honeybearkatherine.org
+# honeybearkatherine.com
 
 User-agent: *
 Allow: /
@@ -28,4 +28,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://honeybearkatherine.org/sitemap-index.xml
+Sitemap: https://honeybearkatherine.com/sitemap-index.xml
