@@ -163,9 +163,41 @@ check();
 if (![...assetSet].some((f) => f.startsWith("/sitemap"))) fail("site", "no sitemap");
 
 // --- the old site's time-zone bug, guarded ---
+//
+// The old site typed its times out by hand on every page and drifted: 7PM ET
+// was published alongside a 5PM CST that was an hour wrong. Times are now
+// stated once in site.ts and derived, and this check enforces that: any
+// "H:MM AM/PM Eastern" that appears in a built page but is NOT one of the
+// times in site.ts has been hard-coded somewhere and is free to go stale.
 check();
-const shows = await readFile("src/data/site.ts", "utf8");
-if (/5PM CST/i.test(shows)) fail("site.ts", "the old 7PM ET / 5PM CST conversion error is back");
+const siteSrc = await readFile("src/data/site.ts", "utf8");
+if (/5PM CST/i.test(siteSrc)) fail("site.ts", "the old 7PM ET / 5PM CST conversion error is back");
+
+// [\s\S] rather than a literal newline class, so this survives both the
+// one-line bingo slots and the multi-line show blocks.
+const declared = new Set();
+for (const m of siteSrc.matchAll(
+  /hourET:\s*(\d{1,2}),[\s\S]{0,40}?minuteET:\s*(\d{1,2})/g,
+)) {
+  const h = Number(m[1]), mi = Number(m[2]);
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  declared.add(`${h12}:${String(mi).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`);
+}
+
+const timed = files.filter((f) => [".html", ".txt"].includes(extname(f)));
+for (const f of timed) {
+  check();
+  const body = await readFile(f, "utf8");
+  for (const m of body.matchAll(/(\d{1,2}:\d{2}\s(?:AM|PM))\s+Eastern/g)) {
+    if (!declared.has(m[1])) {
+      fail(
+        relative(DIST, f),
+        `"${m[1]} Eastern" is hard-coded — site.ts does not declare that time. ` +
+          `Derive it with timeLabel() instead.`,
+      );
+    }
+  }
+}
 
 console.log(`\nAudited ${html.length} pages, ${checks} checks.\n`);
 

@@ -62,7 +62,7 @@ export const shows: Show[] = [
     blurb:
       "The main show. Guests from every walk of life, real conversation, and a live audience that talks back.",
     weekday: 5,
-    hourET: 19,
+    hourET: 20,
     minuteET: 0,
     runtimeMin: 90,
     art: "/art/haven-podcast.jpg",

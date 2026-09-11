@@ -1,6 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
-import { site, links } from "../data/site";
+import {
+  site, links, shows, weekdayName, timeLabel, zoneLine,
+} from "../data/site";
+
+// Derived, never typed out. The Haven's time is stated once in site.ts; this
+// page used to hard-code it — and its zone conversions — which is exactly how
+// the old site ended up an hour wrong in Central.
+const haven = shows.find((s) => s.id === "haven")!;
+const havenDay = `${weekdayName(haven.weekday)}s`;
+const havenET = timeLabel(haven.hourET, haven.minuteET);
+const havenZones = zoneLine(haven.hourET, haven.minuteET);
 
 // Questions phrased the way people actually ask them, each answered directly
 // in the first sentence. This is what answer engines quote.
@@ -11,7 +21,7 @@ const faqs = [
   },
   {
     q: "When does HoneyBear Katherine's Haven air?",
-    a: "HoneyBear Katherine's Haven airs every Friday at 7:00 PM Eastern, which is 6:00 PM Central, 5:00 PM Mountain, and 4:00 PM Pacific. Episodes are published to YouTube afterwards.",
+    a: `HoneyBear Katherine's Haven airs every ${weekdayName(haven.weekday)} at ${havenET} Eastern — that is ${havenZones}. Episodes are published to YouTube afterwards.`,
   },
   {
     q: "Where can I listen to the podcast?",
@@ -108,9 +118,9 @@ const schema = [
           questions, stories, and conversation run throughout.
         </p>
         <p>
-          It airs <strong>Fridays at 7:00 PM Eastern</strong>, live from Meta
-          Horizon Worlds. If you cannot make it live, every episode goes up
-          afterwards.
+          It airs <strong>{havenDay} at {havenET} Eastern</strong>, live from
+          Meta Horizon Worlds. If you cannot make it live, every episode goes
+          up afterwards.
         </p>
       </div>
     </div>
