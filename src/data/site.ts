@@ -112,6 +112,7 @@ export const worlds = [
 ];
 
 export const nav = [
+  { label: "Live", href: "/live" },
   { label: "Journal", href: "/blog" },
   { label: "Topics", href: "/topics" },
   { label: "Shows", href: "/shows" },

@@ -1,0 +1,247 @@
+---
+import Base from "../layouts/Base.astro";
+import LiveStream from "../components/LiveStream.astro";
+import {
+  site, links, shows, bingo, platforms, weekdayName, timeLabel, zoneLine,
+} from "../data/site";
+
+// Everything that goes out live, in one list. Built from the same schedule
+// data the Shows page uses, so the two can never drift apart.
+const airings = [
+  ...shows.map((s) => ({
+    name: s.name,
+    weekday: s.weekday,
+    hourET: s.hourET,
+    minuteET: s.minuteET,
+    runtimeMin: s.runtimeMin,
+  })),
+  ...bingo.slots.map((slot) => ({
+    name: bingo.name,
+    weekday: slot.weekday,
+    hourET: slot.hourET,
+    minuteET: slot.minuteET,
+    runtimeMin: 60,
+  })),
+].sort((a, b) => a.weekday - b.weekday || a.hourET - b.hourET);
+
+// NOTE: the weekday-and-time lines below are deliberately static. This site is
+// built once and served as files, so anything resembling "starts in 2 hours"
+// would be frozen at build time and would start lying within the hour. The
+// recurring schedule never goes stale, and the one moving figure — what is on
+// next — is worked out in the visitor's own browser at the bottom of this file.
+
+const schema = [
+  {
+    "@type": "BroadcastService",
+    name: "HoneyBear Katherine's Haven",
+    description:
+      "Weekly live broadcasts from Katherine L. Carter, streamed on YouTube and hosted live in Meta Horizon Worlds.",
+    broadcastDisplayName: "HoneyBear Katherine's Haven",
+    inLanguage: "en-US",
+    url: `${site.domain}/live`,
+    provider: { "@id": `${site.domain}/#katherine` },
+  },
+];
+---
+
+<Base
+  title="Watch live"
+  description="Watch HoneyBear Katherine's Haven live. The stream plays here when Katherine is on air, and the weekly schedule is listed in every US time zone."
+  schema={schema}
+>
+  <section class="head">
+    <div class="shell stack stack-md">
+      <h1>Watch live</h1>
+      <p class="lede">
+        When Katherine is on air, the stream plays right here. Press play to
+        join — or watch on YouTube, or come into the room itself.
+      </p>
+      <p class="on-air" id="on-air" hidden></p>
+    </div>
+  </section>
+
+  <section class="player">
+    <div class="shell stack stack-md">
+      <LiveStream channelId={links.youtubeChannelId} poster="/art/haven-podcast.jpg" />
+      <p class="small quiet">
+        If nothing is broadcasting, the player will say so. The schedule below
+        is when to come back.
+      </p>
+      <p>
+        <a class="btn btn-quiet" href={links.youtube} rel="noopener">
+          Open the channel on YouTube
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="when">
+    <div class="shell stack stack-md">
+      <div class="rule"><h2>When she's on</h2></div>
+      <p class="lede lede-tight">
+        Every time below is Eastern, converted for the rest of the country on
+        the line beneath it.
+      </p>
+      <ul class="slots">
+        {airings.map((a) => (
+          <li>
+            <span class="slot-day">{weekdayName(a.weekday)}</span>
+            <span class="slot-time tnum">{timeLabel(a.hourET, a.minuteET)} ET</span>
+            <span class="slot-name">{a.name}</span>
+            <span class="slot-zones small quiet">{zoneLine(a.hourET, a.minuteET)}</span>
+          </li>
+        ))}
+      </ul>
+      <p><a class="btn btn-quiet" href="/shows">Full show details</a></p>
+    </div>
+  </section>
+
+  <section class="rooms">
+    <div class="shell stack stack-md">
+      <div class="rule"><h2>Or come into the room</h2></div>
+      <p class="lede lede-tight">
+        The show is hosted live inside virtual worlds, with an audience that
+        talks back. Watching on YouTube is the quiet way in; these are the
+        rooms themselves.
+      </p>
+      <ul class="rooms-list">
+        {platforms.map((p) => (
+          <li>
+            <a href={p.href} rel="noopener">{p.name}</a>
+            <span class="small quiet">{p.note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-block: clamp(46px, 7vw, 82px) 14px; }
+  .player { padding-block: 10px clamp(30px, 4vw, 44px); }
+  .when, .rooms { padding-block: clamp(30px, 4vw, 46px); }
+  .rooms { border-top: 1px solid var(--rule); }
+  .lede-tight { max-width: 56ch; }
+
+  .on-air {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 16px;
+  }
+  .on-air::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 26%, transparent);
+  }
+  .on-air[data-state="live"]::before {
+    background: #d4462f;
+    box-shadow: 0 0 0 4px #d4462f3d;
+    animation: on-air-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes on-air-pulse { 50% { opacity: .45; } }
+  @media (prefers-reduced-motion: reduce) {
+    .on-air[data-state="live"]::before { animation: none; }
+  }
+
+  .slots { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+  .slots li {
+    display: grid;
+    grid-template-columns: 8.5rem 8.5rem 1fr;
+    gap: 4px 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .slot-day { font-weight: 600; }
+  .slot-zones { grid-column: 1 / -1; }
+  @media (max-width: 620px) {
+    .slots li { grid-template-columns: 1fr; gap: 3px; padding: 16px 0; }
+    .slot-name { order: -1; font-weight: 600; }
+  }
+
+  .rooms-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .rooms-list li { display: flex; flex-direction: column; gap: 3px; }
+</style>
+
+<script define:vars={{ airings }}>
+  // Worked out in the visitor's browser rather than at build time, so it is
+  // right whenever the page is opened, and right in their own time zone.
+  const el = document.getElementById("on-air");
+  if (el && airings.length) {
+    const ET = "America/New_York";
+
+    // The Eastern offset at a given instant, in minutes east of UTC.
+    const etOffset = (at) => {
+      const p = {};
+      for (const part of new Intl.DateTimeFormat("en-US", {
+        timeZone: ET, hour12: false, year: "numeric", month: "2-digit",
+        day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit",
+      }).formatToParts(at)) p[part.type] = part.value;
+      const asUTC = Date.UTC(
+        +p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second,
+      );
+      return (asUTC - at.getTime()) / 60000;
+    };
+
+    // The exact instant of an Eastern wall-clock time, correct across DST.
+    const instant = (y, m, d, h, mi) => {
+      const naive = Date.UTC(y, m - 1, d, h, mi);
+      const guess = new Date(naive - etOffset(new Date(naive)) * 60000);
+      return new Date(naive - etOffset(guess) * 60000);
+    };
+
+    const now = new Date();
+
+    // Today's date as Eastern sees it — the week rolls over there, not here.
+    const etParts = {};
+    for (const part of new Intl.DateTimeFormat("en-US", {
+      timeZone: ET, year: "numeric", month: "2-digit", day: "2-digit",
+      weekday: "short",
+    }).formatToParts(now)) etParts[part.type] = part.value;
+    const today = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+      .indexOf(etParts.weekday);
+
+    let onAir = null;
+    let next = null;
+
+    for (const a of airings) {
+      // Last week, this week and next week, so Sunday wrap-around works.
+      for (let w = -1; w <= 1; w++) {
+        const delta = ((a.weekday - today + 7) % 7) + w * 7;
+        const start = instant(
+          +etParts.year, +etParts.month, +etParts.day + delta,
+          a.hourET, a.minuteET,
+        );
+        const end = new Date(start.getTime() + a.runtimeMin * 60000);
+        if (now >= start && now <= end) {
+          onAir = { name: a.name };
+        } else if (start > now && (!next || start < next.start)) {
+          next = { name: a.name, start };
+        }
+      }
+      if (onAir) break;
+    }
+
+    if (onAir) {
+      el.textContent = `${onAir.name} is scheduled to be on air right now.`;
+      el.dataset.state = "live";
+      el.hidden = false;
+    } else if (next) {
+      const when = next.start.toLocaleString(undefined, {
+        weekday: "long", hour: "numeric", minute: "2-digit",
+      });
+      const zone = new Intl.DateTimeFormat(undefined, { timeZoneName: "short" })
+        .formatToParts(next.start)
+        .find((p) => p.type === "timeZoneName");
+      el.textContent =
+        `Next up: ${next.name}, ${when}${zone ? " " + zone.value : ""} your time.`;
+      el.dataset.state = "next";
+      el.hidden = false;
+    }
+  }
+</script>

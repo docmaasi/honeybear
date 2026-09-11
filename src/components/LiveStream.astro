@@ -1,0 +1,113 @@
+---
+// Click-to-play facade for the channel's live stream.
+//
+// YouTube has one URL that always resolves to whatever a channel is currently
+// broadcasting: /embed/live_stream?channel=<id>. It needs no API key and no
+// video id, so it keeps working every week without anyone editing this site.
+//
+// It is NOT loaded on page load. The same rule that governs the episode player
+// governs this one: nothing reaches Google until a visitor chooses to watch.
+// This site carries domestic-abuse resources and promises no tracking, and an
+// idle embed would quietly hand YouTube a record of every person who opened
+// the page. The iframe is built in JavaScript only after a click.
+//
+// youtube-nocookie is used for the same reason it is used elsewhere.
+interface Props {
+  channelId: string;
+  poster: string;
+}
+const { channelId, poster } = Astro.props;
+---
+
+<div class="live-frame" data-channel={channelId}>
+  <img class="live-poster" src={poster} alt="" width="1280" height="720" loading="lazy" />
+  <button type="button" class="live-play">
+    <span class="live-play-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </span>
+    <span class="live-play-text">Watch the live stream</span>
+  </button>
+  <p class="live-note small">
+    Nothing is sent to YouTube until you press play.
+  </p>
+</div>
+
+<style>
+  .live-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    background: var(--paper-sunk);
+    display: grid;
+    place-items: center;
+  }
+  .live-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .5;
+  }
+  .live-frame :global(iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .live-play {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 24px 13px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--gold);
+    background: #221a2bd9;
+    color: var(--pearl, #f4efe6);
+    font: inherit;
+    font-size: 17px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background-color .18s ease, transform .18s ease;
+  }
+  .live-play:hover { background: var(--gold); color: #1b1322; transform: scale(1.03); }
+  .live-play:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  .live-play-icon { display: grid; place-items: center; }
+  .live-note {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    text-align: center;
+    color: var(--pearl, #f4efe6);
+    opacity: .82;
+    margin: 0;
+    text-shadow: 0 1px 3px #000000a6;
+  }
+</style>
+
+<script>
+  // Build the iframe only on click. Before that, no request leaves the site.
+  document.querySelectorAll<HTMLElement>(".live-frame").forEach((frame) => {
+    const btn = frame.querySelector<HTMLButtonElement>(".live-play");
+    const channel = frame.dataset.channel;
+    if (!btn || !channel) return;
+    btn.addEventListener("click", () => {
+      const iframe = document.createElement("iframe");
+      iframe.src =
+        `https://www.youtube-nocookie.com/embed/live_stream?channel=${channel}&autoplay=1&rel=0`;
+      iframe.title = "Live stream";
+      iframe.allow =
+        "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      frame.textContent = "";
+      frame.appendChild(iframe);
+    });
+  });
+</script>
