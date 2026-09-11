@@ -9,7 +9,11 @@
  *   - Nothing is sent anywhere. There is no push, no sync, no analytics.
  */
 
-const VERSION = "hbk-v1";
+/* Bump this whenever a cached file changes but keeps its name. On activate,
+   every cache not matching VERSION is deleted, so a returning visitor is not
+   left looking at an old copy. The portrait changed on 2026-09-11 under the
+   same filename, which is exactly the case this guards against. */
+const VERSION = "hbk-v2";
 const SHELL = `${VERSION}-shell`;
 const RUNTIME = `${VERSION}-runtime`;
 
