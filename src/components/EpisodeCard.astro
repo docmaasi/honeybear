@@ -3,6 +3,7 @@ import {
   isDateOnlyTitle,
   formatDate,
   thumbUrl,
+  runtime,
   type Episode,
 } from "../data/episodes";
 
@@ -16,6 +17,7 @@ const { episode, featured = false } = Astro.props;
 const untitled = isDateOnlyTitle(episode.title);
 const heading = untitled ? formatDate(episode.published) : episode.title;
 const sub = untitled ? "Episode" : formatDate(episode.published);
+const length = runtime(episode.seconds);
 ---
 
 <a
@@ -35,6 +37,7 @@ const sub = untitled ? "Episode" : formatDate(episode.published);
         <path d="M8 5v14l11-7z" />
       </svg>
     </span>
+    <span class="ep-len">{length}</span>
   </div>
   <div class="ep-text">
     <h3>{heading}</h3>
@@ -81,6 +84,21 @@ const sub = untitled ? "Episode" : formatDate(episode.published);
     background: #221a2bb3;
     border: 1px solid var(--gold);
     color: var(--gold);
+    backdrop-filter: blur(4px);
+  }
+
+  .ep-len {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #221a2bcc;
+    border: 1px solid var(--rule);
+    color: var(--pearl, #f4efe6);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .01em;
     backdrop-filter: blur(4px);
   }
 

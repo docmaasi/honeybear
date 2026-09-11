@@ -3,10 +3,10 @@ import Base from "../layouts/Base.astro";
 import NextShow from "../components/NextShow.astro";
 import EpisodeCard from "../components/EpisodeCard.astro";
 import { site, links, worlds, bingo, weekdayName, timeLabel } from "../data/site";
-import { episodes } from "../data/episodes";
+import { episodes, fullEpisodes } from "../data/episodes";
 import { topics } from "../data/topics";
 
-const recent = episodes.slice(0, 6);
+const recent = fullEpisodes.slice(0, 6);
 
 const schema = [
   {
@@ -85,7 +85,7 @@ const schema = [
         {recent.map((ep) => <EpisodeCard episode={ep} />)}
       </div>
       <p class="more">
-        <a class="btn btn-quiet" href="/episodes">See all {episodes.length} episodes</a>
+        <a class="btn btn-quiet" href="/episodes">See all {fullEpisodes.length} episodes</a>
       </p>
     </div>
   </section>

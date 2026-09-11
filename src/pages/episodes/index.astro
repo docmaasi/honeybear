@@ -1,12 +1,14 @@
 ---
 import Base from "../../layouts/Base.astro";
 import EpisodeCard from "../../components/EpisodeCard.astro";
-import { episodes, formatDate } from "../../data/episodes";
+import { episodes, fullEpisodes, clips, formatDate } from "../../data/episodes";
 import { site, links } from "../../data/site";
 
-// Group by year so a long list stays navigable.
+// Group the full episodes by year so a long list stays navigable. Short clips
+// are listed separately below — mixing fifteen-second bumpers in with
+// twenty-five-minute episodes made the library look thinner than it is.
 const byYear = new Map<number, typeof episodes>();
-for (const ep of episodes) {
+for (const ep of fullEpisodes) {
   const y = Number(ep.published.slice(0, 4));
   if (!byYear.has(y)) byYear.set(y, []);
   byYear.get(y)!.push(ep);
@@ -17,8 +19,8 @@ const schema = [
   {
     "@type": "ItemList",
     name: "HoneyBear Katherine's Haven episodes",
-    numberOfItems: episodes.length,
-    itemListElement: episodes.map((ep, i) => ({
+    numberOfItems: fullEpisodes.length,
+    itemListElement: fullEpisodes.map((ep, i) => ({
       "@type": "ListItem",
       position: i + 1,
       url: `${site.domain}/episodes/${ep.id}`,
@@ -30,15 +32,15 @@ const schema = [
 
 <Base
   title="Every episode"
-  description={`All ${episodes.length} episodes of HoneyBear Katherine's Haven and The Encouraging Moment, newest first.`}
+  description={`All ${fullEpisodes.length} full episodes of HoneyBear Katherine's Haven, newest first, plus ${clips.length} short clips.`}
   schema={schema}
 >
   <section class="head">
     <div class="shell stack stack-md">
       <h1>Every episode</h1>
       <p class="lede">
-        {episodes.length} episodes, newest first. Each one plays here or on
-        YouTube — whichever you prefer.
+        {fullEpisodes.length} full episodes, newest first. Each one plays here
+        or on YouTube — whichever you prefer.
       </p>
       <p>
         <a class="btn btn-quiet" href={links.youtube} rel="noopener">
@@ -58,10 +60,31 @@ const schema = [
       </div>
     </section>
   ))}
+
+  {clips.length > 0 && (
+    <section class="clips">
+      <div class="shell stack stack-md">
+        <div class="rule"><h2>Short clips</h2></div>
+        <p class="lede lede-tight">
+          Brief pieces — a thought, a trailer, a minute between episodes. Short
+          enough to watch standing up.
+        </p>
+        <div class="ep-grid">
+          {clips.map((ep) => <EpisodeCard episode={ep} />)}
+        </div>
+      </div>
+    </section>
+  )}
 </Base>
 
 <style>
   .head { padding-block: clamp(46px, 7vw, 82px) 20px; }
+  .clips {
+    padding-block: clamp(34px, 5vw, 56px) clamp(46px, 7vw, 76px);
+    margin-top: clamp(18px, 3vw, 30px);
+    border-top: 1px solid var(--rule);
+  }
+  .lede-tight { max-width: 54ch; margin-top: -4px; }
   .year { padding-block: clamp(30px, 4vw, 46px); }
   .ep-grid {
     display: grid;

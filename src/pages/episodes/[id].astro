@@ -4,6 +4,7 @@ import EpisodeCard from "../../components/EpisodeCard.astro";
 import LiteYouTube from "../../components/LiteYouTube.astro";
 import {
   episodes, formatDate, isDateOnlyTitle, watchUrl, thumbUrl, remoteThumbUrl,
+  isFullEpisode, runtime,
 } from "../../data/episodes";
 import { site, links } from "../../data/site";
 
@@ -22,7 +23,13 @@ const description =
   episode.summary ??
   `HoneyBear Katherine's Haven, published ${formatDate(episode.published)}. Encouragement, resilience, and everyday hope with Katherine L. Carter.`;
 
-const more = episodes.filter((e) => e.id !== episode.id).slice(0, 3);
+// Suggest like for like: an episode page should not send a listener to a
+// fifteen-second bumper, and a clip should not pretend to be a full episode.
+const sameKind = isFullEpisode(episode);
+const more = episodes
+  .filter((e) => e.id !== episode.id && isFullEpisode(e) === sameKind)
+  .slice(0, 3);
+const moreLabel = sameKind ? "More episodes" : "More short clips";
 
 const schema = [
   {
@@ -91,7 +98,7 @@ const schema = [
 
   <section class="more">
     <div class="shell">
-      <div class="rule"><h2>More episodes</h2></div>
+      <div class="rule"><h2>{moreLabel}</h2></div>
       <div class="ep-grid">
         {more.map((ep) => <EpisodeCard episode={ep} />)}
       </div>
