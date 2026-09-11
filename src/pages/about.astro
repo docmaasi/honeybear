@@ -10,7 +10,12 @@ import {
 const haven = shows.find((s) => s.id === "haven")!;
 const havenDay = `${weekdayName(haven.weekday)}s`;
 const havenET = timeLabel(haven.hourET, haven.minuteET);
-const havenZones = zoneLine(haven.hourET, haven.minuteET);
+// zoneLine() leads with ET, which would read "8:00 PM Eastern — that is
+// 8:00 PM ET". Drop the first segment; the sentence has already said Eastern.
+const havenOtherZones = zoneLine(haven.hourET, haven.minuteET)
+  .split(" / ")
+  .slice(1)
+  .join(", ");
 
 // Questions phrased the way people actually ask them, each answered directly
 // in the first sentence. This is what answer engines quote.
@@ -21,7 +26,7 @@ const faqs = [
   },
   {
     q: "When does HoneyBear Katherine's Haven air?",
-    a: `HoneyBear Katherine's Haven airs every ${weekdayName(haven.weekday)} at ${havenET} Eastern — that is ${havenZones}. Episodes are published to YouTube afterwards.`,
+    a: `HoneyBear Katherine's Haven airs every ${weekdayName(haven.weekday)} at ${havenET} Eastern — that is ${havenOtherZones}. Episodes are published to YouTube afterwards.`,
   },
   {
     q: "Where can I listen to the podcast?",
