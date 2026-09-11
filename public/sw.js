@@ -13,7 +13,7 @@
    every cache not matching VERSION is deleted, so a returning visitor is not
    left looking at an old copy. The portrait changed on 2026-09-11 under the
    same filename, which is exactly the case this guards against. */
-const VERSION = "hbk-v2";
+const VERSION = "hbk-v3";
 const SHELL = `${VERSION}-shell`;
 const RUNTIME = `${VERSION}-runtime`;
 
