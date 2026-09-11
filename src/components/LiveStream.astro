@@ -21,6 +21,7 @@ const { channelId, poster } = Astro.props;
 
 <div class="live-frame" data-channel={channelId}>
   <img class="live-poster" src={poster} alt="" width="1280" height="720" loading="lazy" />
+  <span class="live-scrim" aria-hidden="true"></span>
   <button type="button" class="live-play">
     <span class="live-play-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
@@ -29,9 +30,6 @@ const { channelId, poster } = Astro.props;
     </span>
     <span class="live-play-text">Watch the live stream</span>
   </button>
-  <p class="live-note small">
-    Nothing is sent to YouTube until you press play.
-  </p>
 </div>
 
 <style>
@@ -51,7 +49,15 @@ const { channelId, poster } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: .5;
+  }
+  /* Just enough shade for the button to hold its contrast over a lit room,
+     without dimming the room itself into mud. */
+  .live-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60% 60% at 50% 50%, #17101f5c 0%, #17101f00 72%),
+      linear-gradient(to bottom, #17101f1f, #17101f4d);
   }
   .live-frame :global(iframe) {
     position: absolute;
@@ -79,17 +85,6 @@ const { channelId, poster } = Astro.props;
   .live-play:hover { background: var(--gold); color: #1b1322; transform: scale(1.03); }
   .live-play:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
   .live-play-icon { display: grid; place-items: center; }
-  .live-note {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 12px;
-    text-align: center;
-    color: var(--pearl, #f4efe6);
-    opacity: .82;
-    margin: 0;
-    text-shadow: 0 1px 3px #000000a6;
-  }
 </style>
 
 <script>
