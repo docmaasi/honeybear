@@ -17,7 +17,7 @@ const year = new Date().getFullYear();
         />
         <p class="small">
           A live relationship podcast with Katherine L. Carter, broadcast weekly
-          from Meta Horizon Worlds and Clubroom.
+          from Meta Horizon Worlds and Club Room.
         </p>
         <div class="socials">
           <a href={links.youtube} rel="noopener">YouTube</a>
@@ -31,9 +31,11 @@ const year = new Date().getFullYear();
         {shows.map((s) => (
           <p class="small">
             {s.name}<br />
-            <span class="tnum">
-              {weekdayName(s.weekday)}s, {timeLabel(s.hourET, s.minuteET)} Eastern
-            </span>
+            {s.airings.map((a) => (
+              <span class="tnum">
+                {weekdayName(a.weekday)}s, {timeLabel(a.hourET, a.minuteET)} Eastern<br />
+              </span>
+            ))}
           </p>
         ))}
         <p class="small">

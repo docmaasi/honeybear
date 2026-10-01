@@ -8,19 +8,23 @@ import {
 // Everything that goes out live, in one list. Built from the same schedule
 // data the Shows page uses, so the two can never drift apart.
 const airings = [
-  ...shows.map((s) => ({
-    name: s.name,
-    weekday: s.weekday,
-    hourET: s.hourET,
-    minuteET: s.minuteET,
-    runtimeMin: s.runtimeMin,
-  })),
+  ...shows.flatMap((s) =>
+    s.airings.map((a) => ({
+      name: s.name,
+      weekday: a.weekday,
+      hourET: a.hourET,
+      minuteET: a.minuteET,
+      runtimeMin: s.runtimeMin,
+      venue: a.venue,
+    })),
+  ),
   ...bingo.slots.map((slot) => ({
     name: bingo.name,
     weekday: slot.weekday,
     hourET: slot.hourET,
     minuteET: slot.minuteET,
     runtimeMin: 60,
+    venue: "",
   })),
 ].sort((a, b) => a.weekday - b.weekday || a.hourET - b.hourET);
 

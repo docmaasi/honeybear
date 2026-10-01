@@ -8,14 +8,26 @@ import {
 // page used to hard-code it — and its zone conversions — which is exactly how
 // the old site ended up an hour wrong in Central.
 const haven = shows.find((s) => s.id === "haven")!;
-const havenDay = `${weekdayName(haven.weekday)}s`;
-const havenET = timeLabel(haven.hourET, haven.minuteET);
+// The Haven runs two nights. The Friday show in the Grand Pavilion is the one
+// Katherine leads with, so it is first in the data and first in the prose.
+const [havenMain, ...havenAlso] = haven.airings;
+const havenDay = `${weekdayName(havenMain.weekday)}s`;
+const havenET = timeLabel(havenMain.hourET, havenMain.minuteET);
 // zoneLine() leads with ET, which would read "8:00 PM Eastern — that is
 // 8:00 PM ET". Drop the first segment; the sentence has already said Eastern.
-const havenOtherZones = zoneLine(haven.hourET, haven.minuteET)
+const havenOtherZones = zoneLine(havenMain.hourET, havenMain.minuteET)
   .split(" / ")
   .slice(1)
   .join(", ");
+const havenAlsoLine = havenAlso
+  .map(
+    (a) =>
+      `${weekdayName(a.weekday)}s at ${timeLabel(a.hourET, a.minuteET)} Eastern in ${a.venue}`,
+  )
+  .join(", and ");
+
+const blessing = shows.find((s) => s.id === "word-of-blessing")!;
+const blessingAiring = blessing.airings[0];
 
 // Questions phrased the way people actually ask them, each answered directly
 // in the first sentence. This is what answer engines quote.
@@ -26,7 +38,11 @@ const faqs = [
   },
   {
     q: "When does HoneyBear Katherine's Haven air?",
-    a: `HoneyBear Katherine's Haven airs every ${weekdayName(haven.weekday)} at ${havenET} Eastern — that is ${havenOtherZones}. Episodes are published to YouTube afterwards.`,
+    a: `HoneyBear Katherine's Haven airs every ${weekdayName(havenMain.weekday)} at ${havenET} Eastern — that is ${havenOtherZones} — live in ${havenMain.venue}. It runs a second night on ${havenAlsoLine}. Episodes are published to YouTube afterwards.`,
+  },
+  {
+    q: "What is HoneyBear Katherine's Word of Blessing?",
+    a: `${blessing.name} is Katherine's midweek scripture show, ${blessing.tagline!.toLowerCase()}. It streams live on YouTube every ${weekdayName(blessingAiring.weekday)} at ${timeLabel(blessingAiring.hourET, blessingAiring.minuteET)} Eastern, beginning ${blessing.firstBroadcast}.`,
   },
   {
     q: "Where can I listen to the podcast?",
@@ -124,8 +140,8 @@ const schema = [
         </p>
         <p>
           It airs <strong>{havenDay} at {havenET} Eastern</strong>, live from
-          Meta Horizon Worlds. If you cannot make it live, every episode goes
-          up afterwards.
+          {" "}{havenMain.venue}, and again {havenAlsoLine}. If you cannot make
+          it live, every episode goes up afterwards.
         </p>
       </div>
     </div>

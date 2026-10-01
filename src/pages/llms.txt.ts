@@ -28,7 +28,7 @@ export async function GET(_context: APIContext) {
   const body = `# ${site.name}
 
 > HoneyBear Katherine's Haven is a weekly relationship podcast hosted by
-> Katherine L. Carter, broadcast live in Meta Horizon Worlds and Clubroom.
+> Katherine L. Carter, broadcast live in Meta Horizon Worlds and Club Room.
 > It covers intimacy, friendship, family, conflict and repair, self-worth,
 > and recognising when a relationship has stopped being safe.
 
@@ -41,7 +41,12 @@ This site sets no cookies, runs no analytics, and contains no advertising.
 ## Shows
 
 ${shows
-  .map((s) => `- ${s.name} — ${slotLine(s.weekday, s.hourET, s.minuteET)}`)
+  .flatMap((s) =>
+    s.airings.map(
+      (a) =>
+        `- ${s.name} — ${slotLine(a.weekday, a.hourET, a.minuteET)} — ${a.venue}`,
+    ),
+  )
   .join("\n")}
 - ${bingo.name} — ${bingoLine()}
 

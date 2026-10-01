@@ -6,10 +6,20 @@ import { links } from "../data/site";
 // Rendered at build time in Eastern, then corrected to the reader's own
 // timezone on load. The page is never blank and never wrong for long.
 const now = new Date();
+// A show can run more than one night, so the candidates are airings, not
+// shows — otherwise a Monday broadcast would never be announced.
 const upcoming = shows
-  .map((s) => ({
-    show: s,
-    occ: nextOccurrence(s.weekday, s.hourET, s.minuteET, s.runtimeMin, now),
+  .flatMap((show) => show.airings.map((airing) => ({ show, airing })))
+  .map(({ show, airing }) => ({
+    show,
+    airing,
+    occ: nextOccurrence(
+      airing.weekday,
+      airing.hourET,
+      airing.minuteET,
+      show.runtimeMin,
+      now,
+    ),
   }))
   .sort((a, b) => a.occ.start.getTime() - b.occ.start.getTime());
 
@@ -30,9 +40,10 @@ const live = isLive(next.occ, now);
   <h2 class="next-name">{next.show.name}</h2>
 
   <p class="next-when tnum" data-when>
-    {weekdayName(next.show.weekday)}s at{" "}
-    {timeLabel(next.show.hourET, next.show.minuteET)} Eastern
+    {weekdayName(next.airing.weekday)}s at{" "}
+    {timeLabel(next.airing.hourET, next.airing.minuteET)} Eastern
   </p>
+  <p class="next-venue small" data-venue>{next.airing.venue}</p>
   <p class="next-yours small tnum" data-yours hidden></p>
 
   <p class="next-blurb">{next.show.blurb}</p>
@@ -47,14 +58,17 @@ const live = isLive(next.occ, now);
 
 <script
   define:vars={{
-    shows: shows.map((s) => ({
-      name: s.name,
-      weekday: s.weekday,
-      hourET: s.hourET,
-      minuteET: s.minuteET,
-      runtimeMin: s.runtimeMin,
-      blurb: s.blurb,
-    })),
+    shows: shows.flatMap((s) =>
+      s.airings.map((a) => ({
+        name: s.name,
+        weekday: a.weekday,
+        hourET: a.hourET,
+        minuteET: a.minuteET,
+        runtimeMin: s.runtimeMin,
+        blurb: s.blurb,
+        venue: a.venue,
+      })),
+    ),
   }}
 >
   // Re-run the same schedule maths in the reader's browser so the countdown
@@ -119,6 +133,15 @@ const live = isLive(next.occ, now);
 
     root.querySelector(".next-name").textContent = s.name;
     root.querySelector(".next-blurb").textContent = s.blurb;
+    root.querySelector("[data-venue]").textContent = s.venue;
+
+    root.querySelector("[data-when]").textContent =
+      ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][s.weekday] +
+      "s at " +
+      ((s.hourET % 12 === 0 ? 12 : s.hourET % 12) +
+        ":" + String(s.minuteET).padStart(2, "0") +
+        (s.hourET < 12 ? " AM" : " PM")) +
+      " Eastern";
 
     const liveBadge = root.querySelector("[data-live-badge]");
     const nextBadge = root.querySelector("[data-next-badge]");
@@ -178,6 +201,7 @@ const live = isLive(next.occ, now);
     font-weight: 500;
   }
   .next-yours { color: var(--on-night-2); }
+  .next-venue { color: var(--gold-line); }
   .next-blurb { color: var(--on-night-2); max-width: 46ch; }
   .next-actions {
     display: flex;

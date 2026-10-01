@@ -1,36 +1,36 @@
 ---
 import Base from "../layouts/Base.astro";
 import {
-  site, links, shows, bingo, weekdayName, timeLabel, zoneLine,
+  site, links, shows, bingo, weekdayName, timeLabel, zoneLine, airingLine,
 } from "../data/site";
 import { nextOccurrence } from "../data/schedule";
 
 const now = new Date();
-const withNext = shows.map((s) => ({
-  ...s,
-  next: nextOccurrence(s.weekday, s.hourET, s.minuteET, s.runtimeMin, now),
-}));
 
-const schema = withNext.map((s) => ({
-  "@type": "Event",
-  name: s.name,
-  description: s.blurb,
-  startDate: s.next.start.toISOString(),
-  endDate: s.next.end.toISOString(),
-  eventStatus: "https://schema.org/EventScheduled",
-  eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
-  location: {
-    "@type": "VirtualLocation",
-    url: links.youtube,
-  },
-  performer: { "@id": `${site.domain}/#katherine` },
-  organizer: { "@id": `${site.domain}/#katherine` },
-}));
+// A show can run more than one night, so each airing gets its own Event in
+// the structured data — otherwise search engines only ever learn about one.
+const schema = shows.flatMap((s) =>
+  s.airings.map((a) => {
+    const next = nextOccurrence(a.weekday, a.hourET, a.minuteET, s.runtimeMin, now);
+    return {
+      "@type": "Event",
+      name: s.name,
+      description: s.blurb,
+      startDate: next.start.toISOString(),
+      endDate: next.end.toISOString(),
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+      location: { "@type": "VirtualLocation", name: a.venue, url: links.youtube },
+      performer: { "@id": `${site.domain}/#katherine` },
+      organizer: { "@id": `${site.domain}/#katherine` },
+    };
+  }),
+);
 ---
 
 <Base
   title="Shows and schedule"
-  description="When HoneyBear Katherine's Haven, The Encouraging Moment, and Bingo Under the Stars air each week — in every US time zone."
+  description="When HoneyBear Katherine's Haven, Word of Blessing, and Bingo Under the Stars air each week — in every US time zone."
   schema={schema}
 >
   <section class="head">
@@ -45,18 +45,26 @@ const schema = withNext.map((s) => ({
 
   <section class="list">
     <div class="shell stack stack-lg">
-      {withNext.map((s) => (
-        <article class="show">
+      {shows.map((s) => (
+        <article class={s.artW > s.artH ? "show show-banner" : "show"}>
           <div class="show-art">
-            <img src={s.art} alt="" width="300" height="400" loading="lazy" />
+            <img src={s.art} alt="" width={s.artW} height={s.artH} loading="lazy" />
           </div>
           <div class="stack stack-sm show-body">
             <h2>{s.name}</h2>
-            <p class="when tnum">
-              Every {weekdayName(s.weekday)} at{" "}
-              {timeLabel(s.hourET, s.minuteET)} Eastern
-            </p>
-            <p class="zones small tnum">{zoneLine(s.hourET, s.minuteET)}</p>
+            {s.tagline && <p class="show-tagline">{s.tagline}</p>}
+            <ul class="airings">
+              {s.airings.map((a) => (
+                <li>
+                  <p class="when tnum">{airingLine(a)}</p>
+                  <p class="zones small tnum">{zoneLine(a.hourET, a.minuteET)}</p>
+                  <p class="venue small">{a.venue}</p>
+                </li>
+              ))}
+            </ul>
+            {s.firstBroadcast && (
+              <p class="first-air small">First broadcast {s.firstBroadcast}.</p>
+            )}
             <p class="blurb">{s.blurb}</p>
             <p class="cta">
               <a class="btn btn-gold" href={links.youtube} rel="noopener">
@@ -106,6 +114,21 @@ const schema = withNext.map((s) => ({
     border: 1px solid var(--rule);
     display: block;
   }
+  .show-banner { grid-template-columns: 1fr; }
+  .show-banner .show-art { max-width: 620px; }
+
+  .show-tagline {
+    font-family: var(--font-display, inherit);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--plum, var(--ink-2));
+  }
+
+  .airings { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 14px; }
+  .airings li { display: grid; gap: 1px; }
+  .venue { color: var(--ink-2); }
+  .first-air { color: var(--muted); font-style: italic; }
+
   .when {
     font-size: 19px;
     color: var(--gold);
@@ -129,6 +152,7 @@ const schema = withNext.map((s) => ({
   @media (max-width: 720px) {
     .show { grid-template-columns: 1fr; gap: 22px; }
     .show-art { max-width: 180px; }
+    .show-banner .show-art { max-width: 100%; }
     .slots li { grid-template-columns: 1fr; gap: 2px; }
   }
 </style>

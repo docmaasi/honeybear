@@ -199,6 +199,35 @@ for (const f of timed) {
   }
 }
 
+// --- template holes: undefined / NaN reaching a reader ---
+//
+// Added after a real one: a data-shape change left llms.txt publishing
+// "undefineds, NaN:undefined PM Eastern". Every other check passed, because
+// nothing was broken — a value was simply missing, and JavaScript printed the
+// word rather than failing. These tokens are never legitimate prose on this
+// site, so finding one in built output is always a bug.
+const HOLES = [
+  ["undefined", /\bundefined\b/],
+  ["NaN", /\bNaN\b/],
+  ["[object Object]", /\[object Object\]/],
+];
+for (const f of files.filter((x) => [".html", ".txt", ".xml"].includes(extname(x)))) {
+  check();
+  const body = await readFile(f, "utf8");
+  // Skip inline scripts: "undefined" is ordinary JavaScript inside them.
+  const prose = body.replace(/<script[\s\S]*?<\/script>/gi, "");
+  for (const [name, re] of HOLES) {
+    if (re.test(prose)) {
+      fail(
+        relative(DIST, f),
+        `"${name}" appears in the published text — a value is missing upstream, ` +
+          `and the page is showing the gap to readers.`,
+      );
+    }
+  }
+}
+
+
 console.log(`\nAudited ${html.length} pages, ${checks} checks.\n`);
 
 if (warnings.length) {
