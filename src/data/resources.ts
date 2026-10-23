@@ -90,7 +90,9 @@ export const resourceGroups: ResourceGroup[] = [
       },
       {
         name: "HotPeachPages International",
-        href: "https://www.hotpeachpages.net",
+        // Their HTTPS certificate does not cover this address (checked 2026-10-23), so the https link
+        // showed visitors a browser security warning. The site itself only loads over plain http.
+        href: "http://www.hotpeachpages.net",
         note: "A long-running international directory of domestic violence agencies, listed by country and in many languages.",
       },
       {

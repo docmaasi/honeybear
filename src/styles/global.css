@@ -163,7 +163,9 @@ section { padding-block: clamp(56px, 9vw, 104px); }
   gap: 18px;
   margin-bottom: 34px;
 }
-.rule h2 { flex: none; }
+/* Shrinkable, so a long section name wraps on a phone instead of pushing past the screen edge.
+   Short names still sit at their natural width with the hairline beside them. */
+.rule h2 { flex: 0 1 auto; min-width: 0; overflow-wrap: break-word; }
 .rule::after {
   content: "";
   flex: 1;
